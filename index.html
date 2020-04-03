@@ -100,11 +100,11 @@
 <p>全局配置官方源</p>
 <p><code>npm config set registry [http://www.npmjs.org](http://www.npmjs.org/)</code></p>
 <p>可以使用<code>npm info underscore</code>查询是否切换到了淘宝源</p>
-<p><img src="/.com//C:%5CUsers%5CMyPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585930740328.png" alt="1585930740328"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GdNgQH.png" alt="1585930740328"></p>
 <p>或者可以直接安装<code>cnpm</code>工具也可以。</p>
 <p>最好还是切换到淘宝源，因为后续还会用到</p>
 <h4 id="5-初始化hexo"><a href="#5-初始化hexo" class="headerlink" title="5.初始化hexo"></a>5.初始化hexo</h4><p>使用命令<code>hexo init</code></p>
-<p><img src="/.com//C:%5CUsers%5CMyPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585931839027.png" alt="1585931839027"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GdNIFf.png" alt="1585931839027"></p>
 <p>初始化结束之后，文件夹里会多出如图的文件和文件夹</p>
 <ul>
 <li>node_modules : 依赖包</li>
@@ -117,19 +117,19 @@
 <p>在这里对于仓库的有一个规则，必须要符合规则</p>
 <p><code>yourname.github.io</code>，其中yourname是你的github名称</p>
 <p>创建之后，回到GitBash，配置GitHub账户信息</p>
-<p><img src="/.com//C:%5CUsers%5CMyPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585932600840.png" alt="1585932600840"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GdNHSg.png" alt="1585932600840"></p>
 <p>其中<code>user.name</code>后面写的是自己GitHub的名称</p>
 <p><code>user.email</code>后面写的是自己的GitHub的邮箱</p>
 <p>接下来创建ssh，在GitBash中输入以下命令</p>
 <p><code>ssh-keygen -t rsa -C &quot;&quot;</code> 双引号里填入你的GitHub绑定的邮箱</p>
 <p>之后输入<code>cd ~/.ssh</code> 接着输入<code>cat id_rsa.sh</code>可以看到ssh        </p>
-<p><img src="/.com//C:%5CUsers%5CMyPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585933176887.png" alt="1585933176887"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GdNqyj.png" alt="1585933176887"></p>
 <p>将获取到的ssh配置到GitHub上</p>
-<p><img src="/.com//C:%5CUsers%5CMyPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585933386861.png" alt="1585933386861"></p>
-<p><img src="/.com//C:%5CUsers%5CMyPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585933660195.png" alt="1585933660195"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GdNzkV.png" alt="1585933386861"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GdUSYT.png" alt="1585933660195"></p>
 <p>title可以随便取，key就写ssh</p>
 <p>可以在GitBash中验证一下<code>ssh -T git@github.com</code></p>
-<p><img src="/.com//C:%5CUsers%5CMyPC%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1585933805852.png" alt="1585933805852"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GdUCpF.png" alt="1585933805852"></p>
 <h4 id="7-配置hexo文件（-config-yml）"><a href="#7-配置hexo文件（-config-yml）" class="headerlink" title="7.配置hexo文件（_config.yml）"></a>7.配置hexo文件（_config.yml）</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/YourgithubName/YourgithubName.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 
 <p>配置好以后保存</p>
@@ -146,12 +146,12 @@
 <p><code>hexo deploy</code></p>
 <p>部署好以后会显示</p>
 <p><code>INFO  Deploy done: git</code></p>
-<p>最后在浏览器输入<a href="http://yourgithubname.github.io（yourname就是GitHub名字）就可以看到hexo搭建的个人博客了" target="_blank" rel="noopener">http://yourgithubname.github.io（yourname就是GitHub名字）就可以看到hexo搭建的个人博客了</a></p>
+<p>最后在浏览器输入<a href="http://yourgithubname.github.io" target="_blank" rel="noopener">http://yourgithubname.github.io</a> （yourname就是GitHub名字）就可以看到hexo搭建的个人博客了</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/04/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B-%E7%94%A8hexo%E5%92%8CGitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="ck8khstsc00017sro9uo4bmx8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/04/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B-%E7%94%A8hexo%E5%92%8CGitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="ck8khwgxh000104rogs3k49uv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/04/hello-world/" data-id="ck8khsts100007srodkoi5p19" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/04/hello-world/" data-id="ck8khwgx2000004ro3zpg5vmx" class="article-share-link">Share</a>
       
       
     </footer>
