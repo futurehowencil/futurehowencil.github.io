@@ -341,7 +341,8 @@
       
         
           
-            <h2 id="Linux下安装Redis"><a href="#Linux下安装Redis" class="headerlink" title="Linux下安装Redis"></a>Linux下安装Redis</h2><h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h3><p>在Linux里下载很方便，直接运行下面这条命令</p>
+            <h2 id="Linux下安装Redis"><a href="#Linux下安装Redis" class="headerlink" title="Linux下安装Redis"></a>Linux下安装Redis</h2><p>前提：我自己的Linux是在阿里云上的</p>
+<h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h3><p>在Linux里下载很方便，直接运行下面这条命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-5.0.5.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>版本号在最后面 例如想安装4.0.8的，可以修改一下</p>
@@ -375,6 +376,10 @@
 
 <p><img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/D:%5Cblog%5Csource_posts%5CLinux%E4%B8%8B%E5%AE%89%E8%A3%85Redis%5CSnipaste_2020-04-06_14-26-14.png" alt></p>
 <p>可以试着链接客户端或者查看进程进行验证</p>
+<h4 id="5-连接阿里云上的Redis"><a href="#5-连接阿里云上的Redis" class="headerlink" title="5.连接阿里云上的Redis"></a>5.连接阿里云上的Redis</h4><p>需要修改配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bind 127.0.0.1 ::1</span><br><span class="line">修改成</span><br><span class="line">bind 0.0.0.0 代表任意IP</span><br><span class="line">一般的版本号比较新的还需要修改</span><br><span class="line">protected-mode no 改成 protected-mode yes</span><br></pre></td></tr></table></figure>
+
+<p>最后记得将阿里云的安全组开放redis端口</p>
 
           
         
