@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="工作有感," />
 
 
 
@@ -79,16 +79,21 @@
 
 
 
-<meta name="description" content="我先睡了">
+<meta name="description" content="用户密码的存储方式最近正在重构公司的老项目，做到了用户注册这一块的功能。关于用户密码的存储有一些自己的想法，之前也做过，但用的都是MD5算法。突然想学习总结一下关于用户密码的存储方式。 1.明文存储这种是最容易做的，也是最不安全的一种。比如用户的密码是“1234”，就直接原封不动地存到数据库“1234“。但好像大多数互联网公司用的也是这种。。例如顶顶大名的FaceBook之前就被爆出使用明文存储用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用户密码的存储方式">
 <meta property="og:url" content="http://yoursite.com/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="我先睡了">
-<meta property="article:published_time" content="2020-04-18T14:12:11.708Z">
-<meta property="article:modified_time" content="2020-04-18T15:59:29.141Z">
+<meta property="og:description" content="用户密码的存储方式最近正在重构公司的老项目，做到了用户注册这一块的功能。关于用户密码的存储有一些自己的想法，之前也做过，但用的都是MD5算法。突然想学习总结一下关于用户密码的存储方式。 1.明文存储这种是最容易做的，也是最不安全的一种。比如用户的密码是“1234”，就直接原封不动地存到数据库“1234“。但好像大多数互联网公司用的也是这种。。例如顶顶大名的FaceBook之前就被爆出使用明文存储用">
+<meta property="og:image" content="http://yoursite.com/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/4.png">
+<meta property="article:published_time" content="2020-04-18T14:12:11.000Z">
+<meta property="article:modified_time" content="2020-04-18T15:59:29.149Z">
 <meta property="article:author" content="fzq">
+<meta property="article:tag" content="工作有感">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/1.png">
 
 
 
@@ -338,7 +343,84 @@
       
 
       
-        
+        <h3 id="用户密码的存储方式"><a href="#用户密码的存储方式" class="headerlink" title="用户密码的存储方式"></a>用户密码的存储方式</h3><p>最近正在重构公司的老项目，做到了用户注册这一块的功能。关于用户密码的存储有一些自己的想法，之前也做过，但用的都是MD5算法。突然想学习总结一下关于用户密码的存储方式。</p>
+<h4 id="1-明文存储"><a href="#1-明文存储" class="headerlink" title="1.明文存储"></a>1.明文存储</h4><p>这种是最容易做的，也是最不安全的一种。比如用户的密码是“1234”，就直接原封不动地存到数据库“1234“。但好像大多数互联网公司用的也是这种。。例如顶顶大名的FaceBook之前就被爆出使用明文存储用户密码。</p>
+<h4 id="2-对称加密存储"><a href="#2-对称加密存储" class="headerlink" title="2.对称加密存储"></a>2.对称加密存储</h4><p>常见的有</p>
+<ul>
+<li>DES：数据加密标准，速度较快，适用于加密大量数据的场合；</li>
+<li>3DES：是基于DES，对一块数据用三个不同的密钥进行三次加密，强度更高；</li>
+<li>AES（Advanced Encryption Standard）：高级加密标准，是下一代的加密算法标准，速度快，安全级别高，支持128、192、256、512位密钥的加密。</li>
+</ul>
+<p>这些方式都有一些共同特征</p>
+<ul>
+<li>加密和解密都使用同一个密钥</li>
+<li>加密解密速度快</li>
+<li>密钥传输过程不安全，容易被破解，而且密钥管理麻烦</li>
+</ul>
+<img src="/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/1.png" class title="对称加密">
+
+<p>一般这种方式，密码和密钥都是分开保存的，但是既然密码泄露了，密钥也不会安全到哪里去。想要密钥绝对的安全应该不是一件易事。</p>
+<h4 id="３-使用MD5等单向HASH算法加密存储"><a href="#３-使用MD5等单向HASH算法加密存储" class="headerlink" title="３.使用MD5等单向HASH算法加密存储"></a>３.使用MD5等单向HASH算法加密存储</h4><p>目前正在做的项目就是使用的这一种方式进行加密。应该大部分公司都是使用的这一种，但这种方式不能解密。</p>
+<p>听说有一种彩虹表的技术，可以破解这种算法。</p>
+
+
+<h4 id="４-加盐算法"><a href="#４-加盐算法" class="headerlink" title="４.加盐算法"></a>４.加盐算法</h4><p>在单向加密的基础上，进行加盐，增加破解的难度。但这种”固定盐“的方式，要保证”固定盐“不能被泄露。这里就遇到和对称加密保护密钥一样的问题。”固定盐“泄露了，用彩虹表一样可以破解出密码。</p>
+<img src="/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/3.png" class title="加盐加密">
+
+<h4 id="５-bcrypt算法（属于加盐算法的一种）"><a href="#５-bcrypt算法（属于加盐算法的一种）" class="headerlink" title="５.bcrypt算法（属于加盐算法的一种）"></a>５.bcrypt算法（属于加盐算法的一种）</h4><p>这种算法是比较好的实现方式。在我第一次接触的时候有个疑问：同一个密码但它每次生成的HASH都不一样，那是如何进行校验的？</p>
+<p>我查阅资料以后发现：虽然同一个密码每次生成的HASH都不同，但HASH中都包含了“盐”。每次运算都先随机生成一个“盐”，这个“盐”再和密码进行HASH。</p>
+<p>在校验的时候，先从HASH中取出“盐”，“盐”再和密码进行HASH，得出的结果和数据库进行对比。</p>
+<p>compareSync中已经实现了这一过程：bcrypt.compareSync(password, hashFromDB);</p>
+<h4 id="6-PBKDF2算法"><a href="#6-PBKDF2算法" class="headerlink" title="6.PBKDF2算法"></a>6.PBKDF2算法</h4><p>这个是我完全没有接触过的。网上是说该算法原理大致相当于在HASH算法基础上增加“随机盐”，并进行多次HASH运算，“随机盐”使得彩虹表的建表难度大幅增加，而多次HASH也使得建表和破解的难度都大幅增加。使用PBKDF2算法时，HASH算法一般选用sha1或者sha256，“随机盐”的长度一般不能少于8字节，HASH次数至少也要1000次，这样安全性才足够高。</p>
+<img src="/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/4.png" class title="PBKDF2算法">
+
+<h4 id="7-小结"><a href="#7-小结" class="headerlink" title="7.小结"></a>7.小结</h4><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>特点</th>
+<th>破解方式</th>
+<th>破解难度</th>
+<th>安全相关</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>明文</td>
+<td>简单</td>
+<td>无需破解</td>
+<td>简单</td>
+<td>不安全</td>
+</tr>
+<tr>
+<td>对称加密</td>
+<td>可以反向破解</td>
+<td>需要密钥破解</td>
+<td>中等</td>
+<td>安全，但要保证密钥不被泄露</td>
+</tr>
+<tr>
+<td>单向HASH</td>
+<td>不能反向破解</td>
+<td>碰撞、彩虹表</td>
+<td>中等</td>
+<td>相对安全</td>
+</tr>
+<tr>
+<td>加盐HASH</td>
+<td>不能反向破解</td>
+<td>碰撞、彩虹表</td>
+<td>中等</td>
+<td>安全，但要保证盐不被泄露</td>
+</tr>
+<tr>
+<td>PBKDF2算法</td>
+<td>不能反向破解</td>
+<td>暂时没有</td>
+<td>困难</td>
+<td>安全</td>
+</tr>
+</tbody></table>
+
       
     </div>
     
@@ -352,6 +434,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%9C%89%E6%84%9F/" rel="tag"># 工作有感</a>
+          
+        </div>
       
 
       
@@ -429,8 +517,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -458,7 +555,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -481,6 +578,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户密码的存储方式"><span class="nav-number">1.</span> <span class="nav-text">用户密码的存储方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-明文存储"><span class="nav-number">1.1.</span> <span class="nav-text">1.明文存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-对称加密存储"><span class="nav-number">1.2.</span> <span class="nav-text">2.对称加密存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#３-使用MD5等单向HASH算法加密存储"><span class="nav-number">1.3.</span> <span class="nav-text">３.使用MD5等单向HASH算法加密存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#４-加盐算法"><span class="nav-number">1.4.</span> <span class="nav-text">４.加盐算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#５-bcrypt算法（属于加盐算法的一种）"><span class="nav-number">1.5.</span> <span class="nav-text">５.bcrypt算法（属于加盐算法的一种）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-PBKDF2算法"><span class="nav-number">1.6.</span> <span class="nav-text">6.PBKDF2算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-小结"><span class="nav-number">1.7.</span> <span class="nav-text">7.小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
