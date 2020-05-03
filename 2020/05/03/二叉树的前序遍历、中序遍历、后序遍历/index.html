@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java基础," />
+  <meta name="keywords" content="数据结构," />
 
 
 
@@ -79,17 +79,22 @@
 
 
 
-<meta name="description" content="Java 8-Steam学习前言Stream流是Java8的新特性，简化了很多代码，使代码看起来相对优雅。对集合（Colletion）对象功能增强。">
+<meta name="description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历 简单的二叉树   前序：ABC 中序：BAC 后序：BCA     前序：ABDECFG  (可以拆分成多个有3个节点的小二叉树) 首先">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java 8-Stream流学习">
-<meta property="og:url" content="http://yoursite.com/2020/04/12/Java8-Stream%E6%B5%81%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="二叉树的前序遍历、中序遍历、后序遍历">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="Java 8-Steam学习前言Stream流是Java8的新特性，简化了很多代码，使代码看起来相对优雅。对集合（Colletion）对象功能增强。">
-<meta property="article:published_time" content="2020-04-12T02:26:00.000Z">
-<meta property="article:modified_time" content="2020-04-12T02:31:39.611Z">
+<meta property="og:description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历 简单的二叉树   前序：ABC 中序：BAC 后序：BCA     前序：ABDECFG  (可以拆分成多个有3个节点的小二叉树) 首先">
+<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png">
+<meta property="article:published_time" content="2020-05-03T09:58:51.000Z">
+<meta property="article:modified_time" content="2020-05-03T12:03:09.872Z">
 <meta property="article:author" content="fzq">
-<meta property="article:tag" content="Java基础">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png">
 
 
 
@@ -119,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/12/Java8-Stream流学习/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/03/二叉树的前序遍历、中序遍历、后序遍历/"/>
 
 
 
 
 
-  <title>Java 8-Stream流学习 | 76的个人博客</title>
+  <title>二叉树的前序遍历、中序遍历、后序遍历 | 76的个人博客</title>
   
 
 
@@ -262,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/12/Java8-Stream%E6%B5%81%E5%AD%A6%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fzq">
@@ -279,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java 8-Stream流学习</h1>
+          <h1 class="post-title" itemprop="name headline">二叉树的前序遍历、中序遍历、后序遍历</h1>
         
 
         <div class="post-meta">
@@ -291,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-12T10:26:00+08:00">
-                2020-04-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-03T17:58:51+08:00">
+                2020-05-03
               </time>
             
 
@@ -310,8 +315,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/04/12/Java8-Stream%E6%B5%81%E5%AD%A6%E4%B9%A0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/12/Java8-Stream流学习/" itemprop="commentCount"></span>
+                <a href="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/03/二叉树的前序遍历、中序遍历、后序遍历/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -339,7 +344,86 @@
       
 
       
-        <h2 id="Java-8-Steam学习"><a href="#Java-8-Steam学习" class="headerlink" title="Java 8-Steam学习"></a>Java 8-Steam学习</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Stream流是Java8的新特性，简化了很多代码，使代码看起来相对优雅。对集合（Colletion）对象功能增强。</p>
+        <h2 id="二叉树的前序遍历、中序遍历、后序遍历"><a href="#二叉树的前序遍历、中序遍历、后序遍历" class="headerlink" title="二叉树的前序遍历、中序遍历、后序遍历"></a>二叉树的前序遍历、中序遍历、后序遍历</h2><p>简单讲一下三种遍历方式</p>
+<ul>
+<li>前序：根 - &gt; 左 - &gt;  右</li>
+<li>中序：左 - &gt; 根 - &gt; 右</li>
+<li>后序：左 - &gt; 右 - &gt; 根</li>
+</ul>
+<p><strong>其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历</strong></p>
+<h3 id="简单的二叉树"><a href="#简单的二叉树" class="headerlink" title="简单的二叉树"></a>简单的二叉树</h3><img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png" class>
+
+<ul>
+<li>前序：ABC</li>
+<li>中序：BAC</li>
+<li>后序：BCA</li>
+</ul>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png" class>
+
+<ul>
+<li>前序：ABDECFG</li>
+</ul>
+<p>(可以拆分成多个有3个节点的小二叉树)</p>
+<p>首先A为根节点，有左子树B，右子树C</p>
+<p>B可以作为下一级的根节点，有左子树D，右子树E</p>
+<p>A根节点的右子树C同理</p>
+<p>最后就是ABDECFG</p>
+<ul>
+<li>中序：DBEAFCG</li>
+</ul>
+<p>首先是B A C，</p>
+<p>B下面还有子树，所以是D B E A C，</p>
+<p>C下面还有子树，所以最后是DBEAFCG</p>
+<ul>
+<li>后序：DEBFGCA</li>
+</ul>
+<p>首先是 B C A，</p>
+<p>B下面还有子树，所以是D E B C A，</p>
+<p>C下面还有子树，所以最后是DEBFGCA</p>
+<h3 id="不规则的二叉树"><a href="#不规则的二叉树" class="headerlink" title="不规则的二叉树"></a>不规则的二叉树</h3><p>上面的二叉树是左右对称的二叉树。</p>
+<p>现在画一个不对称的二叉树</p>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png" class>
+
+<ul>
+<li>前序：ABDEGHCF</li>
+</ul>
+<p>首先是A B C，B下面还有子树，所以是A B D E C</p>
+<p>E下面还有子树，所以是A B D E G H C</p>
+<p>C下面还有子树，最后就是ABDEGHCF</p>
+<ul>
+<li>中序：DBGEHACF</li>
+</ul>
+<p>首先是B A C，B下面还有子树，所以是D B E A C</p>
+<p>E下面还有子树，所以是D B G E H A C</p>
+<p>C下面还有子树，最后就是DBGEHACF</p>
+<ul>
+<li>后序：DGHEBFCA</li>
+</ul>
+<p>首先是B C A，B下面还有子树，所以是D E B C A </p>
+<p>E下面还有子树，所以是D G H E B C A </p>
+<p>C下面还有子树，所以是DGHEBFCA</p>
+<h3 id="根据三种排序中的两种排序画出二叉树（中序必须有）"><a href="#根据三种排序中的两种排序画出二叉树（中序必须有）" class="headerlink" title="根据三种排序中的两种排序画出二叉树（中序必须有）"></a>根据三种排序中的两种排序画出二叉树（中序必须有）</h3><p>想要知道二叉树的结构，中序是必不可少的。因为没有中序无法知道左右子树。</p>
+<p><strong>如果已知中序遍历是DBEAFC，前序遍历是ABDECF，求后序遍历</strong></p>
+<ol>
+<li><p>可以确定A是根节点</p>
+</li>
+<li><p>A根节点下面，左子树有DBE，右子树有FC</p>
+</li>
+<li><p>根据前序BDE，中序DBE，得知B是次级根节点，左子树是D，右子树是E</p>
+</li>
+<li><p>F C、C F，根据排序方式可以得出结论，C是次级根节点，左子树是F（中序遍历F出现在C前面所以是左子树，如果F出现的C后面，那F就是C的右子树），无右子树</p>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png" class title="二叉树图示">
+</li>
+<li><p>所以后序遍历就是DEBFCA</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>再把所说的排序方式深入总结一下</p>
+<ol>
+<li><strong>前序遍历：首先访问根节点，再遍历左子树，最后遍历右子树。在遍历左、右子树时，也是先访问根节点，再遍历左子树，最后遍历右子树。</strong></li>
+<li><strong>中序遍历：首先遍历左子树，然后访问根节点，最后遍历右子树。在遍历左、右子树时，也是先遍历左子树，然后访问根节点，最后遍历右子树。</strong></li>
+<li><strong>后序遍历：首先遍历左子树，再遍历右子树，最后访问根节点。在遍历左、右子树时，也是先遍历左子树，再遍历右子树，最后访问根节点。</strong></li>
+</ol>
+<p>也就是不断地递归</p>
 
       
     </div>
@@ -357,7 +441,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag"># Java基础</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
           
         </div>
       
@@ -370,8 +454,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/" rel="next" title="Linux下安装redis">
-                <i class="fa fa-chevron-left"></i> Linux下安装redis
+              <a href="/2020/04/25/%E4%BD%BF%E7%94%A8redis%E7%9B%91%E5%90%AC%E8%AE%A2%E5%8D%95/" rel="next" title="使用redis监听订单">
+                <i class="fa fa-chevron-left"></i> 使用redis监听订单
               </a>
             
           </div>
@@ -379,10 +463,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/12/Java8-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/" rel="prev" title="Java8-Lambda表达式学习">
-                Java8-Lambda表达式学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -413,8 +493,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2020/04/12/Java8-Stream流学习/"
-           data-title="Java 8-Stream流学习" data-url="http://yoursite.com/2020/04/12/Java8-Stream%E6%B5%81%E5%AD%A6%E4%B9%A0/">
+      <div class="ds-thread" data-thread-key="2020/05/03/二叉树的前序遍历、中序遍历、后序遍历/"
+           data-title="二叉树的前序遍历、中序遍历、后序遍历" data-url="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">
       </div>
     </div>
 
@@ -512,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8-Steam学习"><span class="nav-number">1.</span> <span class="nav-text">Java 8-Steam学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的前序遍历、中序遍历、后序遍历"><span class="nav-number">1.</span> <span class="nav-text">二叉树的前序遍历、中序遍历、后序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的二叉树"><span class="nav-number">1.1.</span> <span class="nav-text">简单的二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不规则的二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">不规则的二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据三种排序中的两种排序画出二叉树（中序必须有）"><span class="nav-number">1.3.</span> <span class="nav-text">根据三种排序中的两种排序画出二叉树（中序必须有）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>

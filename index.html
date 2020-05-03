@@ -260,6 +260,215 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fzq">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="76的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/" itemprop="url">二叉树的前序遍历、中序遍历、后序遍历</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-03T17:58:51+08:00">
+                2020-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/03/二叉树的前序遍历、中序遍历、后序遍历/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="二叉树的前序遍历、中序遍历、后序遍历"><a href="#二叉树的前序遍历、中序遍历、后序遍历" class="headerlink" title="二叉树的前序遍历、中序遍历、后序遍历"></a>二叉树的前序遍历、中序遍历、后序遍历</h2><p>简单讲一下三种遍历方式</p>
+<ul>
+<li>前序：根 - &gt; 左 - &gt;  右</li>
+<li>中序：左 - &gt; 根 - &gt; 右</li>
+<li>后序：左 - &gt; 右 - &gt; 根</li>
+</ul>
+<p><strong>其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历</strong></p>
+<h3 id="简单的二叉树"><a href="#简单的二叉树" class="headerlink" title="简单的二叉树"></a>简单的二叉树</h3><img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png" class>
+
+<ul>
+<li>前序：ABC</li>
+<li>中序：BAC</li>
+<li>后序：BCA</li>
+</ul>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png" class>
+
+<ul>
+<li>前序：ABDECFG</li>
+</ul>
+<p>(可以拆分成多个有3个节点的小二叉树)</p>
+<p>首先A为根节点，有左子树B，右子树C</p>
+<p>B可以作为下一级的根节点，有左子树D，右子树E</p>
+<p>A根节点的右子树C同理</p>
+<p>最后就是ABDECFG</p>
+<ul>
+<li>中序：DBEAFCG</li>
+</ul>
+<p>首先是B A C，</p>
+<p>B下面还有子树，所以是D B E A C，</p>
+<p>C下面还有子树，所以最后是DBEAFCG</p>
+<ul>
+<li>后序：DEBFGCA</li>
+</ul>
+<p>首先是 B C A，</p>
+<p>B下面还有子树，所以是D E B C A，</p>
+<p>C下面还有子树，所以最后是DEBFGCA</p>
+<h3 id="不规则的二叉树"><a href="#不规则的二叉树" class="headerlink" title="不规则的二叉树"></a>不规则的二叉树</h3><p>上面的二叉树是左右对称的二叉树。</p>
+<p>现在画一个不对称的二叉树</p>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png" class>
+
+<ul>
+<li>前序：ABDEGHCF</li>
+</ul>
+<p>首先是A B C，B下面还有子树，所以是A B D E C</p>
+<p>E下面还有子树，所以是A B D E G H C</p>
+<p>C下面还有子树，最后就是ABDEGHCF</p>
+<ul>
+<li>中序：DBGEHACF</li>
+</ul>
+<p>首先是B A C，B下面还有子树，所以是D B E A C</p>
+<p>E下面还有子树，所以是D B G E H A C</p>
+<p>C下面还有子树，最后就是DBGEHACF</p>
+<ul>
+<li>后序：DGHEBFCA</li>
+</ul>
+<p>首先是B C A，B下面还有子树，所以是D E B C A </p>
+<p>E下面还有子树，所以是D G H E B C A </p>
+<p>C下面还有子树，所以是DGHEBFCA</p>
+<h3 id="根据三种排序中的两种排序画出二叉树（中序必须有）"><a href="#根据三种排序中的两种排序画出二叉树（中序必须有）" class="headerlink" title="根据三种排序中的两种排序画出二叉树（中序必须有）"></a>根据三种排序中的两种排序画出二叉树（中序必须有）</h3><p>想要知道二叉树的结构，中序是必不可少的。因为没有中序无法知道左右子树。</p>
+<p><strong>如果已知中序遍历是DBEAFC，前序遍历是ABDECF，求后序遍历</strong></p>
+<ol>
+<li><p>可以确定A是根节点</p>
+</li>
+<li><p>A根节点下面，左子树有DBE，右子树有FC</p>
+</li>
+<li><p>根据前序BDE，中序DBE，得知B是次级根节点，左子树是D，右子树是E</p>
+</li>
+<li><p>F C、C F，根据排序方式可以得出结论，C是次级根节点，左子树是F（中序遍历F出现在C前面所以是左子树，如果F出现的C后面，那F就是C的右子树），无右子树</p>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png" class title="二叉树图示">
+</li>
+<li><p>所以后序遍历就是DEBFCA</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>再把所说的排序方式深入总结一下</p>
+<ol>
+<li><strong>前序遍历：首先访问根节点，再遍历左子树，最后遍历右子树。在遍历左、右子树时，也是先访问根节点，再遍历左子树，最后遍历右子树。</strong></li>
+<li><strong>中序遍历：首先遍历左子树，然后访问根节点，最后遍历右子树。在遍历左、右子树时，也是先遍历左子树，然后访问根节点，最后遍历右子树。</strong></li>
+<li><strong>后序遍历：首先遍历左子树，再遍历右子树，最后访问根节点。在遍历左、右子树时，也是先遍历左子树，再遍历右子树，最后访问根节点。</strong></li>
+</ol>
+<p>也就是不断地递归</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/%E4%BD%BF%E7%94%A8redis%E7%9B%91%E5%90%AC%E8%AE%A2%E5%8D%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1740,151 +1949,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/04/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fzq">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="76的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/04/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-04T00:19:53+08:00">
-                2020-04-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/04/04/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/04/hello-world/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
+
 
 
           </div>
@@ -1928,7 +1999,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1941,7 +2012,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
