@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="docker," />
 
 
 
@@ -79,16 +79,28 @@
 
 
 
-<meta name="description" content="我先睡了">
+<meta name="description" content="这里以阿里云为例（我的操作系统是centOS7） 1.安装docker在阿里云上安装docker还是比较简单的，使用脚本安装就好了只需一行命令 1curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun  设置开机启动 1service docker start  查看docker版本 1docker version">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker的安装和使用">
 <meta property="og:url" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="我先睡了">
+<meta property="og:description" content="这里以阿里云为例（我的操作系统是centOS7） 1.安装docker在阿里云上安装docker还是比较简单的，使用脚本安装就好了只需一行命令 1curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun  设置开机启动 1service docker start  查看docker版本 1docker version">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/7.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/8.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/9.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/10.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/11.png">
 <meta property="article:published_time" content="2020-05-07T13:44:15.000Z">
-<meta property="article:modified_time" content="2020-05-07T13:44:15.441Z">
+<meta property="article:modified_time" content="2020-05-08T12:58:14.165Z">
 <meta property="article:author" content="fzq">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/1.png">
 
 
 
@@ -338,7 +350,107 @@
       
 
       
-        
+        <p>这里以阿里云为例（我的操作系统是centOS7）</p>
+<h3 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h3><p>在阿里云上安装docker还是比较简单的，使用脚本安装就好了只需一行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置开机启动</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker start</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看docker版本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/1.png" class>
+
+<p><strong>配置阿里的docker镜像加速器</strong></p>
+<p>不使用加速器可能会在拉取docker镜像的时候很慢</p>
+<p>进入阿里云控制台，在右上方的搜索框输入“容器镜像服务”</p>
+<p>直接复制命令粘贴</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/2.png" class>
+
+<h2 id="2-安装docker-mysql"><a href="#2-安装docker-mysql" class="headerlink" title="2.安装docker-mysql"></a>2.安装docker-mysql</h2><ol>
+<li><strong>拉取mysql镜像</strong></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/3.png" class>
+
+<ol>
+<li><strong>查看是否拉取成功</strong></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/4.png" class>
+
+<ol>
+<li><strong>创建并启动mysql容器</strong></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -p 3306:3306 --name mysql5.7 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<p>命令解释：</p>
+<ul>
+<li>-i : 交互式运行容器</li>
+<li>-t : 创建伪终端</li>
+<li>-p 3306:3306 : 映射容器的3306端口到宿主机的3306端口，外部服务可以通过ip:3306访问mysql</li>
+<li>–name : 容器的名称</li>
+<li>-e MYSQL_ROOT_PASSWORD=123456 : 设置mysql root用户的密码</li>
+<li>-d : 后台运行</li>
+</ul>
+<p>执行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p>看到如图所示，证明安装成功并成功启动</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/5.png" class>
+
+<ol>
+<li><strong>添加安全组</strong></li>
+</ol>
+<p>在阿里云控制平台开放3306端口</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/7.png" class>
+
+<p>出入方向都创建一样的规则</p>
+<p>授权对象：0.0.0.0/0 代表任何ip</p>
+<p>（但其实不建议授权任何ip，会存在安全问题。授权自己的ip就好了）</p>
+<h3 id="3-安装docker-redis"><a href="#3-安装docker-redis" class="headerlink" title="3.安装docker-redis"></a>3.安装docker-redis</h3><p>和安装mysql大同小异</p>
+<p>1.<strong>拉取redis镜像</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis:latest</span><br></pre></td></tr></table></figure>
+
+<p>latest : 代表最新版本</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/8.png" class>
+
+<p>2.<strong>查看是否拉取成功</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/9.png" class>
+
+<p>3.<strong>启动并设置密码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name redis -p 6379:6379 -d --restart&#x3D;always redis:latest redis-server --appendonly yes --requirepass &quot;123456&quot;</span><br></pre></td></tr></table></figure>
+
+<p>命令解释：</p>
+<ul>
+<li>–name :容器的名字</li>
+<li>-p : 6979:6979: 映射容器的6979端口到宿主机的3306端口，外部服务可以通过ip:6979访问redis</li>
+<li>-d : 后台运行</li>
+<li>–restart : 重启策略 always随着docker容器的启动而启动</li>
+<li>redis-servier : 启动命令</li>
+<li>–appendonly : redis持久化配置</li>
+<li>–requirepass : 密码</li>
+</ul>
+<p>执行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p>看到如图所示则证明成功</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/10.png" class>
+
+<p>4.<strong>添加安全组</strong></p>
+<p>进入阿里云控制台开放6379端口</p>
+<p>出入方向都需要</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/11.png" class>
+
+<p>授权对象：0.0.0.0/0 代表任何ip</p>
+<p>（不建议授权任何ip，会存在安全问题。授权自己的ip就好了）</p>
+<p>目前就安装这么多，后续有需要再更新</p>
+
       
     </div>
     
@@ -352,6 +464,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+        </div>
       
 
       
@@ -429,8 +547,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -458,7 +585,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -481,6 +608,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装docker"><span class="nav-number">1.</span> <span class="nav-text">1.安装docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装docker-mysql"><span class="nav-number"></span> <span class="nav-text">2.安装docker-mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装docker-redis"><span class="nav-number">1.</span> <span class="nav-text">3.安装docker-redis</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
