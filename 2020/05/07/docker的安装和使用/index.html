@@ -95,8 +95,12 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/9.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/10.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/11.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/12.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/13.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/14.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/15.png">
 <meta property="article:published_time" content="2020-05-07T13:44:15.000Z">
-<meta property="article:modified_time" content="2020-05-08T12:58:14.165Z">
+<meta property="article:modified_time" content="2020-05-12T12:41:39.155Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -449,6 +453,38 @@
 
 <p>授权对象：0.0.0.0/0 代表任何ip</p>
 <p>（不建议授权任何ip，会存在安全问题。授权自己的ip就好了）</p>
+<h3 id="4-安装docker-mongo"><a href="#4-安装docker-mongo" class="headerlink" title="4.安装docker-mongo"></a>4.安装docker-mongo</h3><p>1.<strong>拉取镜像</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mongo</span><br></pre></td></tr></table></figure>
+
+<p>默认最新版本</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/12.png" class>
+
+<p>2.<strong>查看是否拉取成功</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/13.png" class>
+
+<p>3.<strong>启动容器</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mongoDB -p 27017:27017 -d mongo --auth</span><br></pre></td></tr></table></figure>
+
+<p>命令含义和之前差不多，就不解释了。</p>
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/14.png" class>
+
+<p>4.<strong>设置密码</strong></p>
+<p>首先进入容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器ID mongo admin</span><br></pre></td></tr></table></figure>
+
+<p>创建用户和密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123; user: 'admin', pwd: '123', roles: [ &#123; role: "userAdminAnyDatabase", db: "admin" &#125; ] &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>验证密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.auth("admin","123");</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/15.png" class>
+
+<p>最后输入<code>exit</code>退出</p>
+<p>5.<strong>添加安全组</strong></p>
+<p>和之前一样，就不对赘述了。</p>
 <p>目前就安装这么多，后续有需要再更新</p>
 
       
@@ -622,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装docker"><span class="nav-number">1.</span> <span class="nav-text">1.安装docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装docker-mysql"><span class="nav-number"></span> <span class="nav-text">2.安装docker-mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装docker-redis"><span class="nav-number">1.</span> <span class="nav-text">3.安装docker-redis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装docker"><span class="nav-number">1.</span> <span class="nav-text">1.安装docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装docker-mysql"><span class="nav-number"></span> <span class="nav-text">2.安装docker-mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装docker-redis"><span class="nav-number">1.</span> <span class="nav-text">3.安装docker-redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安装docker-mongo"><span class="nav-number">2.</span> <span class="nav-text">4.安装docker-mongo</span></a></li></ol></div>
             
 
           </div>
