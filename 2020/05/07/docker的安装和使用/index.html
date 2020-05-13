@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/14.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/15.png">
 <meta property="article:published_time" content="2020-05-07T13:44:15.000Z">
-<meta property="article:modified_time" content="2020-05-12T12:41:39.155Z">
+<meta property="article:modified_time" content="2020-05-13T12:44:30.100Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -372,23 +372,17 @@
 <p>直接复制命令粘贴</p>
 <img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/2.png" class>
 
-<h2 id="2-安装docker-mysql"><a href="#2-安装docker-mysql" class="headerlink" title="2.安装docker-mysql"></a>2.安装docker-mysql</h2><ol>
-<li><strong>拉取mysql镜像</strong></li>
-</ol>
+<h2 id="2-安装docker-mysql"><a href="#2-安装docker-mysql" class="headerlink" title="2.安装docker-mysql"></a>2.安装docker-mysql</h2><p>1.<strong>拉取mysql镜像</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
 
 <img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/3.png" class>
 
-<ol>
-<li><strong>查看是否拉取成功</strong></li>
-</ol>
+<p>2.<strong>查看是否拉取成功</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
 
 <img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/4.png" class>
 
-<ol>
-<li><strong>创建并启动mysql容器</strong></li>
-</ol>
+<p>3.<strong>创建并启动mysql容器</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -p 3306:3306 --name mysql5.7 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
 
 <p>命令解释：</p>
@@ -406,13 +400,10 @@
 <p>看到如图所示，证明安装成功并成功启动</p>
 <img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/5.png" class>
 
-<ol>
-<li><strong>添加安全组</strong></li>
-</ol>
+<p>4.<strong>添加安全组</strong></p>
 <p>在阿里云控制平台开放3306端口</p>
 <img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/7.png" class>
 
-<p>出入方向都创建一样的规则</p>
 <p>授权对象：0.0.0.0/0 代表任何ip</p>
 <p>（但其实不建议授权任何ip，会存在安全问题。授权自己的ip就好了）</p>
 <h3 id="3-安装docker-redis"><a href="#3-安装docker-redis" class="headerlink" title="3.安装docker-redis"></a>3.安装docker-redis</h3><p>和安装mysql大同小异</p>
@@ -448,7 +439,6 @@
 
 <p>4.<strong>添加安全组</strong></p>
 <p>进入阿里云控制台开放6379端口</p>
-<p>出入方向都需要</p>
 <img src="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/11.png" class>
 
 <p>授权对象：0.0.0.0/0 代表任何ip</p>
