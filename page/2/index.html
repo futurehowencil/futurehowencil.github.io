@@ -260,6 +260,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/12/Java8-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fzq">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="76的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/12/Java8-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/" itemprop="url">Java8-Lambda表达式学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-12T10:32:10+08:00">
+                2020-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/04/12/Java8-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/12/Java8-Lambda表达式学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Lambda表达式是Java 8的新特性，也更新了好久，但是感觉并不是很常见?（可能是我的错觉），但好像使用频率有增长的势头。因为我自己也很少使用，利用一下周末时间来学习一下。</p>
+<h3 id="1-关于Lambda-表达式"><a href="#1-关于Lambda-表达式" class="headerlink" title="1.关于Lambda 表达式"></a>1.关于Lambda 表达式</h3><ul>
+<li>Lambda 表达式允许函数作为一个方法的参数</li>
+<li>熟练使用Lambda 表达式可以使代码变得更加简洁优雅（可以少写）</li>
+<li>一般用于简化匿名内部类，被称为函数式接口的概念（函数式接口也就是只具有一个抽象方法的普通接口，这个应该属于它的缺点了… 有局限性）</li>
+</ul>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>一般的语法格式为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(parameters) -&gt; expression  <span class="comment">// （参数）-&gt; 表达式</span></span><br><span class="line"><span class="comment">//或者是</span></span><br><span class="line">（parameters) -&gt; &#123; statements; &#125; <span class="comment">// (参数) -&gt; 方法体</span></span><br></pre></td></tr></table></figure>
+
+<p>Lambda 表达式的几个特征</p>
+<ul>
+<li>不需要声明参数类型</li>
+<li>一个参数时，不需要圆括号；多个参数需要</li>
+<li>方法体只有一条语句时不需要花括号；多条语句需要</li>
+<li>如果只有一个返回值会自动返回，不需要写return</li>
+</ul>
+<h3 id="2-使用Lambda-表达式的例子"><a href="#2-使用Lambda-表达式的例子" class="headerlink" title="2.使用Lambda 表达式的例子"></a>2.使用Lambda 表达式的例子</h3><ul>
+<li>关于匿名内部类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经常使用的匿名内部类 例如排序</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getComparator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list1.add(<span class="string">"abcdfg"</span>);</span><br><span class="line">        list1.add(<span class="string">"123456789"</span>);</span><br><span class="line">        list1.add(<span class="string">"ABCJKLQW"</span>);</span><br><span class="line">        ArrayList&lt;String&gt; list2 = <span class="keyword">new</span> ArrayList&lt;&gt;(list1);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"list1 排序前："</span>+list1);</span><br><span class="line">        System.out.println(<span class="string">"list2 排序前："</span>+list2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Java 8之前</span></span><br><span class="line">        list1.sort(<span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> a.length() - b.length();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// java 8之后，使用Lambda 表达式</span></span><br><span class="line">        list2.sort((a,b) -&gt; a.length()-b.length());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"list1 排序后："</span>+list1);</span><br><span class="line">        System.out.println(<span class="string">"list2 排序后："</span>+list2);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后打印输出的结果是一样的</p>
+<img src="/2020/04/12/Java8-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/1.png" class title="打印输出的结果">
+
+
+
+<ul>
+<li>无参数无返回值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> fzq</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LambdaDemo01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LambdaMessage m1 = <span class="keyword">new</span> LambdaMessageImpl();</span><br><span class="line">        <span class="comment">// Java 8之前传统方法</span></span><br><span class="line">        m1.printMessage();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 匿名内部类方式</span></span><br><span class="line">        LambdaMessage m2 = <span class="keyword">new</span> LambdaMessage() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"输出信息:匿名内部类"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        m2.printMessage();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用lambda表达式, 使用lambda表达式</span></span><br><span class="line"><span class="comment">//        LambdaMessage m3 = () -&gt; &#123;System.out.println("输出信息:使用Lambda表达式");&#125;;</span></span><br><span class="line">        LambdaMessage m3 = () -&gt; System.out.println(<span class="string">"输出信息:使用Lambda表达式"</span>);</span><br><span class="line">        m3.printMessage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">interface</span>  <span class="title">LambdaMessage</span></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 打印信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">printMessage</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LambdaMessageImpl</span> <span class="keyword">implements</span> <span class="title">LambdaMessage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"输出信息"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/04/12/Java8-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/2.png" class title="打印输出结果">
+
+<ul>
+<li>有参有返回值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> fzq</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LambdaDemo02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//无参无返回值</span></span><br><span class="line">        WhereGo go = () -&gt; System.out.println(<span class="string">"下楼吃饭"</span>);</span><br><span class="line">        go.go();</span><br><span class="line">        <span class="comment">//有参无返回值</span></span><br><span class="line">        WhoTalkSomething wts = ((person, content) -&gt; System.out.println(person + <span class="string">"说"</span> + content));</span><br><span class="line">        wts.talk(<span class="string">"我"</span>, <span class="string">"饿了"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//有参数有返回值</span></span><br><span class="line"><span class="comment">//        CalcResult result = (int a,int b) -&gt;&#123; return a + b;&#125;; // 参数类型可不写</span></span><br><span class="line"><span class="comment">//        CalcResult result = (a, b) -&gt; &#123;return a+b;&#125;; // 可以省略花括号+return</span></span><br><span class="line">        CalcResult result = (a, b) -&gt; a + b;</span><br><span class="line">        System.out.println(<span class="string">"计算结果:"</span> + result.add(<span class="number">2</span>, <span class="number">3</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">WhereGo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">go</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">WhoTalkSomething</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">talk</span><span class="params">(String person, String content)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">CalcResult</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/04/12/Java8-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/3.png" class title="打印输出结果">
+
+<ul>
+<li>关于参数的使用简单说明</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LambdaDemo03</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// lambda表达式可以使用外部的局部变量</span></span><br><span class="line">        <span class="keyword">int</span> num1 = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> num2 = <span class="number">10</span>;</span><br><span class="line">        ParamClass paramClass = (a, b) -&gt; System.out.println(num1+num2);</span><br><span class="line">        <span class="comment">// num1 = 1; 会编译报错 Variable used in lambda expression should be final or effectively final </span></span><br><span class="line">        <span class="comment">// 这里的外部局部变量可以不声明final 但不可修改(隐性final)</span></span><br><span class="line">        </span><br><span class="line">		<span class="comment">// 外部的局部变量不可与lambda表达式中的变量名相同</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">4</span>;</span><br><span class="line">        ParamClass paramClass1 = (a,w) -&gt; System.out.println(a+c);</span><br><span class="line">   		<span class="comment">// 这里的局部变量a与入参a名字相同, 会编译报错 Variable 'a' is already defined in the scope</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ParamClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>学习完这个打算再学习一下Steam流</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/12/Java8-Stream%E6%B5%81%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -953,7 +1128,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
