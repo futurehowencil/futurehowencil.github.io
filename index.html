@@ -260,6 +260,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fzq">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="76的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" itemprop="url">关于缓存和布隆过滤器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T20:02:49+08:00">
+                2020-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/20/关于缓存和布隆过滤器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-缓存雪崩"><a href="#1-缓存雪崩" class="headerlink" title="1.缓存雪崩"></a>1.缓存雪崩</h3><p><strong>缓存雪崩是什么？</strong></p>
+<p>缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>搭建redis集群，提升高可用性。</li>
+<li>将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效</li>
+<li>将热点数据的过期时间设为永不过期。</li>
+</ul>
+<h3 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2.缓存击穿"></a>2.缓存击穿</h3><p><strong>缓存击穿是什么？</strong></p>
+<p>缓存击穿就是，缓存中没有但数据库中有的数据。如果这时候并发请求很多，在缓存中读取不到数据，请求就会落到数据库上，导致数据库所承受的压力瞬间增大。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>设置热点数据永不过期。</li>
+<li>加锁限流</li>
+<li>使用布隆过滤器。</li>
+</ul>
+<h3 id="3-缓存穿透"><a href="#3-缓存穿透" class="headerlink" title="3.缓存穿透"></a>3.缓存穿透</h3><p><strong>缓存穿透是什么？</strong></p>
+<p>缓存穿透就是，一个在缓存中和数据库中都不存在的数据。在请求过来时，会直接落到数据库上。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>在接口层面做数据校验。</li>
+<li>使用布隆过滤器</li>
+<li>在数据库中查询不到也缓存为null值。</li>
+</ul>
+<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><h3 id="1-什么是布隆过滤器"><a href="#1-什么是布隆过滤器" class="headerlink" title="1.什么是布隆过滤器"></a>1.什么是布隆过滤器</h3><p>布隆过滤器（Bloom Filter）是1970年由<a href="https://baike.baidu.com/item/%E5%B8%83%E9%9A%86/14216465" target="_blank" rel="noopener">布隆</a>提出的。它实际上是一个很长的<a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457" target="_blank" rel="noopener">二进制</a>向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都比一般的算法要好的多，缺点是有一定的误识别率和删除困难。    ——百度百科</p>
+<h3 id="2-布隆过滤器的原理"><a href="#2-布隆过滤器的原理" class="headerlink" title="2.布隆过滤器的原理"></a>2.布隆过滤器的原理</h3><p>布隆过滤器有一个<strong>位数组</strong>，位数组的每个元素只占1bit，并且每个元素只能是1或者0</p>
+<p><strong>存入元素：</strong></p>
+<p>1.布隆过滤器会用哈希函数对元素进行计算，得到哈希值。（有几个哈希函数就会有几个哈希值）</p>
+<p>2.根据得到的哈希值，在位数组中把对应的下标设置为1。</p>
+<p><strong>判断元素是否存在：</strong></p>
+<p>1.使用哈希函数对该元素进行计算，得到哈希值。</p>
+<p>2.得到哈希值后，判断位数组中的每个元素对应的下标是否为1。如果都为1则证明该元素在布隆过滤器中，只要有一个不为1，说明该元素不在布隆过滤器中。</p>
+<p><strong>结论：</strong>布隆过滤器说某个元素不在，那必定不在；说某个元素存在，有几率会误判。</p>
+<h3 id="3-应用场景"><a href="#3-应用场景" class="headerlink" title="3.应用场景"></a>3.应用场景</h3><p>1.过滤，例如防止缓存穿透，一些网站的黑名单功能等。</p>
+<p>2.去重</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/%E5%85%B3%E4%BA%8ERedis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1945,192 +2109,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fzq">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="76的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" itemprop="url">设计模式学习-单例模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-12T17:05:29+08:00">
-                2020-04-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/04/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/12/设计模式学习-单例模式/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="设计模式-单例模式"><a href="#设计模式-单例模式" class="headerlink" title="设计模式-单例模式"></a>设计模式-单例模式</h2><h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h3><p>单例模式属于创建型设计模式的一种，确保一个类在系统中有且仅有一个实例，会自行实例化，同时向外界提供获取这个唯一实例的方法。</p>
-<ul>
-<li>单例类有且仅有一个实例</li>
-<li>单例类必须自行实例化</li>
-<li>向外部提供唯一实例</li>
-</ul>
-<h3 id="2-优缺点"><a href="#2-优缺点" class="headerlink" title="2.优缺点"></a>2.优缺点</h3><ul>
-<li>优点<ul>
-<li>对于频繁使用的对象，使用单例模式可以减少创建对象所花费的时间</li>
-<li>使创建对象的次数减少，减少内存压力</li>
-</ul>
-</li>
-<li>缺点<ul>
-<li>单例类没有抽象类，扩展困难</li>
-<li>因为只要一个单例，会导致职责过重，违背“单一职责原则”</li>
-</ul>
-</li>
-</ul>
-<p><strong>为什么不用静态变量来定义唯一实例呢？</strong></p>
-<p>因为静态变量在类加载时便存在，如果没有使用到就会造成资源浪费。使用单例模式的话，可以实现在使用时再创建该实例，避免浪费。</p>
-<h3 id="3-关于实现单例模式的几种方法"><a href="#3-关于实现单例模式的几种方法" class="headerlink" title="3.关于实现单例模式的几种方法"></a>3.关于实现单例模式的几种方法</h3><ul>
-<li><strong>饿汉式（线程安全，不能实现延迟加载）</strong></li>
-</ul>
-<p>在类加载时创建单例，免去判断，调用效率高，但也容易造成浪费</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonDemo1</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonDemo1 singleton = <span class="keyword">new</span> SingletonDemo1();</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  私有化构造方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonDemo1</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提供获取方法</span></span><br><span class="line"><span class="comment">     * 没有加synchronized 效率高</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonDemo1 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>懒汉式（线程不安全，可以延迟加载）</strong></li>
-</ul>
-<p>区别于饿汉式，这个方式在第一次被使用时创建单例，但在多线程模式下就会出现线程不安全的问题。</p>
-<p>可以在<code>getInstance()</code>方法加关键字<code>synchronized</code>，但会让效率低下。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonDemo2</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> SingletonDemo2 singleton = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有化构造方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonDemo2</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提供获取单例方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonDemo2 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 延迟加载</span></span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> SingletonDemo2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>懒汉式-双重同步锁（线程安全，可以延迟加载，效率高）</strong></li>
-</ul>
-<p>第一次检查为了避免不要的实例，第二次检查是为了进行同步。</p>
-<p>关于<code>volatile</code>关键字，是保证了数据的可见性，个人的理解是确保多线程下的数据一致性。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonDemo3</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span>  SingletonDemo3 singleton = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有化构造方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonDemo3</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonDemo3 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 检查是否存在</span></span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (SingletonDemo3<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="comment">// 进入同步代码块以后，再检查一次，为null则创建</span></span><br><span class="line">                <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    singleton = <span class="keyword">new</span> SingletonDemo3();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>关于同步代码块和同步方法，同步方法的范围更大，范围越大性能也就越差。所以第二次懒汉模式性能相对于第一种更好。</p>
-<ul>
-<li><strong>懒汉式（静态内部类方式，线程安全）</strong></li>
-</ul>
-<p>只有通过显式调用<code>getInstance()</code>方法，才会显式装载内部类并实例化<code>singleton</code>。只有第一次使用这个单例的实例时才加载，同时不会有线程安全问题。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonDemo4</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 静态内部类</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInner</span></span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 保证了线程安全</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SingletonDemo4 singleton = <span class="keyword">new</span> SingletonDemo4();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 私有构造方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonDemo4</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提供获取实例方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonDemo4 <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonInner.singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>*<em>饿汉式（枚举方式，线程安全） *</em></li>
-</ul>
-<p>这种方式用起来很简洁，但我个人不是很喜欢。觉得太简洁了… 可读性不高。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonDemo5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Singleton singleton  = Singleton.singleton;</span><br><span class="line">        singleton.testDo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">enum</span> Singleton&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义了一个实例，使用的时候可以直接调用</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    singleton;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"此方法可以省略，只是为了证明已实例化"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-反序列化破坏单例模式"><a href="#4-反序列化破坏单例模式" class="headerlink" title="4.反序列化破坏单例模式"></a>4.反序列化破坏单例模式</h3><p>反序列化会破坏单例模式，会创建一个新的实例</p>
-<p><strong>解决方法</strong> : 是重写<code>readResolve()</code>方法，直接返回此方法指定的对象，就不会再单独创建新的实例了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> <span class="keyword">throws</span> ObjectStreamException</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> singleton;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2181,7 +2159,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

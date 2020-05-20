@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hexo," />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -79,28 +79,17 @@
 
 
 
-<meta name="description" content="hexo博客自定义域名1.购买域名这里以阿里云为例。 在搜索框输入自己想要的域名，之后点击查询，在下放选择自己想要的域名购买就好了   提交订单的时候，选择个人或者企业。我选择的是个人，需要一个通过实名认证的信息模板，如果没有就创建一个。   实名认证通过之后就是这个样子了   之后再重复购买步骤。 2.添加CNAME文件在本地博客根目录下，有一个source文件夹， 进入source文件夹，创建">
+<meta name="description" content="1.缓存雪崩缓存雪崩是什么？ 缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。 解决方案：  搭建redis集群，提升高可用性。 将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效 将热点数据的过期时间设为永不过期。  2.缓存击穿缓存击穿是什么？ 缓存击穿就是，缓存中没有但数据库中有的数据。如果这时候并发请求很多，在缓存中读取不到数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo博客如何自定义域名">
-<meta property="og:url" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/index.html">
+<meta property="og:title" content="关于缓存和布隆过滤器">
+<meta property="og:url" content="http://yoursite.com/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="hexo博客自定义域名1.购买域名这里以阿里云为例。 在搜索框输入自己想要的域名，之后点击查询，在下放选择自己想要的域名购买就好了   提交订单的时候，选择个人或者企业。我选择的是个人，需要一个通过实名认证的信息模板，如果没有就创建一个。   实名认证通过之后就是这个样子了   之后再重复购买步骤。 2.添加CNAME文件在本地博客根目录下，有一个source文件夹， 进入source文件夹，创建">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/3.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/4.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/5.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/7.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/8.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/9.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png">
-<meta property="article:published_time" content="2020-05-04T02:17:22.000Z">
-<meta property="article:modified_time" content="2020-05-04T04:42:50.506Z">
+<meta property="og:description" content="1.缓存雪崩缓存雪崩是什么？ 缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。 解决方案：  搭建redis集群，提升高可用性。 将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效 将热点数据的过期时间设为永不过期。  2.缓存击穿缓存击穿是什么？ 缓存击穿就是，缓存中没有但数据库中有的数据。如果这时候并发请求很多，在缓存中读取不到数">
+<meta property="article:published_time" content="2020-05-20T12:02:49.000Z">
+<meta property="article:modified_time" content="2020-05-20T12:03:08.752Z">
 <meta property="article:author" content="fzq">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/1.png">
 
 
 
@@ -130,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/04/hexo博客如何自定义域名/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/20/关于缓存和布隆过滤器/"/>
 
 
 
 
 
-  <title>hexo博客如何自定义域名 | 76的个人博客</title>
+  <title>关于缓存和布隆过滤器 | 76的个人博客</title>
   
 
 
@@ -273,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fzq">
@@ -290,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo博客如何自定义域名</h1>
+          <h1 class="post-title" itemprop="name headline">关于缓存和布隆过滤器</h1>
         
 
         <div class="post-meta">
@@ -302,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-04T10:17:22+08:00">
-                2020-05-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T20:02:49+08:00">
+                2020-05-20
               </time>
             
 
@@ -321,8 +310,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/04/hexo博客如何自定义域名/" itemprop="commentCount"></span>
+                <a href="/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/20/关于缓存和布隆过滤器/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -350,44 +339,41 @@
       
 
       
-        <h2 id="hexo博客自定义域名"><a href="#hexo博客自定义域名" class="headerlink" title="hexo博客自定义域名"></a>hexo博客自定义域名</h2><h3 id="1-购买域名"><a href="#1-购买域名" class="headerlink" title="1.购买域名"></a>1.购买域名</h3><p>这里以阿里云为例。</p>
-<p>在搜索框输入自己想要的域名，之后点击查询，在下放选择自己想要的域名购买就好了</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/1.png" class>
-
-<p>提交订单的时候，选择个人或者企业。我选择的是个人，需要一个通过实名认证的信息模板，如果没有就创建一个。</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/2.png" class>
-
-<p>实名认证通过之后就是这个样子了</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/3.png" class>
-
-<p>之后再重复购买步骤。</p>
-<h3 id="2-添加CNAME文件"><a href="#2-添加CNAME文件" class="headerlink" title="2.添加CNAME文件"></a>2.添加CNAME文件</h3><p>在本地博客根目录下，有一个source文件夹，</p>
-<p>进入source文件夹，创建一个CNAME文件，注意这个文件是没有后缀的。</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/4.png" class>
-
-<p>之后打开CNAME，把刚刚购买的域名填进去</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/5.png" class>
-
-<h3 id="3-在GitHub中设置"><a href="#3-在GitHub中设置" class="headerlink" title="3.在GitHub中设置"></a>3.在GitHub中设置</h3><p>打开GitHub上的博客项目，点击Setting，往下拉找到Custom domain</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png" class>
-
-<h3 id="4-给域名添加解析记录"><a href="#4-给域名添加解析记录" class="headerlink" title="4.给域名添加解析记录"></a>4.给域名添加解析记录</h3><p>首先要ping一下博客地址，地址就是yourname.github.io</p>
-<p>以Windows系统为例，打开CMD</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/7.png" class>
-
-<p>红色框起来的部分就是IP地址</p>
-<p>打开阿里云控制台，进入域名列表</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/8.png" class>
-
-<p>点击解析，添加两条记录</p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/9.png" class>
-
-<h3 id="5-开启https"><a href="#5-开启https" class="headerlink" title="5.开启https"></a>5.开启https</h3><p>设置好以后，一般是通过http访问。</p>
-<p>在GitHub项目的setting中，有一个选项Enforce HTTPS </p>
-<img src="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png" class>
-
-<p>一开始这个选项是不能勾选的，要等待证书颁发</p>
-<p>证书颁发下来以后，将这个选项勾选上，就可以通过https进行访问了。</p>
+        <h3 id="1-缓存雪崩"><a href="#1-缓存雪崩" class="headerlink" title="1.缓存雪崩"></a>1.缓存雪崩</h3><p><strong>缓存雪崩是什么？</strong></p>
+<p>缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>搭建redis集群，提升高可用性。</li>
+<li>将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效</li>
+<li>将热点数据的过期时间设为永不过期。</li>
+</ul>
+<h3 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2.缓存击穿"></a>2.缓存击穿</h3><p><strong>缓存击穿是什么？</strong></p>
+<p>缓存击穿就是，缓存中没有但数据库中有的数据。如果这时候并发请求很多，在缓存中读取不到数据，请求就会落到数据库上，导致数据库所承受的压力瞬间增大。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>设置热点数据永不过期。</li>
+<li>加锁限流</li>
+<li>使用布隆过滤器。</li>
+</ul>
+<h3 id="3-缓存穿透"><a href="#3-缓存穿透" class="headerlink" title="3.缓存穿透"></a>3.缓存穿透</h3><p><strong>缓存穿透是什么？</strong></p>
+<p>缓存穿透就是，一个在缓存中和数据库中都不存在的数据。在请求过来时，会直接落到数据库上。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>在接口层面做数据校验。</li>
+<li>使用布隆过滤器</li>
+<li>在数据库中查询不到也缓存为null值。</li>
+</ul>
+<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><h3 id="1-什么是布隆过滤器"><a href="#1-什么是布隆过滤器" class="headerlink" title="1.什么是布隆过滤器"></a>1.什么是布隆过滤器</h3><p>布隆过滤器（Bloom Filter）是1970年由<a href="https://baike.baidu.com/item/%E5%B8%83%E9%9A%86/14216465" target="_blank" rel="noopener">布隆</a>提出的。它实际上是一个很长的<a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457" target="_blank" rel="noopener">二进制</a>向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都比一般的算法要好的多，缺点是有一定的误识别率和删除困难。    ——百度百科</p>
+<h3 id="2-布隆过滤器的原理"><a href="#2-布隆过滤器的原理" class="headerlink" title="2.布隆过滤器的原理"></a>2.布隆过滤器的原理</h3><p>布隆过滤器有一个<strong>位数组</strong>，位数组的每个元素只占1bit，并且每个元素只能是1或者0</p>
+<p><strong>存入元素：</strong></p>
+<p>1.布隆过滤器会用哈希函数对元素进行计算，得到哈希值。（有几个哈希函数就会有几个哈希值）</p>
+<p>2.根据得到的哈希值，在位数组中把对应的下标设置为1。</p>
+<p><strong>判断元素是否存在：</strong></p>
+<p>1.使用哈希函数对该元素进行计算，得到哈希值。</p>
+<p>2.得到哈希值后，判断位数组中的每个元素对应的下标是否为1。如果都为1则证明该元素在布隆过滤器中，只要有一个不为1，说明该元素不在布隆过滤器中。</p>
+<p><strong>结论：</strong>布隆过滤器说某个元素不在，那必定不在；说某个元素存在，有几率会误判。</p>
+<h3 id="3-应用场景"><a href="#3-应用场景" class="headerlink" title="3.应用场景"></a>3.应用场景</h3><p>1.过滤，例如防止缓存穿透，一些网站的黑名单功能等。</p>
+<p>2.去重</p>
 
       
     </div>
@@ -405,7 +391,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
           
         </div>
       
@@ -418,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/" rel="next" title="二叉树的前序遍历、中序遍历、后序遍历">
-                <i class="fa fa-chevron-left"></i> 二叉树的前序遍历、中序遍历、后序遍历
+              <a href="/2020/05/16/%E5%85%B3%E4%BA%8ERedis/" rel="next" title="关于redis">
+                <i class="fa fa-chevron-left"></i> 关于redis
               </a>
             
           </div>
@@ -427,10 +413,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/" rel="prev" title="docker的安装和使用">
-                docker的安装和使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -461,8 +443,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2020/05/04/hexo博客如何自定义域名/"
-           data-title="hexo博客如何自定义域名" data-url="http://yoursite.com/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/">
+      <div class="ds-thread" data-thread-key="2020/05/20/关于缓存和布隆过滤器/"
+           data-title="关于缓存和布隆过滤器" data-url="http://yoursite.com/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
       </div>
     </div>
 
@@ -560,7 +542,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo博客自定义域名"><span class="nav-number">1.</span> <span class="nav-text">hexo博客自定义域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-购买域名"><span class="nav-number">1.1.</span> <span class="nav-text">1.购买域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加CNAME文件"><span class="nav-number">1.2.</span> <span class="nav-text">2.添加CNAME文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-在GitHub中设置"><span class="nav-number">1.3.</span> <span class="nav-text">3.在GitHub中设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-给域名添加解析记录"><span class="nav-number">1.4.</span> <span class="nav-text">4.给域名添加解析记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-开启https"><span class="nav-number">1.5.</span> <span class="nav-text">5.开启https</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-缓存雪崩"><span class="nav-number">1.</span> <span class="nav-text">1.缓存雪崩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-缓存击穿"><span class="nav-number">2.</span> <span class="nav-text">2.缓存击穿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-缓存穿透"><span class="nav-number">3.</span> <span class="nav-text">3.缓存穿透</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布隆过滤器"><span class="nav-number"></span> <span class="nav-text">布隆过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是布隆过滤器"><span class="nav-number">1.</span> <span class="nav-text">1.什么是布隆过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-布隆过滤器的原理"><span class="nav-number">2.</span> <span class="nav-text">2.布隆过滤器的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-应用场景"><span class="nav-number">3.</span> <span class="nav-text">3.应用场景</span></a></li></ol></div>
             
 
           </div>
