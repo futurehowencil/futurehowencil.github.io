@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据结构," />
+  <meta name="keywords" content="网络," />
 
 
 
@@ -79,22 +79,17 @@
 
 
 
-<meta name="description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历 简单的二叉树   前序：ABC 中序：BAC 后序：BCA     前序：ABDECFG  (可以拆分成多个有3个节点的小二叉树) 首先">
+<meta name="description" content="1.前言当在浏览器地址栏输入www.baidu.com 时，发生了什么 2.概述1.首先对网址进行DNS域名解析，得到对应的IP地址 2.根据得到的IP地址，找到服务器，发起TCP三次握手 3.成功建立TCP连接后，发起HTTP请求 4.服务器相应HTTP请求，返回html代码 5.浏览器解析html代码，并请求html代码中的资源，例如css，js，图片等。 6.浏览器对页面进行渲染呈现 3.各">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉树的前序遍历、中序遍历、后序遍历">
-<meta property="og:url" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/index.html">
+<meta property="og:title" content="一个完整的HTTP请求过程">
+<meta property="og:url" content="http://yoursite.com/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历 简单的二叉树   前序：ABC 中序：BAC 后序：BCA     前序：ABDECFG  (可以拆分成多个有3个节点的小二叉树) 首先">
-<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png">
-<meta property="article:published_time" content="2020-05-03T09:58:51.000Z">
-<meta property="article:modified_time" content="2020-05-03T12:03:09.872Z">
+<meta property="og:description" content="1.前言当在浏览器地址栏输入www.baidu.com 时，发生了什么 2.概述1.首先对网址进行DNS域名解析，得到对应的IP地址 2.根据得到的IP地址，找到服务器，发起TCP三次握手 3.成功建立TCP连接后，发起HTTP请求 4.服务器相应HTTP请求，返回html代码 5.浏览器解析html代码，并请求html代码中的资源，例如css，js，图片等。 6.浏览器对页面进行渲染呈现 3.各">
+<meta property="article:published_time" content="2020-05-21T13:07:23.000Z">
+<meta property="article:modified_time" content="2020-05-24T05:59:56.911Z">
 <meta property="article:author" content="fzq">
-<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png">
 
 
 
@@ -124,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/03/二叉树的前序遍历、中序遍历、后序遍历/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/21/一个完整的HTTP请求过程/"/>
 
 
 
 
 
-  <title>二叉树的前序遍历、中序遍历、后序遍历 | 76的个人博客</title>
+  <title>一个完整的HTTP请求过程 | 76的个人博客</title>
   
 
 
@@ -267,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fzq">
@@ -284,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">二叉树的前序遍历、中序遍历、后序遍历</h1>
+          <h1 class="post-title" itemprop="name headline">一个完整的HTTP请求过程</h1>
         
 
         <div class="post-meta">
@@ -296,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-03T17:58:51+08:00">
-                2020-05-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-21T21:07:23+08:00">
+                2020-05-21
               </time>
             
 
@@ -315,8 +310,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/03/二叉树的前序遍历、中序遍历、后序遍历/" itemprop="commentCount"></span>
+                <a href="/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/21/一个完整的HTTP请求过程/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -344,86 +339,54 @@
       
 
       
-        <h2 id="二叉树的前序遍历、中序遍历、后序遍历"><a href="#二叉树的前序遍历、中序遍历、后序遍历" class="headerlink" title="二叉树的前序遍历、中序遍历、后序遍历"></a>二叉树的前序遍历、中序遍历、后序遍历</h2><p>简单讲一下三种遍历方式</p>
+        <h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>当在浏览器地址栏输入<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 时，发生了什么</p>
+<h3 id="2-概述"><a href="#2-概述" class="headerlink" title="2.概述"></a>2.概述</h3><p>1.首先对网址进行DNS域名解析，得到对应的IP地址</p>
+<p>2.根据得到的IP地址，找到服务器，发起TCP三次握手</p>
+<p>3.成功建立TCP连接后，发起HTTP请求</p>
+<p>4.服务器相应HTTP请求，返回html代码</p>
+<p>5.浏览器解析html代码，并请求html代码中的资源，例如css，js，图片等。</p>
+<p>6.浏览器对页面进行渲染呈现</p>
+<h3 id="3-各个步骤的细节"><a href="#3-各个步骤的细节" class="headerlink" title="3.各个步骤的细节"></a>3.各个步骤的细节</h3><h4 id="1-DNS域名解析"><a href="#1-DNS域名解析" class="headerlink" title="1.DNS域名解析"></a>1.DNS域名解析</h4><p>1.浏览器首先会搜索自身的DNS缓存</p>
+<p>2.若自身缓存里没有找到，就会去搜索系统中的DNS缓存</p>
+<p>3.若系统的DNS缓存没有找到，就会尝试在hosts文件中查找</p>
+<p>4.若在hosts文件中还是没有，会先去本地配置的DNS服务器中查找</p>
+<p>5.若本地配置的DNS服务器没有，再来是com的顶级域名服务器</p>
+<p>6.若在com域名服务器中没有，最后就会去baidu.com的域名服务器中查找</p>
+<h4 id="2-TCP三次握手"><a href="#2-TCP三次握手" class="headerlink" title="2.TCP三次握手"></a>2.TCP三次握手</h4><h5 id="为什么要三次握手？"><a href="#为什么要三次握手？" class="headerlink" title="为什么要三次握手？"></a>为什么要三次握手？</h5><p>因为计算机之间通信是通过协议来实现，协议不同是不能进行通信的。三次握手是保证了协议一致（3次是最少的认知次数）。</p>
+<h4 id="3-发起HTTP请求"><a href="#3-发起HTTP请求" class="headerlink" title="3.发起HTTP请求"></a>3.发起HTTP请求</h4><p>HTTP请求分为3个部分，请求行、请求头、请求正文</p>
 <ul>
-<li>前序：根 - &gt; 左 - &gt;  右</li>
-<li>中序：左 - &gt; 根 - &gt; 右</li>
-<li>后序：左 - &gt; 右 - &gt; 根</li>
-</ul>
-<p><strong>其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历</strong></p>
-<h3 id="简单的二叉树"><a href="#简单的二叉树" class="headerlink" title="简单的二叉树"></a>简单的二叉树</h3><img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png" class>
-
-<ul>
-<li>前序：ABC</li>
-<li>中序：BAC</li>
-<li>后序：BCA</li>
-</ul>
-<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png" class>
-
-<ul>
-<li>前序：ABDECFG</li>
-</ul>
-<p>(可以拆分成多个有3个节点的小二叉树)</p>
-<p>首先A为根节点，有左子树B，右子树C</p>
-<p>B可以作为下一级的根节点，有左子树D，右子树E</p>
-<p>A根节点的右子树C同理</p>
-<p>最后就是ABDECFG</p>
-<ul>
-<li>中序：DBEAFCG</li>
-</ul>
-<p>首先是B A C，</p>
-<p>B下面还有子树，所以是D B E A C，</p>
-<p>C下面还有子树，所以最后是DBEAFCG</p>
-<ul>
-<li>后序：DEBFGCA</li>
-</ul>
-<p>首先是 B C A，</p>
-<p>B下面还有子树，所以是D E B C A，</p>
-<p>C下面还有子树，所以最后是DEBFGCA</p>
-<h3 id="不规则的二叉树"><a href="#不规则的二叉树" class="headerlink" title="不规则的二叉树"></a>不规则的二叉树</h3><p>上面的二叉树是左右对称的二叉树。</p>
-<p>现在画一个不对称的二叉树</p>
-<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png" class>
-
-<ul>
-<li>前序：ABDEGHCF</li>
-</ul>
-<p>首先是A B C，B下面还有子树，所以是A B D E C</p>
-<p>E下面还有子树，所以是A B D E G H C</p>
-<p>C下面还有子树，最后就是ABDEGHCF</p>
-<ul>
-<li>中序：DBGEHACF</li>
-</ul>
-<p>首先是B A C，B下面还有子树，所以是D B E A C</p>
-<p>E下面还有子树，所以是D B G E H A C</p>
-<p>C下面还有子树，最后就是DBGEHACF</p>
-<ul>
-<li>后序：DGHEBFCA</li>
-</ul>
-<p>首先是B C A，B下面还有子树，所以是D E B C A </p>
-<p>E下面还有子树，所以是D G H E B C A </p>
-<p>C下面还有子树，所以是DGHEBFCA</p>
-<h3 id="根据三种排序中的两种排序画出二叉树（中序必须有）"><a href="#根据三种排序中的两种排序画出二叉树（中序必须有）" class="headerlink" title="根据三种排序中的两种排序画出二叉树（中序必须有）"></a>根据三种排序中的两种排序画出二叉树（中序必须有）</h3><p>想要知道二叉树的结构，中序是必不可少的。因为没有中序无法知道左右子树。</p>
-<p><strong>如果已知中序遍历是DBEAFC，前序遍历是ABDECF，求后序遍历</strong></p>
-<ol>
-<li><p>可以确定A是根节点</p>
+<li><p><strong>请求行：</strong>用于描述客户端的请求方式（例如GET、POST等），请求URL以及使用的HTTP协议的版本号。比如GET/index.html HTTP/1.1</p>
 </li>
-<li><p>A根节点下面，左子树有DBE，右子树有FC</p>
+<li><p><strong>请求头：</strong>请求头是告知服务器关于客户端（浏览器）的请求信息。</p>
 </li>
-<li><p>根据前序BDE，中序DBE，得知B是次级根节点，左子树是D，右子树是E</p>
+<li><p><strong>请求正文：</strong>请求正文就是客户端（浏览器）向服务器传递的数据。（有一些请求是不需要请求正文的，例如GET请求可以没有请求正文）</p>
 </li>
-<li><p>F C、C F，根据排序方式可以得出结论，C是次级根节点，左子树是F（中序遍历F出现在C前面所以是左子树，如果F出现的C后面，那F就是C的右子树），无右子树</p>
-<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png" class title="二叉树图示">
-</li>
-<li><p>所以后序遍历就是DEBFCA</p>
-</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>再把所说的排序方式深入总结一下</p>
-<ol>
-<li><strong>前序遍历：首先访问根节点，再遍历左子树，最后遍历右子树。在遍历左、右子树时，也是先访问根节点，再遍历左子树，最后遍历右子树。</strong></li>
-<li><strong>中序遍历：首先遍历左子树，然后访问根节点，最后遍历右子树。在遍历左、右子树时，也是先遍历左子树，然后访问根节点，最后遍历右子树。</strong></li>
-<li><strong>后序遍历：首先遍历左子树，再遍历右子树，最后访问根节点。在遍历左、右子树时，也是先遍历左子树，再遍历右子树，最后访问根节点。</strong></li>
-</ol>
-<p>也就是不断地递归</p>
+</ul>
+<p>一般的请求方式有：</p>
+<ul>
+<li><em>GET：</em>完整请求一个资源</li>
+<li><em>POST：</em>提交表单</li>
+<li><em>HEAD：</em>仅请求响应头部</li>
+<li><em>PUT：</em>上传文件</li>
+<li><em>DELETE：</em>删除</li>
+<li><em>OPTIONS：</em>预请求，即试探性的请求，如果遭到拒绝，则不会发起第二次请求</li>
+</ul>
+<h4 id="4-服务器响应HTTP请求"><a href="#4-服务器响应HTTP请求" class="headerlink" title="4.服务器响应HTTP请求"></a>4.服务器响应HTTP请求</h4><p>HTTP响应同样分为3个部分，响应行、响应头、响应正文</p>
+<ul>
+<li><strong>响应行：</strong>一般有协议版本号、状态码、描述组成。例如HTTP/200 OK</li>
+<li><strong>响应头：</strong>返回服务器的基本信息，以及告知客户端如何处理数据</li>
+<li><strong>响应体：</strong>就是响应的消息体，一般就是数据或者html代码</li>
+</ul>
+<p><strong>状态码：</strong></p>
+<ul>
+<li><em>1xx：</em>提示信息，表示请求已收到，继续处理</li>
+<li><em>2xx：</em>成功，请求被成功接收并完成整个处理过程。一般为200</li>
+<li><em>3xx：</em>重定向，要完成请求必须要进行进一步的操作。一般有302重定向至新的资源地址</li>
+<li><em>4xx：</em>客户端请求错误，404表示请求的资源在服务器中没有，403服务器拒绝访问</li>
+<li><em>5xx：</em>服务端错误，一般用500服务器发生错误，503服务器不能处理这个请求</li>
+</ul>
+<h4 id="5-解析html代码并请求html代码中的资源"><a href="#5-解析html代码并请求html代码中的资源" class="headerlink" title="5.解析html代码并请求html代码中的资源"></a>5.解析html代码并请求html代码中的资源</h4><p>若有css、js、图片等静态资源，就会向服务器下载。</p>
+<h4 id="6-浏览器对页面进行渲染呈现"><a href="#6-浏览器对页面进行渲染呈现" class="headerlink" title="6.浏览器对页面进行渲染呈现"></a>6.浏览器对页面进行渲染呈现</h4><p>这里就是浏览器自己的工作机制了，对已获得的静态资源和html代码进行渲染并呈现给用户。</p>
 
       
     </div>
@@ -441,7 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+            <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"># 网络</a>
           
         </div>
       
@@ -454,8 +417,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/25/%E4%BD%BF%E7%94%A8redis%E7%9B%91%E5%90%AC%E8%AE%A2%E5%8D%95/" rel="next" title="使用redis监听订单">
-                <i class="fa fa-chevron-left"></i> 使用redis监听订单
+              <a href="/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="next" title="关于缓存和布隆过滤器">
+                <i class="fa fa-chevron-left"></i> 关于缓存和布隆过滤器
               </a>
             
           </div>
@@ -463,10 +426,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/04/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" rel="prev" title="hexo博客如何自定义域名">
-                hexo博客如何自定义域名 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -497,8 +456,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2020/05/03/二叉树的前序遍历、中序遍历、后序遍历/"
-           data-title="二叉树的前序遍历、中序遍历、后序遍历" data-url="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">
+      <div class="ds-thread" data-thread-key="2020/05/21/一个完整的HTTP请求过程/"
+           data-title="一个完整的HTTP请求过程" data-url="http://yoursite.com/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/">
       </div>
     </div>
 
@@ -596,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的前序遍历、中序遍历、后序遍历"><span class="nav-number">1.</span> <span class="nav-text">二叉树的前序遍历、中序遍历、后序遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的二叉树"><span class="nav-number">1.1.</span> <span class="nav-text">简单的二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不规则的二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">不规则的二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据三种排序中的两种排序画出二叉树（中序必须有）"><span class="nav-number">1.3.</span> <span class="nav-text">根据三种排序中的两种排序画出二叉树（中序必须有）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1.前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-概述"><span class="nav-number">2.</span> <span class="nav-text">2.概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-各个步骤的细节"><span class="nav-number">3.</span> <span class="nav-text">3.各个步骤的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-DNS域名解析"><span class="nav-number">3.1.</span> <span class="nav-text">1.DNS域名解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-TCP三次握手"><span class="nav-number">3.2.</span> <span class="nav-text">2.TCP三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么要三次握手？"><span class="nav-number">3.2.1.</span> <span class="nav-text">为什么要三次握手？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-发起HTTP请求"><span class="nav-number">3.3.</span> <span class="nav-text">3.发起HTTP请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-服务器响应HTTP请求"><span class="nav-number">3.4.</span> <span class="nav-text">4.服务器响应HTTP请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-解析html代码并请求html代码中的资源"><span class="nav-number">3.5.</span> <span class="nav-text">5.解析html代码并请求html代码中的资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-浏览器对页面进行渲染呈现"><span class="nav-number">3.6.</span> <span class="nav-text">6.浏览器对页面进行渲染呈现</span></a></li></ol></li></ol></div>
             
 
           </div>
