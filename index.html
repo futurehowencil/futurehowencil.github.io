@@ -260,6 +260,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/25/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fzq">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="76的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/25/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" itemprop="url">Java并发编程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-25T10:33:54+08:00">
+                2020-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/25/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/25/Java并发编程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-进程和线程"><a href="#1-进程和线程" class="headerlink" title="1.进程和线程"></a>1.进程和线程</h3><ul>
+<li><strong>进程：</strong>进程是程序的一次执行过程，是系统运行程序的基本单位。进程的生命周期是创建、运行、消亡。</li>
+</ul>
+<p>打开Windows的任务管理器，就可以看到很多在运行的进程。</p>
+<img src="/2020/05/25/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/1.png" class>
+
+<ul>
+<li><strong>线程：</strong>线程和进程类似，进程有许多线程来组成。与进程不同，线程共享<strong>堆</strong>和<strong>方法区</strong>的资源，但每个线程都有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>、<strong>本地方法栈</strong> 。</li>
+</ul>
+<p><em>进程由多个线程来组成。各个线程之间的独立存在的，而线程则不一定。线程有可能会互相影响，线程执行开销小，不利于资源的保护，而进程刚好相反。</em></p>
+<h4 id="程序计数器、虚拟机栈、本地方法栈为什么是私有的？"><a href="#程序计数器、虚拟机栈、本地方法栈为什么是私有的？" class="headerlink" title="程序计数器、虚拟机栈、本地方法栈为什么是私有的？"></a>程序计数器、虚拟机栈、本地方法栈为什么是私有的？</h4><ul>
+<li>程序计数器：</li>
+</ul>
+<p>1.字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制。</p>
+<p>2.在多线程时，计数器用来记录当前线程所执行到的位置，确保下次线程切换后能恢复到正确的执行位置。</p>
+<ul>
+<li>虚拟机栈：每个Java方法在执行时，会将局部变量，常量池引用等信息存储在虚拟机栈中。</li>
+<li>本地方法栈：和虚拟机栈类似，虚拟机栈为虚拟机执行Java方法（字节码）服务，本地方法栈为虚拟机执行Native方法服务。</li>
+</ul>
+<p>为了保证线程中的局部变量不被其他线程访问到，所以虚拟机栈和本地方法栈是私有的。</p>
+<h4 id="堆和方法区"><a href="#堆和方法区" class="headerlink" title="堆和方法区"></a>堆和方法区</h4><ul>
+<li><strong>堆：</strong>用于存放新创建的对象</li>
+<li><strong>方法区：</strong>用于存放被加载的类信息、常量、静态变量等。</li>
+</ul>
+<h3 id="2-线程的生命周期"><a href="#2-线程的生命周期" class="headerlink" title="2.线程的生命周期"></a>2.线程的生命周期</h3><ul>
+<li><strong>初始状态（NEW）：</strong>线程被构建，但是还没有调用start()方法。</li>
+<li><strong>运行状态（RUNNABLE）：</strong>包括线程就绪和运行。</li>
+<li><strong>阻塞状态（BLOCKED）：</strong>线程被锁阻塞。</li>
+<li><strong>等待状态（WAITING）：</strong>当前线程需要等待其他线程完成一些特定动作（例如通知或者中断）。</li>
+<li><strong>超时等待状态（TIME_WATING）：</strong>不同于WAITING，它可以在指定的时间自行返回。</li>
+<li><strong>终止状态（TERMINATED）：</strong>当前线程已经执行完毕。</li>
+</ul>
+<h3 id="3-线程死锁"><a href="#3-线程死锁" class="headerlink" title="3.线程死锁"></a>3.线程死锁</h3><p>多个线程同时被阻塞，它们中的一个或者全部都在等待某个资源释放。由于线程被阻塞，因此程序不可能正常终止。</p>
+<p>一个死锁的例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object objectA = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object objectB = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 线程1</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (objectA) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"get ObjectA"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"wait ObjectB"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (objectB) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">"ge6t ObjectB"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"线程1"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 线程2</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (objectB) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"get ObjectB"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"wait ObjectA"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (objectA) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">"get ObjectA"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"线程2"</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 控制台输出内容</span></span><br><span class="line">Thread[线程<span class="number">1</span>,<span class="number">5</span>,main]get ObjectA</span><br><span class="line">Thread[线程<span class="number">2</span>,<span class="number">5</span>,main]get ObjectB</span><br><span class="line">Thread[线程<span class="number">1</span>,<span class="number">5</span>,main]wait ObjectB</span><br><span class="line">Thread[线程<span class="number">2</span>,<span class="number">5</span>,main]wait ObjectA</span><br></pre></td></tr></table></figure>
+
+<p>2个线程各自开始获取对方的资源，并对自身所获取的资源保持不放，就会一直等待下去，这就造成了死锁。</p>
+<h4 id="产生死锁的4个条件"><a href="#产生死锁的4个条件" class="headerlink" title="产生死锁的4个条件"></a>产生死锁的4个条件</h4><ul>
+<li><em>互斥条件：</em>一个资源在任意时刻只能被一个线程占用。</li>
+<li><em>请求与保持条件：</em>一个进程因请求资源而阻塞时，对自身获得的资源保持不放。</li>
+<li><em>不可剥夺条件：</em>线程已获得的资源在使用完毕之前不能被其他线程获取，只有自己使用完毕后才释放资源。</li>
+<li><em>循环等待条件：</em>若干线程之间形成一种头尾相接的循环等待资源关系。</li>
+</ul>
+<h4 id="如何避免死锁"><a href="#如何避免死锁" class="headerlink" title="如何避免死锁"></a>如何避免死锁</h4><p>破坏上述4个条件之一。</p>
+<ol>
+<li><em>破坏互斥条件：</em>使用锁的目的就是互斥，这个没办法破坏。</li>
+<li><em>破坏请求与保持条件：</em>一个线程一次获取到所以资源。</li>
+<li><em>破坏不可剥夺条件：</em>获得资源的线程在尝试获取其他资源时，若获取不到，释放自身获取到的资源。</li>
+<li><em>破坏循环等待条件：</em>靠按序申请资源来预防。按某一顺序申请资源，释放资源则反序释放。</li>
+</ol>
+<p>破坏不可剥夺条件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object objectA = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object objectB = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 线程1</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (objectA) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"get ObjectA"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"wait ObjectB"</span>);</span><br><span class="line">                <span class="comment">// 判断是否获取到</span></span><br><span class="line">                <span class="keyword">if</span> (!Thread.holdsLock(objectB)) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        <span class="comment">// 获取不到则释放已有资源</span></span><br><span class="line">                        objectA.wait();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">synchronized</span> (objectB) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">"get ObjectB"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"线程1"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 线程2</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (objectB) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"2get ObjectB"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"2wait ObjectA"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (objectA) &#123;</span><br><span class="line">                    <span class="comment">// 唤醒线程</span></span><br><span class="line">                    objectA.notifyAll();</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">"2get ObjectA"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"线程2"</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>破坏循环等待条件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object objectA = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Object objectB = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 线程1</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (objectA) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"get ObjectA"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"wait ObjectB"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (objectB) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">"get ObjectB"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"线程1"</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 线程2</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// 按顺序来获取</span></span><br><span class="line">            <span class="keyword">synchronized</span> (objectA) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"2get ObjectB"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread() + <span class="string">"2wait ObjectA"</span>);</span><br><span class="line">                <span class="comment">// 按顺序来获取</span></span><br><span class="line">                <span class="keyword">synchronized</span> (objectB) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread() + <span class="string">"2get ObjectA"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">"线程2"</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-sleep-方法和wait-方法"><a href="#4-sleep-方法和wait-方法" class="headerlink" title="4.sleep()方法和wait()方法"></a>4.sleep()方法和wait()方法</h3><ul>
+<li>sleep()方法没有释放锁，wait()方法释放锁。</li>
+<li>两个方法都可以暂停线程的执行。</li>
+<li>sleep()方法用于暂停线程的执行，wait()用于线程之间的交互/通信。</li>
+<li>sleep()方法被调用后，到时间线程会自动苏醒。</li>
+<li>wait()方法被调用后，需要别的线程调用同一对象上的notify()方法或者notifyAll()方法唤醒线程。或者使用wait(long timeout)超时后线程会自动苏醒</li>
+</ul>
+<h3 id="5-run-方法和start-方法"><a href="#5-run-方法和start-方法" class="headerlink" title="5.run()方法和start()方法"></a>5.run()方法和start()方法</h3><p><strong>调用 start 方法方可启动线程并使线程进入就绪状态，而 run 方法只是 thread 的一个普通方法调用，还是在主线程里执行。</strong></p>
+<p><strong>使用start()方法才是真正的多线程。</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1943,151 +2139,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fzq">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="76的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/" itemprop="url">HashMap的put方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-25T20:39:59+08:00">
-                2020-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/25/HashMap的put方法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="HashMap的put方法"><a href="#HashMap的put方法" class="headerlink" title="HashMap的put方法"></a>HashMap的put方法</h2><p>趁着有空打算把集合方面比较有意思和重要的知识点都总结一下，因为平时Map集合用得比较多，就从HashMap开始吧</p>
-<h3 id="1-HashMap里面一些重要的成员变量"><a href="#1-HashMap里面一些重要的成员变量" class="headerlink" title="1.HashMap里面一些重要的成员变量"></a>1.HashMap里面一些重要的成员变量</h3><img src="/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/1.png" class title="HashMap的一些成员变量">
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The default initial capacity - MUST be a power of two.</span></span><br><span class="line"><span class="comment">  * 默认的初始容量-必须为2的幂。</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The load factor used when none specified in constructor.</span></span><br><span class="line"><span class="comment">  * 负载因子，当容量达到总容量的0.75时需要扩容</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The bin count threshold for using a tree rather than list for a</span></span><br><span class="line"><span class="comment">  * bin.  Bins are converted to trees when adding an element to a</span></span><br><span class="line"><span class="comment">  * bin with at least this many nodes. The value must be greater</span></span><br><span class="line"><span class="comment">  * than 2 and should be at least 8 to mesh with assumptions in</span></span><br><span class="line"><span class="comment">  * tree removal about conversion back to plain bins upon</span></span><br><span class="line"><span class="comment">  * shrinkage.</span></span><br><span class="line"><span class="comment">  * 链表长度到8，就转为红黑树</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The bin count threshold for untreeifying a (split) bin during a</span></span><br><span class="line"><span class="comment">  * resize operation. Should be less than TREEIFY_THRESHOLD, and at</span></span><br><span class="line"><span class="comment">  * most 6 to mesh with shrinkage detection under removal.</span></span><br><span class="line"><span class="comment">  * 树大小为6，就转回链表</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 使用put方法的时候会调用putVal方法 </span></span><br><span class="line">    <span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="comment">// 判断是table否为空</span></span><br><span class="line">    <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">        <span class="comment">// resize方法不仅是字面意思的调整容量，在第一次put的时候还会初始化</span></span><br><span class="line">        n = (tab = resize()).length;</span><br><span class="line">    <span class="comment">// 计算hash值</span></span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">        <span class="comment">// table的第i个桶中没有元素就直接插入</span></span><br><span class="line">        tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果table第i个桶有元素，并且p是第一个元素</span></span><br><span class="line">        Node&lt;K,V&gt; e; K k;</span><br><span class="line">        <span class="keyword">if</span> (p.hash == hash &amp;&amp;</span><br><span class="line">            ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">            <span class="comment">// 进行比较，hash值相等并且是（同一个key或者这两个key equals），则新值覆盖旧值</span></span><br><span class="line">            e = p;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">            <span class="comment">// 如果table第i个桶是红黑树的话，执行红黑树插入的方法</span></span><br><span class="line">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不是红黑树，那就一定是链表了。这里会遍历整个链表</span></span><br><span class="line">            <span class="comment">// binCount 计数链表的节点数</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 遍历到链表最后，在链表尾部添加一个节点</span></span><br><span class="line">                    p.next = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                    <span class="comment">/* TREEIFY_THRESHOLD是8，binCount的初始值是0，</span></span><br><span class="line"><span class="comment">                     * 添加一个节点后，如果binCount&gt;=7 也就是有8个节点时会转变成红黑树</span></span><br><span class="line"><span class="comment">                     */</span></span><br><span class="line">                    <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st</span></span><br><span class="line">                        treeifyBin(tab, hash);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 如果在遍历时，其中一个key的hash值相等并且是（同一个key或者这两个key equals），则新值覆盖旧值，并且break结束循环</span></span><br><span class="line">                <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                p = e;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123; <span class="comment">// existing mapping for key</span></span><br><span class="line">            V oldValue = e.value;</span><br><span class="line">            <span class="comment">// 在put方法里传入的onlyIfAbsent是false</span></span><br><span class="line">            <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)</span><br><span class="line">                <span class="comment">// 新值覆盖旧值</span></span><br><span class="line">                e.value = value;</span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            <span class="comment">// 返回旧值，方法结束。因为覆盖旧值的话，结构和size没有变化，下面的代码不用执行</span></span><br><span class="line">            <span class="keyword">return</span> oldValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// modCount记录的是，HashMap结构修改的次数。（覆盖旧值不算，因为覆盖旧值的话方法在上面已经结束了</span></span><br><span class="line">    ++modCount;</span><br><span class="line">    <span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">        <span class="comment">// 插入一个key-value之后，如果此时的size &gt; threshold，进行扩容rezise</span></span><br><span class="line">        resize();</span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>小小说一下put方法的整个流程</p>
-<ol>
-<li>初始化table</li>
-<li>计算key的hash值，table的第i个桶中没有元素，直接插入</li>
-<li>如果第i个桶中有元素，并且满足条件，就进行新值覆盖旧值</li>
-<li>如果第i个桶是TreeNode红黑树，则执行方法putTreeVal进行树的插入操作</li>
-<li>如果第i个桶是链表，则遍历链表。如果key的hash值相等，并且（为同一个key||两个key equals）则覆盖旧值，break跳出循环。如果不等，则在链表的尾部进行插入newNode。如果插入之后链表长度大于8，则转成红黑树。</li>
-<li>如果size &gt; threshold，进行扩容</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2138,7 +2189,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2151,7 +2202,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
