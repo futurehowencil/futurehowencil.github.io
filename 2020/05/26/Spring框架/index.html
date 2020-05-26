@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="1.什么是SpringSpring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。">
+<meta name="description" content="1.什么是SpringSpring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。 Spring最重要的两个特性IOC和AOP IOC控制反转 IOC是一种设计思想，原本在程序中手动创建对象的控制权，交给Spring来管理。IOC容器就好比是一个工厂，当需要创建一个对象时，只需要配置好文件或者注解即可，无需考虑对象是如何创建的。 AOP面向切面编程 将那些与业务无关的，却为业">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring框架">
 <meta property="og:url" content="http://yoursite.com/2020/05/26/Spring%E6%A1%86%E6%9E%B6/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="1.什么是SpringSpring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。">
+<meta property="og:description" content="1.什么是SpringSpring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。 Spring最重要的两个特性IOC和AOP IOC控制反转 IOC是一种设计思想，原本在程序中手动创建对象的控制权，交给Spring来管理。IOC容器就好比是一个工厂，当需要创建一个对象时，只需要配置好文件或者注解即可，无需考虑对象是如何创建的。 AOP面向切面编程 将那些与业务无关的，却为业">
 <meta property="article:published_time" content="2020-05-26T14:00:26.000Z">
-<meta property="article:modified_time" content="2020-05-26T14:11:15.146Z">
+<meta property="article:modified_time" content="2020-05-26T15:07:30.029Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="常用框架">
 <meta name="twitter:card" content="summary">
@@ -340,11 +340,54 @@
 
       
         <h3 id="1-什么是Spring"><a href="#1-什么是Spring" class="headerlink" title="1.什么是Spring"></a>1.什么是Spring</h3><p>Spring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。</p>
-<a id="more"></a>
-
 <p>Spring最重要的两个特性IOC和AOP</p>
 <p><strong>IOC控制反转</strong></p>
-<p>IOC是一种设计思想</p>
+<p>IOC是一种设计思想，原本在程序中手动创建对象的控制权，交给Spring来管理。IOC容器就好比是一个工厂，当需要创建一个对象时，只需要配置好文件或者注解即可，无需考虑对象是如何创建的。</p>
+<p><strong>AOP面向切面编程</strong></p>
+<p>将那些与业务无关的，却为业务模块所共同调用的逻辑或责任（例如事务管理，日志管理等）封装起来，减少系统的重复代码，降低耦合度，有利于代码的可扩展性和可维护性。</p>
+<a id="more"></a>
+
+<p>AOP是基于动态代理的，动态代理有两种形式。</p>
+<ul>
+<li><strong>JDK动态代理：</strong>目标类需要一个代理接口，核心是InvocationHandler接口和Proxy类。</li>
+</ul>
+<p>1.定义一个InvocationHandler接口的实现类，重写invoke方法</p>
+<p>2.将InvocationHandler对象作为参数传入Proxy类的newProxyInstance方法中</p>
+<p>3.调用Proxy类的newProxyInstance方法获得动态代理对象</p>
+<p>4.通过代理对象调用目标方法</p>
+<ul>
+<li><strong>CgLib动态代理：</strong>通过继承的方式来做代理，生成一个子类，并覆盖其中的业务方法来实现。（如果该类是final类则无法使用CgLib动态代理。）</li>
+</ul>
+<p>1.定义一个cglib.proxy.MethodInterceptor接口的实现类，重写intercept方法</p>
+<p>2.获取cglib.proxy.Enhancer类的对象</p>
+<p>3.调用Enhance对象的setSuperclass方法和setCallback方法，使用create方法获取代理对象</p>
+<p>4.通过代理对象调用目标方法</p>
+<p><em>Spring默认使用 JDK动态代理，如果没有实现接口则使用CgLib代理。</em></p>
+<p><strong>AOP的通知类型：</strong>前置通知、正常返回通知、异常返回通知、返回通知、环绕通知。    </p>
+<h3 id="2-关于SpringBean"><a href="#2-关于SpringBean" class="headerlink" title="2.关于SpringBean"></a>2.关于SpringBean</h3><h4 id="1-bean的作用域"><a href="#1-bean的作用域" class="headerlink" title="1.bean的作用域"></a>1.bean的作用域</h4><ul>
+<li><strong>singleton：</strong>唯一bean实例，Spring中的bean默认单例。</li>
+<li><strong>prototype ：</strong>每次请求都会创建一个新的bean实例。</li>
+<li><strong>request ：</strong>每次请求都会创建一个新的bean实例，该bean只在当前的request中有效</li>
+<li><strong>session ：</strong>每次请求都会创建一个新的bean实例，该bean只在当前的session中有效</li>
+<li><strong>global-session：</strong>全局session作用域。</li>
+</ul>
+<h4 id="2-SpringBean单例的线程安全问题"><a href="#2-SpringBean单例的线程安全问题" class="headerlink" title="2.SpringBean单例的线程安全问题"></a>2.SpringBean单例的线程安全问题</h4><p>当多个线程操作同一个对象时，对这个对象的非静态成员变量的写操作会存在线程安全问题。</p>
+<p><strong>解决方法：</strong></p>
+<p>1.在Bean中尽量避免定义可变的成员变量（这个应该很少用吧…)</p>
+<p>2.在类中定义一个ThreadLocal成员变量，将可变的成员变量保存在ThreadLocal中</p>
+<h3 id="3-Spring的传播事务"><a href="#3-Spring的传播事务" class="headerlink" title="3.Spring的传播事务"></a>3.Spring的传播事务</h3><p>分两种：支持当前事务和不支持当前事务。</p>
+<ul>
+<li><strong>支持当前事务：</strong></li>
+</ul>
+<p>1.如果存在事务，则加入当前事务。不存在事务，则创建新事务。</p>
+<p>2.如果存在事务，则加入当前事务。不存在事务，以非事务的方式进行。</p>
+<p>3.如果存在事务，则加入当前事务。不存在事务，则抛出异常。</p>
+<ul>
+<li><strong>不支持当前事务：</strong></li>
+</ul>
+<p>1.创建新事务，如果当前存在事务，则将当前事务挂起。</p>
+<p>2.以非事务的方式进行，如果当前存在事务，则将当前事务挂起。</p>
+<p>3.以非事务的方式进行，如果当前存在事务，则抛出异常。</p>
 
       
     </div>
@@ -517,7 +560,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是Spring"><span class="nav-number">1.</span> <span class="nav-text">1.什么是Spring</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是Spring"><span class="nav-number">1.</span> <span class="nav-text">1.什么是Spring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-关于SpringBean"><span class="nav-number">2.</span> <span class="nav-text">2.关于SpringBean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-bean的作用域"><span class="nav-number">2.1.</span> <span class="nav-text">1.bean的作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SpringBean单例的线程安全问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.SpringBean单例的线程安全问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Spring的传播事务"><span class="nav-number">3.</span> <span class="nav-text">3.Spring的传播事务</span></a></li></ol></div>
             
 
           </div>
