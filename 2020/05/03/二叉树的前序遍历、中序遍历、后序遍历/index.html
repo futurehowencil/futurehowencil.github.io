@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历 简单的二叉树   前序：ABC 中序：BAC 后序：BCA     前序：ABDECFG  (可以拆分成多个有3个节点的小二叉树) 首先">
+<meta name="description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树的前序遍历、中序遍历、后序遍历">
 <meta property="og:url" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历 简单的二叉树   前序：ABC 中序：BAC 后序：BCA     前序：ABDECFG  (可以拆分成多个有3个节点的小二叉树) 首先">
+<meta property="og:description" content="二叉树的前序遍历、中序遍历、后序遍历简单讲一下三种遍历方式  前序：根 - &gt; 左 - &gt;  右 中序：左 - &gt; 根 - &gt; 右 后序：左 - &gt; 右 - &gt; 根  其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历">
 <meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png">
 <meta property="article:published_time" content="2020-05-03T09:58:51.000Z">
-<meta property="article:modified_time" content="2020-05-03T12:03:09.872Z">
+<meta property="article:modified_time" content="2020-05-26T04:29:01.658Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
@@ -272,7 +272,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fzq">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/my_avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -351,6 +351,8 @@
 <li>后序：左 - &gt; 右 - &gt; 根</li>
 </ul>
 <p><strong>其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历</strong></p>
+<a id="more"></a>
+
 <h3 id="简单的二叉树"><a href="#简单的二叉树" class="headerlink" title="简单的二叉树"></a>简单的二叉树</h3><img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png" class>
 
 <ul>
@@ -538,6 +540,10 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/my_avatar.jpg"
+                alt="fzq" />
             
               <p class="site-author-name" itemprop="name">fzq</p>
               <p class="site-description motion-element" itemprop="description">我先睡了</p>
