@@ -87,7 +87,7 @@
 <meta property="og:description" content="1.什么是SpringSpring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。 Spring最重要的两个特性IOC和AOP IOC控制反转 IOC是一种设计思想，原本在程序中手动创建对象的控制权，交给Spring来管理。IOC容器就好比是一个工厂，当需要创建一个对象时，只需要配置好文件或者注解即可，无需考虑对象是如何创建的。 AOP面向切面编程 将那些与业务无关的，却为业">
 <meta property="og:image" content="http://yoursite.com/2020/05/26/Spring%E6%A1%86%E6%9E%B6/1.png">
 <meta property="article:published_time" content="2020-05-26T14:00:26.000Z">
-<meta property="article:modified_time" content="2020-05-27T04:14:32.619Z">
+<meta property="article:modified_time" content="2020-05-27T04:48:07.332Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="常用框架">
 <meta name="twitter:card" content="summary">
@@ -393,7 +393,7 @@
 <h3 id="4-SpringMVC工作流程"><a href="#4-SpringMVC工作流程" class="headerlink" title="4.SpringMVC工作流程"></a>4.SpringMVC工作流程</h3><ol>
 <li>客户端发送请求，直接请求到<code>DispatcherServlet</code>前端控制器</li>
 <li><code>DispatcherServlet</code>根据请求信息调用<code>HandlerMapping</code>，解析请求对应的<code>Handler</code></li>
-<li>解析到对应的<code>Handler</code>（也就是<code>Controller</code>前端控制器）后，开始由<code>HandlerAdapter</code>适配处理器</li>
+<li>解析到对应的<code>Handler</code>（也就是<code>Controller</code>前端控制器）后，开始由<code>HandlerAdapter</code>适配器处理</li>
 <li><code>HandlerAdapter</code>会根据<code>Handler</code>来调用真正的处理器来处理请求，并处理对应的业务逻辑</li>
 <li>处理器处理业务完毕后，会返回一个<code>ModelAndView</code>对象</li>
 <li><code>ViewResolver</code>视图解析器会根据<code>Model</code>和<code>View</code>渲染视图</li>
