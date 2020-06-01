@@ -1231,4 +1231,26 @@
     <url>/2020/06/01/%E5%85%B3%E4%BA%8E%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[]]></content>
   </entry>
+  <entry>
+    <title>SpringBot</title>
+    <url>/2020/06/01/SpringBoot/</url>
+    <content><![CDATA[<h3 id="1-SpringBoot介绍"><a href="#1-SpringBoot介绍" class="headerlink" title="1.SpringBoot介绍"></a>1.SpringBoot介绍</h3><p>服务于Spring框架的框架，可以简化配置文件，快速构建web应用，内置容器，无需打包部署，直接运行。</p>
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h4><ul>
+<li>创建独立的Spring应用</li>
+<li>嵌入式容器（无需war文件）</li>
+<li>提供的starters简化构建配置</li>
+<li>尽可能地自动配置</li>
+<li>没有代码生成和xml配置要求</li>
+</ul>
+<h4 id="SpringBoot的核心注解"><a href="#SpringBoot的核心注解" class="headerlink" title="SpringBoot的核心注解"></a>SpringBoot的核心注解</h4><p>SpringBoot的核心注解是<strong>@SpringBootApplication</strong>，本质上由3个注解组成。</p>
+<ul>
+<li><strong>@Configuration：</strong>实现配置文件的功能。</li>
+<li><strong>@EnableAutoConfiguration：</strong>打开自动配置的功能，把所有符合条件的@Configuration配置都加载到当前SpringBoot创建并使用的IOC容器中。</li>
+<li><strong>@ComponentScan：</strong>默认扫描当前package下的所有加了@Component、@Controller、@Service、@Repository等注解的类到IOC容器中。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>常用框架</tag>
+      </tags>
+  </entry>
 </search>
