@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Redis," />
+  <meta name="keywords" content="常用框架," />
 
 
 
@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="1.缓存雪崩缓存雪崩是什么？ 缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。 解决方案：  搭建redis集群，提升高可用性。 将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效 将热点数据的过期时间设为永不过期。">
+<meta name="description" content="1.什么是SpringCloudSpringCloud 是一系列框架的有序集合。它利用 SpringBoot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 SpringBoot 的开发风格做到一键启动和部署。 2.SpringCloud的核心组件 Eureka：服务注册与发现（注册中心）。 Feign：声明式服务调用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于缓存和布隆过滤器">
-<meta property="og:url" content="http://yoursite.com/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/index.html">
+<meta property="og:title" content="SpringCloud">
+<meta property="og:url" content="http://yoursite.com/2020/06/02/SpringCloud/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="1.缓存雪崩缓存雪崩是什么？ 缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。 解决方案：  搭建redis集群，提升高可用性。 将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效 将热点数据的过期时间设为永不过期。">
-<meta property="article:published_time" content="2020-05-20T12:02:49.000Z">
-<meta property="article:modified_time" content="2020-05-26T04:29:42.558Z">
+<meta property="og:description" content="1.什么是SpringCloudSpringCloud 是一系列框架的有序集合。它利用 SpringBoot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 SpringBoot 的开发风格做到一键启动和部署。 2.SpringCloud的核心组件 Eureka：服务注册与发现（注册中心）。 Feign：声明式服务调用">
+<meta property="article:published_time" content="2020-06-02T00:42:11.000Z">
+<meta property="article:modified_time" content="2020-06-02T05:55:26.830Z">
 <meta property="article:author" content="fzq">
-<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="常用框架">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/20/关于缓存和布隆过滤器/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/02/SpringCloud/"/>
 
 
 
 
 
-  <title>关于缓存和布隆过滤器 | 76的个人博客</title>
+  <title>SpringCloud | 76的个人博客</title>
   
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/SpringCloud/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fzq">
@@ -303,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于缓存和布隆过滤器</h1>
+          <h1 class="post-title" itemprop="name headline">SpringCloud</h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T20:02:49+08:00">
-                2020-05-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-02T08:42:11+08:00">
+                2020-06-02
               </time>
             
 
@@ -334,8 +334,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/05/20/关于缓存和布隆过滤器/" itemprop="commentCount"></span>
+                <a href="/2020/06/02/SpringCloud/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/02/SpringCloud/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,46 +363,75 @@
       
 
       
-        <h3 id="1-缓存雪崩"><a href="#1-缓存雪崩" class="headerlink" title="1.缓存雪崩"></a>1.缓存雪崩</h3><p><strong>缓存雪崩是什么？</strong></p>
-<p>缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。</p>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li>搭建redis集群，提升高可用性。</li>
-<li>将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效</li>
-<li>将热点数据的过期时间设为永不过期。</li>
+        <h3 id="1-什么是SpringCloud"><a href="#1-什么是SpringCloud" class="headerlink" title="1.什么是SpringCloud"></a>1.什么是SpringCloud</h3><p>SpringCloud 是一系列框架的有序集合。它利用 SpringBoot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 SpringBoot 的开发风格做到一键启动和部署。</p>
+<h3 id="2-SpringCloud的核心组件"><a href="#2-SpringCloud的核心组件" class="headerlink" title="2.SpringCloud的核心组件"></a>2.SpringCloud的核心组件</h3><ul>
+<li><strong>Eureka：</strong>服务注册与发现（注册中心）。</li>
+<li><strong>Feign：</strong>声明式服务调用，基于动态代理机制，根据注解和选择的机器，拼接请求URL地址，发起请求。</li>
+<li><strong>Ribbon：</strong>客户端负载均衡，从一个服务的多台机器中选择一台。</li>
+<li><strong>Hystrix：</strong>断路器，服务容错保护。提供线程池，不同的服务走不同的线程池，实现了不同服务的调用的隔离，避免了服务雪崩的问题。</li>
+<li><strong>Zuul：</strong>API网关服务，由Zuul网关转发请求给对应的服务。</li>
+<li><strong>Config：</strong>分布式配置中心。</li>
 </ul>
-<a id="more"></a>
-
-<h3 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2.缓存击穿"></a>2.缓存击穿</h3><p><strong>缓存击穿是什么？</strong></p>
-<p>缓存击穿就是，缓存中没有但数据库中有的数据。如果这时候并发请求很多，在缓存中读取不到数据，请求就会落到数据库上，导致数据库所承受的压力瞬间增大。</p>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li>设置热点数据永不过期。</li>
-<li>加锁限流（互斥锁）</li>
+<h3 id="3-SpringCloud组件详解"><a href="#3-SpringCloud组件详解" class="headerlink" title="3.SpringCloud组件详解"></a>3.SpringCloud组件详解</h3><ol>
+<li><strong>Eureka的治理机制：</strong><ol>
+<li><strong>服务提供者：</strong><ul>
+<li><strong>服务注册与同步：</strong>启动时会通过REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息（IP+端等）。并且该注册请求会转发到集群中相连的其他注册中心，实现注册中心之间的服务同步。</li>
+<li><strong>服务续约：</strong>注册完成后，服务提供者会维护一个心跳通知Eureka Server自身还在运行，防止被注册中心剔除。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ReentratLock lock = <span class="keyword">new</span> ReentratLock();</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getCache</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 1.从缓存中获取数据</span></span><br><span class="line">    String result = getDataFromCache();</span><br><span class="line">    <span class="comment">// 2.如果缓存为空</span></span><br><span class="line">    <span class="keyword">if</span>(StringUtils.isEmpty(result))&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">               <span class="comment">// 3.尝试获取锁</span></span><br><span class="line">            <span class="keyword">if</span>(lock.trylock())&#123;</span><br><span class="line">                <span class="comment">// 4.拿到锁，从数据库获取数据并写入缓存</span></span><br><span class="line">                result = getDataFromDB();</span><br><span class="line">                setDataToCache(result);</span><br><span class="line">            &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">                <span class="comment">//5.释放锁</span></span><br><span class="line">                lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 6.如果没有拿到锁，先尝试从缓存获取数据（可能别的线程已经将数据写入缓存）</span></span><br><span class="line">            result = getDataFromCache();</span><br><span class="line">            <span class="comment">// 7.如果缓存为空</span></span><br><span class="line">            <span class="keyword">if</span>(StringUtils.isEmpty(result))&#123;</span><br><span class="line">                <span class="comment">// 8.线程sleep一阵</span></span><br><span class="line">                Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                <span class="comment">// 9.重试</span></span><br><span class="line">                <span class="keyword">return</span> getCache();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-缓存穿透"><a href="#3-缓存穿透" class="headerlink" title="3.缓存穿透"></a>3.缓存穿透</h3><p><strong>缓存穿透是什么？</strong></p>
-<p>缓存穿透就是，一个在缓存中和数据库中都不存在的数据。在请求过来时，会直接落到数据库上。</p>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li>在接口层面做数据校验。</li>
-<li>使用布隆过滤器</li>
-<li>在数据库中查询不到也缓存为null值。</li>
+</li>
+<li><strong>服务消费者：</strong><ul>
+<li><strong>获取服务：</strong>服务消费者进行消费时会发送一个REST请求到注册中心获取服务列表，服务列表30s更新一次。</li>
+<li><strong>服务调用：</strong>消费者在获取服务清单后，通过服务名获取服务的实例名，和该实例名的元数据（IP+端等），Eureka底层会通过Ribbon默认采用讯轮的方式进行调用从而实现客户端的负载均衡。</li>
+<li><strong>服务下线：</strong>当服务重启或者关闭时，要主动通知注册中心。会发送一个REST请求到注册中心，注册中心收到请求之后就会把服务从注册列表中剔除。</li>
 </ul>
-<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><h3 id="1-什么是布隆过滤器"><a href="#1-什么是布隆过滤器" class="headerlink" title="1.什么是布隆过滤器"></a>1.什么是布隆过滤器</h3><p>布隆过滤器（Bloom Filter）是1970年由<a href="https://baike.baidu.com/item/%E5%B8%83%E9%9A%86/14216465" target="_blank" rel="noopener">布隆</a>提出的。它实际上是一个很长的<a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457" target="_blank" rel="noopener">二进制</a>向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都比一般的算法要好的多，缺点是有一定的误识别率和删除困难。    ——百度百科</p>
-<h3 id="2-布隆过滤器的原理"><a href="#2-布隆过滤器的原理" class="headerlink" title="2.布隆过滤器的原理"></a>2.布隆过滤器的原理</h3><p>布隆过滤器有一个<strong>位数组</strong>，位数组的每个元素只占1bit，并且每个元素只能是1或者0</p>
-<p><strong>存入元素：</strong></p>
-<p>1.布隆过滤器会用哈希函数对元素进行计算，得到哈希值。（有几个哈希函数就会有几个哈希值）</p>
-<p>2.根据得到的哈希值，在位数组中把对应的下标设置为1。</p>
-<p><strong>判断元素是否存在：</strong></p>
-<p>1.使用哈希函数对该元素进行计算，得到哈希值。</p>
-<p>2.得到哈希值后，判断位数组中的每个元素对应的下标是否为1。如果都为1则证明该元素在布隆过滤器中，只要有一个不为1，说明该元素不在布隆过滤器中。</p>
-<p><strong>结论：</strong>布隆过滤器说某个元素不在，那必定不在；说某个元素存在，有几率会误判。</p>
-<h3 id="3-应用场景"><a href="#3-应用场景" class="headerlink" title="3.应用场景"></a>3.应用场景</h3><p>1.过滤，例如防止缓存穿透，一些网站的黑名单功能等。</p>
-<p>2.去重</p>
+</li>
+<li><strong>注册中心：</strong><ul>
+<li><strong>失效剔除：</strong>默认每隔一段时间（60s）将当前清单中超时（默认90s）没有续约的服务剔除出去。</li>
+<li><strong>自我保护：</strong>注册中心在运行期间会统计服务提供者心跳失败的比例，如果这个比例在15分钟之内小于85%。注册中心会将当前服务保护起来，使其不会过期。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>Ribbon和Nginx的区别</strong></li>
+</ol>
+<p>Ribbon服务清单在客户端，Nginx服务清单在服务端。</p>
+<ol start="3">
+<li><p><strong>Hystrix断路器：</strong></p>
+<ol>
+<li>对通过第三方客户端的访问的依赖项的延迟和故障进行保护和控制。</li>
+<li>在复杂的分布式系统中阻止级联故障。</li>
+<li>快速失败，快速恢复。</li>
+<li>回退，降级</li>
+<li>启用近实时监控、警报和操作控制。</li>
+</ol>
+<p>有几个重要的参数：<strong>滑动窗口大小（20）、 熔断器开关间隔（5s）、错误率（50%）</strong></p>
+<ul>
+<li>每当20个请求中，有50%失败时，断路器就会打开，此时再调用此服务，将会直接返回失败，不再调用远程服务。</li>
+<li>直到5秒钟之后，重新检测该触发条件，判断是否把断路器关闭 ，或者继续打开。</li>
+</ul>
+<p>服务熔断就是相当于我们电闸的保险丝,一旦发生服务雪崩的,就会熔断整个服务,通过维护一个自己的线程池,当线程达到阈值的时候就启动服务降级,如果其他请求继续访问就直接返回fallback的默认值。</p>
+</li>
+<li><p><strong>关于Zuul</strong></p>
+<ol>
+<li>网关一般是应用的入口，做一些公共的与业务无关的校验工作，所以使用Zuul的原因如下：<ol>
+<li>作为系统的统一入口。</li>
+<li>与服务治理框架相结合，实现自动化的实力维护、以及负载均衡的路由转发。</li>
+<li>实现接口的校验和微服务业务逻辑的解耦。</li>
+</ol>
+</li>
+<li>Zuul和Feign有何不同？<ol>
+<li>Zuul是路由的是Controller的请求，Feign路由的是Service的请求。</li>
+<li>Zuul做最外层请求的负载均衡，Feign做的是Service调用的负载均衡。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="4-SpringCloud和Dubbo有何不同？"><a href="#4-SpringCloud和Dubbo有何不同？" class="headerlink" title="4.SpringCloud和Dubbo有何不同？"></a>4.SpringCloud和Dubbo有何不同？</h3><ul>
+<li>Dubbo的通信机制是RPC，SpringCloud是REST请求。</li>
+<li>Dubbo是SOA面向服务的架构，SpringCloud则是把业务系统组件化。</li>
+<li>Zookeeper在选举期间注册服务不可用，各个节点之间是主从关系。Eureka各个节点之间是平等的。</li>
+</ul>
 
       
     </div>
@@ -420,7 +449,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Redis/" rel="tag"># Redis</a>
+            <a href="/tags/%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/" rel="tag"># 常用框架</a>
           
         </div>
       
@@ -433,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/16/%E5%85%B3%E4%BA%8ERedis/" rel="next" title="关于redis">
-                <i class="fa fa-chevron-left"></i> 关于redis
+              <a href="/2020/06/01/SpringBoot/" rel="next" title="SpringBot">
+                <i class="fa fa-chevron-left"></i> SpringBot
               </a>
             
           </div>
@@ -442,10 +471,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/" rel="prev" title="一个完整的HTTP请求过程">
-                一个完整的HTTP请求过程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,8 +501,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2020/05/20/关于缓存和布隆过滤器/"
-           data-title="关于缓存和布隆过滤器" data-url="http://yoursite.com/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+      <div class="ds-thread" data-thread-key="2020/06/02/SpringCloud/"
+           data-title="SpringCloud" data-url="http://yoursite.com/2020/06/02/SpringCloud/">
       </div>
     </div>
 
@@ -579,7 +604,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-缓存雪崩"><span class="nav-number">1.</span> <span class="nav-text">1.缓存雪崩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-缓存击穿"><span class="nav-number">2.</span> <span class="nav-text">2.缓存击穿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-缓存穿透"><span class="nav-number">3.</span> <span class="nav-text">3.缓存穿透</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布隆过滤器"><span class="nav-number"></span> <span class="nav-text">布隆过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是布隆过滤器"><span class="nav-number">1.</span> <span class="nav-text">1.什么是布隆过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-布隆过滤器的原理"><span class="nav-number">2.</span> <span class="nav-text">2.布隆过滤器的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-应用场景"><span class="nav-number">3.</span> <span class="nav-text">3.应用场景</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是SpringCloud"><span class="nav-number">1.</span> <span class="nav-text">1.什么是SpringCloud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SpringCloud的核心组件"><span class="nav-number">2.</span> <span class="nav-text">2.SpringCloud的核心组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SpringCloud组件详解"><span class="nav-number">3.</span> <span class="nav-text">3.SpringCloud组件详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloud和Dubbo有何不同？"><span class="nav-number">4.</span> <span class="nav-text">4.SpringCloud和Dubbo有何不同？</span></a></li></ol></div>
             
 
           </div>
