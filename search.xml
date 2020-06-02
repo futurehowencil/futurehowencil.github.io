@@ -1330,4 +1330,23 @@
         <tag>常用框架</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL索引失效的几种场景</title>
+    <url>/2020/06/02/MySql%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E5%9C%BA%E6%99%AF/</url>
+    <content><![CDATA[<h3 id="1-索引失效的场景"><a href="#1-索引失效的场景" class="headerlink" title="1.索引失效的场景"></a>1.索引失效的场景</h3><ol>
+<li>like查询以<code>%</code>开头，索引失效；以<code>%</code>结尾，索引有效。</li>
+<li>or语句前后没有同时使用索引。</li>
+<li>组合索引，不是使用第一列索引时失效。（例如组合索引为A，B，C，AB、AC索引有效，BC索引无效）</li>
+<li>在索引字段上使用操作符。</li>
+<li>对索引字段使用计算操作。</li>
+<li>在索引字段上使用函数。</li>
+<li>当全局扫描比索引速度快时，MySQL使用全局扫描而非索引。</li>
+</ol>
+<h3 id="2-查看索引分析"><a href="#2-查看索引分析" class="headerlink" title="2.查看索引分析"></a>2.查看索引分析</h3><p>在将要执行的SQL语句前加上explain命令。</p>
+<p>执行结果中，如果看到key这一列上为NULL，则没有使用索引。</p>
+]]></content>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
 </search>
