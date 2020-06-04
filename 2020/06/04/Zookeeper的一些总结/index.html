@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java基础," />
+  <meta name="keywords" content="Zookeeper," />
 
 
 
@@ -79,19 +79,17 @@
 
 
 
-<meta name="description" content="HashMap的put方法趁着有空打算把集合方面比较有意思和重要的知识点都总结一下，因为平时Map集合用得比较多，就从HashMap开始吧 1.HashMap里面一些重要的成员变量  123456789101112131415161718192021222324252627282930&#x2F;**  * The default initial capacity - MUST be a power of">
+<meta name="description" content="1.Zookeeper是什么ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。——百度百科 Zookeeper&#x3D;文件系统+监听通知机制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashMap的put方法">
-<meta property="og:url" content="http://yoursite.com/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:title" content="Zookeeper的一些总结">
+<meta property="og:url" content="http://yoursite.com/2020/06/04/Zookeeper%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="HashMap的put方法趁着有空打算把集合方面比较有意思和重要的知识点都总结一下，因为平时Map集合用得比较多，就从HashMap开始吧 1.HashMap里面一些重要的成员变量  123456789101112131415161718192021222324252627282930&#x2F;**  * The default initial capacity - MUST be a power of">
-<meta property="og:image" content="http://yoursite.com/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/1.png">
-<meta property="article:published_time" content="2020-04-25T12:39:59.000Z">
-<meta property="article:modified_time" content="2020-05-26T04:28:44.244Z">
+<meta property="og:description" content="1.Zookeeper是什么ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。——百度百科 Zookeeper&#x3D;文件系统+监听通知机制">
+<meta property="article:published_time" content="2020-06-04T15:45:33.000Z">
+<meta property="article:modified_time" content="2020-06-04T16:24:41.632Z">
 <meta property="article:author" content="fzq">
-<meta property="article:tag" content="Java基础">
+<meta property="article:tag" content="Zookeeper">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/1.png">
 
 
 
@@ -121,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/25/HashMap的put方法/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/04/Zookeeper的一些总结/"/>
 
 
 
 
 
-  <title>HashMap的put方法 | 76的个人博客</title>
+  <title>Zookeeper的一些总结 | 76的个人博客</title>
   
 
 
@@ -288,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/04/Zookeeper%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fzq">
@@ -305,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HashMap的put方法</h1>
+          <h1 class="post-title" itemprop="name headline">Zookeeper的一些总结</h1>
         
 
         <div class="post-meta">
@@ -317,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-25T20:39:59+08:00">
-                2020-04-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-04T23:45:33+08:00">
+                2020-06-04
               </time>
             
 
@@ -336,8 +334,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/04/25/HashMap的put方法/" itemprop="commentCount"></span>
+                <a href="/2020/06/04/Zookeeper%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/04/Zookeeper的一些总结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,23 +363,58 @@
       
 
       
-        <h2 id="HashMap的put方法"><a href="#HashMap的put方法" class="headerlink" title="HashMap的put方法"></a>HashMap的put方法</h2><p>趁着有空打算把集合方面比较有意思和重要的知识点都总结一下，因为平时Map集合用得比较多，就从HashMap开始吧</p>
-<h3 id="1-HashMap里面一些重要的成员变量"><a href="#1-HashMap里面一些重要的成员变量" class="headerlink" title="1.HashMap里面一些重要的成员变量"></a>1.HashMap里面一些重要的成员变量</h3><img src="/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/1.png" class title="HashMap的一些成员变量">
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The default initial capacity - MUST be a power of two.</span></span><br><span class="line"><span class="comment">  * 默认的初始容量-必须为2的幂。</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The load factor used when none specified in constructor.</span></span><br><span class="line"><span class="comment">  * 负载因子，当容量达到总容量的0.75时需要扩容</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The bin count threshold for using a tree rather than list for a</span></span><br><span class="line"><span class="comment">  * bin.  Bins are converted to trees when adding an element to a</span></span><br><span class="line"><span class="comment">  * bin with at least this many nodes. The value must be greater</span></span><br><span class="line"><span class="comment">  * than 2 and should be at least 8 to mesh with assumptions in</span></span><br><span class="line"><span class="comment">  * tree removal about conversion back to plain bins upon</span></span><br><span class="line"><span class="comment">  * shrinkage.</span></span><br><span class="line"><span class="comment">  * 链表长度到8，就转为红黑树</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The bin count threshold for untreeifying a (split) bin during a</span></span><br><span class="line"><span class="comment">  * resize operation. Should be less than TREEIFY_THRESHOLD, and at</span></span><br><span class="line"><span class="comment">  * most 6 to mesh with shrinkage detection under removal.</span></span><br><span class="line"><span class="comment">  * 树大小为6，就转回链表</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
-
+        <h3 id="1-Zookeeper是什么"><a href="#1-Zookeeper是什么" class="headerlink" title="1.Zookeeper是什么"></a>1.Zookeeper是什么</h3><p>ZooKeeper是一个<a href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F/19276232" target="_blank" rel="noopener">分布式</a>的，开放源码的<a href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/9854429" target="_blank" rel="noopener">分布式应用程序</a>协调服务，是<a href="https://baike.baidu.com/item/Google" target="_blank" rel="noopener">Google</a>的Chubby一个<a href="https://baike.baidu.com/item/%E5%BC%80%E6%BA%90/246339" target="_blank" rel="noopener">开源</a>的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。——百度百科</p>
+<p>Zookeeper=文件系统+监听通知机制</p>
 <a id="more"></a>
 
-<h3 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 使用put方法的时候会调用putVal方法 </span></span><br><span class="line">    <span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="comment">// 判断是table否为空</span></span><br><span class="line">    <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">        <span class="comment">// resize方法不仅是字面意思的调整容量，在第一次put的时候还会初始化</span></span><br><span class="line">        n = (tab = resize()).length;</span><br><span class="line">    <span class="comment">// 计算hash值</span></span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">        <span class="comment">// table的第i个桶中没有元素就直接插入</span></span><br><span class="line">        tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果table第i个桶有元素，并且p是第一个元素</span></span><br><span class="line">        Node&lt;K,V&gt; e; K k;</span><br><span class="line">        <span class="keyword">if</span> (p.hash == hash &amp;&amp;</span><br><span class="line">            ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">            <span class="comment">// 进行比较，hash值相等并且是（同一个key或者这两个key equals），则新值覆盖旧值</span></span><br><span class="line">            e = p;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">            <span class="comment">// 如果table第i个桶是红黑树的话，执行红黑树插入的方法</span></span><br><span class="line">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不是红黑树，那就一定是链表了。这里会遍历整个链表</span></span><br><span class="line">            <span class="comment">// binCount 计数链表的节点数</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 遍历到链表最后，在链表尾部添加一个节点</span></span><br><span class="line">                    p.next = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                    <span class="comment">/* TREEIFY_THRESHOLD是8，binCount的初始值是0，</span></span><br><span class="line"><span class="comment">                     * 添加一个节点后，如果binCount&gt;=7 也就是有8个节点时会转变成红黑树</span></span><br><span class="line"><span class="comment">                     */</span></span><br><span class="line">                    <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st</span></span><br><span class="line">                        treeifyBin(tab, hash);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 如果在遍历时，其中一个key的hash值相等并且是（同一个key或者这两个key equals），则新值覆盖旧值，并且break结束循环</span></span><br><span class="line">                <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                p = e;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123; <span class="comment">// existing mapping for key</span></span><br><span class="line">            V oldValue = e.value;</span><br><span class="line">            <span class="comment">// 在put方法里传入的onlyIfAbsent是false</span></span><br><span class="line">            <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)</span><br><span class="line">                <span class="comment">// 新值覆盖旧值</span></span><br><span class="line">                e.value = value;</span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            <span class="comment">// 返回旧值，方法结束。因为覆盖旧值的话，结构和size没有变化，下面的代码不用执行</span></span><br><span class="line">            <span class="keyword">return</span> oldValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// modCount记录的是，HashMap结构修改的次数。（覆盖旧值不算，因为覆盖旧值的话方法在上面已经结束了</span></span><br><span class="line">    ++modCount;</span><br><span class="line">    <span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">        <span class="comment">// 插入一个key-value之后，如果此时的size &gt; threshold，进行扩容rezise</span></span><br><span class="line">        resize();</span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>小小说一下put方法的整个流程</p>
+<p><strong>Zookeeper的znode</strong></p>
+<p>能够自由增加和删除。</p>
+<ul>
+<li><strong>PERSISTENT-持久化目录节点：</strong>客户端与Zookeeper断开连接后，该节点依然存在。</li>
+<li><strong>PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点：</strong>同上，只是多了顺序编号</li>
+<li><strong>EPHEMERAL-临时目录节点：</strong>客户端与Zookeeper断开连接后，删除该节点。</li>
+<li><strong>EPHEMERAL_SEQUENTIAL-临时顺序编号目录节点：</strong>同上，只是多了顺序编号。</li>
+</ul>
+<p>临时节点不允许有子节点。</p>
+<p><strong>监听通知机制</strong></p>
+<p>客户端注册监听它关心的节点，当节点发生变化时（例如数据改变、被删除、增加等）Zookeeper会通知客户端。</p>
+<p><strong>Zookeeper的5大特性</strong></p>
+<ul>
+<li>顺序一致性：同一个客户端发出的请求，会严格按照顺序进入Zookeeper。</li>
+<li>原子性：集群中的机器都成功处理某个请求，不会出现机器A处理成功，机器B处理失败。</li>
+<li>单一性：集群中的所有机器数据一样。</li>
+<li>可靠性：服务端数据发生变化会立即存储。</li>
+<li>实时性：保证客户端获取到的数据是最新的。</li>
+</ul>
+<h3 id="2-Zookeeper的集群结构"><a href="#2-Zookeeper的集群结构" class="headerlink" title="2.Zookeeper的集群结构"></a>2.Zookeeper的集群结构</h3><ol>
+<li><strong>Leader：</strong>连接任意节点，如果节点出现故障，Leader自动修复，在Service启动时完成Leader的选举。</li>
+<li><strong>Follower：</strong>听从Leader的指令，完成选举工作。</li>
+<li><strong>Client：</strong>分布式中的一个节点，访问服务器的配置信息，周期性向Server发送心跳包，Server向Client回应确认，如果Client没有收到回应，则重定向至另一个Server。</li>
+<li><strong>Server：</strong>Zookeeper的一个节点，为Client提供所需的服务，给Client回应信息表明自己是存活的。</li>
+</ol>
+<p><strong>Leader的作用：</strong></p>
+<ul>
+<li>恢复数据</li>
+<li>维持与Follower的心跳，接收Follower的请求并判断Follower的请求消息类型。</li>
+<li>对不同的Follower消息类型进行不同的处理。</li>
+</ul>
+<h3 id="3-Zookeeper的基本运转流程"><a href="#3-Zookeeper的基本运转流程" class="headerlink" title="3.Zookeeper的基本运转流程"></a>3.Zookeeper的基本运转流程</h3><ol>
+<li>选举Leader</li>
+<li>同步数据</li>
+<li>选举Leader的算法要保持一致</li>
+<li>Leader具有最高的执行ID</li>
+<li>集群中的大多数机器得到响应并follow选举出来的Leader</li>
+</ol>
+<h3 id="4-Zookeeper的一些问题"><a href="#4-Zookeeper的一些问题" class="headerlink" title="4.Zookeeper的一些问题"></a>4.Zookeeper的一些问题</h3><p><strong>Zookeeper服务器挂了，服务调用还可以进行吗？</strong></p>
+<p>可以，消费者在启动时会从Zookeeper拉取服务提供者的地址接口等数据，缓存到本地。每次调用时，可以根据本地缓存进行调用。</p>
+<p><strong>Zookeeper如何进行服务治理？</strong></p>
+<p>接收服务提供者的接口信息和IP地址进行存储，然后管理消费者和服务提供者之间的调用关系。</p>
+<p><strong>如果Zookeeper服务挂了怎么办？</strong></p>
 <ol>
-<li>初始化table</li>
-<li>计算key的hash值，table的第i个桶中没有元素，直接插入</li>
-<li>如果第i个桶中有元素，并且满足条件，就进行新值覆盖旧值</li>
-<li>如果第i个桶是TreeNode红黑树，则执行方法putTreeVal进行树的插入操作</li>
-<li>如果第i个桶是链表，则遍历链表。如果key的hash值相等，并且（为同一个key||两个key equals）则覆盖旧值，break跳出循环。如果不等，则在链表的尾部进行插入newNode。如果插入之后链表长度大于8，则转成红黑树。</li>
-<li>如果size &gt; threshold，进行扩容</li>
+<li>任意一台挂了，切换到另一台。</li>
+<li>全部挂了，消费者和服务提供者可以通过本地缓存进行通讯。</li>
+<li>任意一台服务提供者无状态挂了不影响使用。</li>
+<li>服务提供者全挂了，消费者无法将无法使用，会无限重连直至服务提供者恢复。</li>
 </ol>
 
       
@@ -400,7 +433,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag"># Java基础</a>
+            <a href="/tags/Zookeeper/" rel="tag"># Zookeeper</a>
           
         </div>
       
@@ -413,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/18/%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" rel="next" title="用户密码的存储方式">
-                <i class="fa fa-chevron-left"></i> 用户密码的存储方式
+              <a href="/2020/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/" rel="next" title="数据库和缓存的双写一致性">
+                <i class="fa fa-chevron-left"></i> 数据库和缓存的双写一致性
               </a>
             
           </div>
@@ -422,10 +455,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/25/%E4%BD%BF%E7%94%A8redis%E7%9B%91%E5%90%AC%E8%AE%A2%E5%8D%95/" rel="prev" title="使用redis监听订单">
-                使用redis监听订单 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -456,8 +485,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2020/04/25/HashMap的put方法/"
-           data-title="HashMap的put方法" data-url="http://yoursite.com/2020/04/25/HashMap%E7%9A%84put%E6%96%B9%E6%B3%95/">
+      <div class="ds-thread" data-thread-key="2020/06/04/Zookeeper的一些总结/"
+           data-title="Zookeeper的一些总结" data-url="http://yoursite.com/2020/06/04/Zookeeper%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/">
       </div>
     </div>
 
@@ -559,7 +588,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap的put方法"><span class="nav-number">1.</span> <span class="nav-text">HashMap的put方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HashMap里面一些重要的成员变量"><span class="nav-number">1.1.</span> <span class="nav-text">1.HashMap里面一些重要的成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#put方法"><span class="nav-number">1.2.</span> <span class="nav-text">put方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Zookeeper是什么"><span class="nav-number">1.</span> <span class="nav-text">1.Zookeeper是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Zookeeper的集群结构"><span class="nav-number">2.</span> <span class="nav-text">2.Zookeeper的集群结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Zookeeper的基本运转流程"><span class="nav-number">3.</span> <span class="nav-text">3.Zookeeper的基本运转流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Zookeeper的一些问题"><span class="nav-number">4.</span> <span class="nav-text">4.Zookeeper的一些问题</span></a></li></ol></div>
             
 
           </div>

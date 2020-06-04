@@ -92,6 +92,59 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux下安装redis</title>
+    <url>/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/</url>
+    <content><![CDATA[<h2 id="Linux下安装Redis"><a href="#Linux下安装Redis" class="headerlink" title="Linux下安装Redis"></a>Linux下安装Redis</h2><p>前提：我自己的Linux是在阿里云上的</p>
+<h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h3><p>在Linux里下载很方便，直接运行下面这条命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-5.0.5.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>版本号在最后面 例如想安装4.0.8的，可以修改一下</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-4.0.8.tar.gz</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="2-解压编译安装"><a href="#2-解压编译安装" class="headerlink" title="2.解压编译安装"></a>2.解压编译安装</h3><p>执行解压命令就ok</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">　tar xzvf redis-5.0.5.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压完成后进入文件夹</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd redis-5.0.5</span><br><span class="line">//编译</span><br><span class="line">make</span><br><span class="line">// 进入src安装</span><br><span class="line">cd src</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>如图所示就是安装好了</p>
+<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-10-50.png" class>
+
+<h3 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h3><p>创建一个bin和etc文件夹，方便管理。执行命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir bin</span><br><span class="line">mkdir etc</span><br></pre></td></tr></table></figure>
+
+<p>在解压好的redis-5.0.5文件夹里有<code>redis.conf</code>文件，将其复制移动到etc文件夹内</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mv redis.conf /redis/redis-5.0.5/etc/</span><br></pre></td></tr></table></figure>
+
+<p>进入src文件夹内，将mkreleasehdr.sh redis-benchmark redis-check-aof redis-check-rdb redis-cli redis-server移动到我们刚创建好的bin文件夹中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv mkreleasehdr.sh redis-benchmark redis-check-aof redis-check-rdb redis-cli redis-server &#x2F;redis&#x2F;redis-5.0.5&#x2F;bin&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>进入bin和etc可以看到刚刚移动过来的文件</p>
+<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-19-28.png" class>
+
+<h4 id="4-设置后台启动Redis"><a href="#4-设置后台启动Redis" class="headerlink" title="4.设置后台启动Redis"></a>4.设置后台启动Redis</h4><p>编辑<code>redis.conf</code>文件 将daemonize属性改为yes（表明需要在后台运行）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd etc/</span><br><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-23-12.png" class>
+
+<p>修改完成后，再次启动redis并指定配置文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./redis-server /redis/redis-5.0.5/etc/redis.conf</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-26-14.png" class>
+
+<p>可以试着链接客户端或者查看进程进行验证</p>
+<h4 id="5-连接阿里云上的Redis"><a href="#5-连接阿里云上的Redis" class="headerlink" title="5.连接阿里云上的Redis"></a>5.连接阿里云上的Redis</h4><p>需要修改配置文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bind 127.0.0.1 ::1</span><br><span class="line">修改成</span><br><span class="line">bind 0.0.0.0 代表任意IP</span><br><span class="line">一般的版本号比较新的还需要修改</span><br><span class="line">protected-mode no 改成 protected-mode yes</span><br></pre></td></tr></table></figure>
+
+<p>最后记得将阿里云的安全组开放redis端口</p>
+]]></content>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java并发编程</title>
     <url>/2020/05/25/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h3 id="1-进程和线程"><a href="#1-进程和线程" class="headerlink" title="1.进程和线程"></a>1.进程和线程</h3><ul>
@@ -192,59 +245,6 @@
 ]]></content>
       <tags>
         <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux下安装redis</title>
-    <url>/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/</url>
-    <content><![CDATA[<h2 id="Linux下安装Redis"><a href="#Linux下安装Redis" class="headerlink" title="Linux下安装Redis"></a>Linux下安装Redis</h2><p>前提：我自己的Linux是在阿里云上的</p>
-<h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h3><p>在Linux里下载很方便，直接运行下面这条命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-5.0.5.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>版本号在最后面 例如想安装4.0.8的，可以修改一下</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-4.0.8.tar.gz</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<h3 id="2-解压编译安装"><a href="#2-解压编译安装" class="headerlink" title="2.解压编译安装"></a>2.解压编译安装</h3><p>执行解压命令就ok</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">　tar xzvf redis-5.0.5.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压完成后进入文件夹</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd redis-5.0.5</span><br><span class="line">//编译</span><br><span class="line">make</span><br><span class="line">// 进入src安装</span><br><span class="line">cd src</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>如图所示就是安装好了</p>
-<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-10-50.png" class>
-
-<h3 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h3><p>创建一个bin和etc文件夹，方便管理。执行命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir bin</span><br><span class="line">mkdir etc</span><br></pre></td></tr></table></figure>
-
-<p>在解压好的redis-5.0.5文件夹里有<code>redis.conf</code>文件，将其复制移动到etc文件夹内</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mv redis.conf /redis/redis-5.0.5/etc/</span><br></pre></td></tr></table></figure>
-
-<p>进入src文件夹内，将mkreleasehdr.sh redis-benchmark redis-check-aof redis-check-rdb redis-cli redis-server移动到我们刚创建好的bin文件夹中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv mkreleasehdr.sh redis-benchmark redis-check-aof redis-check-rdb redis-cli redis-server &#x2F;redis&#x2F;redis-5.0.5&#x2F;bin&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>进入bin和etc可以看到刚刚移动过来的文件</p>
-<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-19-28.png" class>
-
-<h4 id="4-设置后台启动Redis"><a href="#4-设置后台启动Redis" class="headerlink" title="4.设置后台启动Redis"></a>4.设置后台启动Redis</h4><p>编辑<code>redis.conf</code>文件 将daemonize属性改为yes（表明需要在后台运行）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd etc/</span><br><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-23-12.png" class>
-
-<p>修改完成后，再次启动redis并指定配置文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./redis-server /redis/redis-5.0.5/etc/redis.conf</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/04/06/Linux%E4%B8%8B%E5%AE%89%E8%A3%85Redis/Snipaste_2020-04-06_14-26-14.png" class>
-
-<p>可以试着链接客户端或者查看进程进行验证</p>
-<h4 id="5-连接阿里云上的Redis"><a href="#5-连接阿里云上的Redis" class="headerlink" title="5.连接阿里云上的Redis"></a>5.连接阿里云上的Redis</h4><p>需要修改配置文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bind 127.0.0.1 ::1</span><br><span class="line">修改成</span><br><span class="line">bind 0.0.0.0 代表任意IP</span><br><span class="line">一般的版本号比较新的还需要修改</span><br><span class="line">protected-mode no 改成 protected-mode yes</span><br></pre></td></tr></table></figure>
-
-<p>最后记得将阿里云的安全组开放redis端口</p>
-]]></content>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -470,167 +470,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/04/04/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>hexo博客如何自定义域名</title>
-    <url>/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/</url>
-    <content><![CDATA[<h2 id="hexo博客自定义域名"><a href="#hexo博客自定义域名" class="headerlink" title="hexo博客自定义域名"></a>hexo博客自定义域名</h2><h3 id="1-购买域名"><a href="#1-购买域名" class="headerlink" title="1.购买域名"></a>1.购买域名</h3><p>这里以阿里云为例。</p>
-<p>在搜索框输入自己想要的域名，之后点击查询，在下放选择自己想要的域名购买就好了</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/1.png" class>
-
-<a id="more"></a>
-
-<p>提交订单的时候，选择个人或者企业。我选择的是个人，需要一个通过实名认证的信息模板，如果没有就创建一个。</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/2.png" class>
-
-<p>实名认证通过之后就是这个样子了</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/3.png" class>
-
-<p>之后再重复购买步骤。</p>
-<h3 id="2-添加CNAME文件"><a href="#2-添加CNAME文件" class="headerlink" title="2.添加CNAME文件"></a>2.添加CNAME文件</h3><p>在本地博客根目录下，有一个source文件夹，</p>
-<p>进入source文件夹，创建一个CNAME文件，注意这个文件是没有后缀的。</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/4.png" class>
-
-<p>之后打开CNAME，把刚刚购买的域名填进去</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/5.png" class>
-
-<h3 id="3-在GitHub中设置"><a href="#3-在GitHub中设置" class="headerlink" title="3.在GitHub中设置"></a>3.在GitHub中设置</h3><p>打开GitHub上的博客项目，点击Setting，往下拉找到Custom domain</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png" class>
-
-<h3 id="4-给域名添加解析记录"><a href="#4-给域名添加解析记录" class="headerlink" title="4.给域名添加解析记录"></a>4.给域名添加解析记录</h3><p>首先要ping一下博客地址，地址就是yourname.github.io</p>
-<p>以Windows系统为例，打开CMD</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/7.png" class>
-
-<p>红色框起来的部分就是IP地址</p>
-<p>打开阿里云控制台，进入域名列表</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/8.png" class>
-
-<p>点击解析，添加两条记录</p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/9.png" class>
-
-<p>——后续更新：</p>
-<p>GitHub官方建议的方式是使用CNAME将你的域名解析到 yourname.github.io </p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/10.png" class>
-
-<p>所以我把前两个删掉了</p>
-<h3 id="5-开启https"><a href="#5-开启https" class="headerlink" title="5.开启https"></a>5.开启https</h3><p>设置好以后，一般是通过http访问。</p>
-<p>在GitHub项目的setting中，有一个选项Enforce HTTPS </p>
-<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png" class>
-
-<p>一开始这个选项是不能勾选的，要等待证书颁发</p>
-<p>证书颁发下来以后，将这个选项勾选上，就可以通过https进行访问了。</p>
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>二叉树的前序遍历、中序遍历、后序遍历</title>
-    <url>/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
-    <content><![CDATA[<h2 id="二叉树的前序遍历、中序遍历、后序遍历"><a href="#二叉树的前序遍历、中序遍历、后序遍历" class="headerlink" title="二叉树的前序遍历、中序遍历、后序遍历"></a>二叉树的前序遍历、中序遍历、后序遍历</h2><p>简单讲一下三种遍历方式</p>
-<ul>
-<li>前序：根 - &gt; 左 - &gt;  右</li>
-<li>中序：左 - &gt; 根 - &gt; 右</li>
-<li>后序：左 - &gt; 右 - &gt; 根</li>
-</ul>
-<p><strong>其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历</strong></p>
-<a id="more"></a>
-
-<h3 id="简单的二叉树"><a href="#简单的二叉树" class="headerlink" title="简单的二叉树"></a>简单的二叉树</h3><img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png" class>
-
-<ul>
-<li>前序：ABC</li>
-<li>中序：BAC</li>
-<li>后序：BCA</li>
-</ul>
-<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png" class>
-
-<ul>
-<li>前序：ABDECFG</li>
-</ul>
-<p>(可以拆分成多个有3个节点的小二叉树)</p>
-<p>首先A为根节点，有左子树B，右子树C</p>
-<p>B可以作为下一级的根节点，有左子树D，右子树E</p>
-<p>A根节点的右子树C同理</p>
-<p>最后就是ABDECFG</p>
-<ul>
-<li>中序：DBEAFCG</li>
-</ul>
-<p>首先是B A C，</p>
-<p>B下面还有子树，所以是D B E A C，</p>
-<p>C下面还有子树，所以最后是DBEAFCG</p>
-<ul>
-<li>后序：DEBFGCA</li>
-</ul>
-<p>首先是 B C A，</p>
-<p>B下面还有子树，所以是D E B C A，</p>
-<p>C下面还有子树，所以最后是DEBFGCA</p>
-<h3 id="不规则的二叉树"><a href="#不规则的二叉树" class="headerlink" title="不规则的二叉树"></a>不规则的二叉树</h3><p>上面的二叉树是左右对称的二叉树。</p>
-<p>现在画一个不对称的二叉树</p>
-<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png" class>
-
-<ul>
-<li>前序：ABDEGHCF</li>
-</ul>
-<p>首先是A B C，B下面还有子树，所以是A B D E C</p>
-<p>E下面还有子树，所以是A B D E G H C</p>
-<p>C下面还有子树，最后就是ABDEGHCF</p>
-<ul>
-<li>中序：DBGEHACF</li>
-</ul>
-<p>首先是B A C，B下面还有子树，所以是D B E A C</p>
-<p>E下面还有子树，所以是D B G E H A C</p>
-<p>C下面还有子树，最后就是DBGEHACF</p>
-<ul>
-<li>后序：DGHEBFCA</li>
-</ul>
-<p>首先是B C A，B下面还有子树，所以是D E B C A </p>
-<p>E下面还有子树，所以是D G H E B C A </p>
-<p>C下面还有子树，所以是DGHEBFCA</p>
-<h3 id="根据三种排序中的两种排序画出二叉树（中序必须有）"><a href="#根据三种排序中的两种排序画出二叉树（中序必须有）" class="headerlink" title="根据三种排序中的两种排序画出二叉树（中序必须有）"></a>根据三种排序中的两种排序画出二叉树（中序必须有）</h3><p>想要知道二叉树的结构，中序是必不可少的。因为没有中序无法知道左右子树。</p>
-<p><strong>如果已知中序遍历是DBEAFC，前序遍历是ABDECF，求后序遍历</strong></p>
-<ol>
-<li><p>可以确定A是根节点</p>
-</li>
-<li><p>A根节点下面，左子树有DBE，右子树有FC</p>
-</li>
-<li><p>根据前序BDE，中序DBE，得知B是次级根节点，左子树是D，右子树是E</p>
-</li>
-<li><p>F C、C F，根据排序方式可以得出结论，C是次级根节点，左子树是F（中序遍历F出现在C前面所以是左子树，如果F出现的C后面，那F就是C的右子树），无右子树</p>
-<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png" class title="二叉树图示">
-</li>
-<li><p>所以后序遍历就是DEBFCA</p>
-</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>再把所说的排序方式深入总结一下</p>
-<ol>
-<li><strong>前序遍历：首先访问根节点，再遍历左子树，最后遍历右子树。在遍历左、右子树时，也是先访问根节点，再遍历左子树，最后遍历右子树。</strong></li>
-<li><strong>中序遍历：首先遍历左子树，然后访问根节点，最后遍历右子树。在遍历左、右子树时，也是先遍历左子树，然后访问根节点，最后遍历右子树。</strong></li>
-<li><strong>后序遍历：首先遍历左子树，再遍历右子树，最后访问根节点。在遍历左、右子树时，也是先遍历左子树，再遍历右子树，最后访问根节点。</strong></li>
-</ol>
-<p>也就是不断地递归</p>
-]]></content>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker的安装和使用</title>
     <url>/2020/05/07/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>这里以阿里云为例（我的操作系统是centOS7）</p>
@@ -763,6 +602,241 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/04/04/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>hexo博客如何自定义域名</title>
+    <url>/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/</url>
+    <content><![CDATA[<h2 id="hexo博客自定义域名"><a href="#hexo博客自定义域名" class="headerlink" title="hexo博客自定义域名"></a>hexo博客自定义域名</h2><h3 id="1-购买域名"><a href="#1-购买域名" class="headerlink" title="1.购买域名"></a>1.购买域名</h3><p>这里以阿里云为例。</p>
+<p>在搜索框输入自己想要的域名，之后点击查询，在下放选择自己想要的域名购买就好了</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/1.png" class>
+
+<a id="more"></a>
+
+<p>提交订单的时候，选择个人或者企业。我选择的是个人，需要一个通过实名认证的信息模板，如果没有就创建一个。</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/2.png" class>
+
+<p>实名认证通过之后就是这个样子了</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/3.png" class>
+
+<p>之后再重复购买步骤。</p>
+<h3 id="2-添加CNAME文件"><a href="#2-添加CNAME文件" class="headerlink" title="2.添加CNAME文件"></a>2.添加CNAME文件</h3><p>在本地博客根目录下，有一个source文件夹，</p>
+<p>进入source文件夹，创建一个CNAME文件，注意这个文件是没有后缀的。</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/4.png" class>
+
+<p>之后打开CNAME，把刚刚购买的域名填进去</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/5.png" class>
+
+<h3 id="3-在GitHub中设置"><a href="#3-在GitHub中设置" class="headerlink" title="3.在GitHub中设置"></a>3.在GitHub中设置</h3><p>打开GitHub上的博客项目，点击Setting，往下拉找到Custom domain</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png" class>
+
+<h3 id="4-给域名添加解析记录"><a href="#4-给域名添加解析记录" class="headerlink" title="4.给域名添加解析记录"></a>4.给域名添加解析记录</h3><p>首先要ping一下博客地址，地址就是yourname.github.io</p>
+<p>以Windows系统为例，打开CMD</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/7.png" class>
+
+<p>红色框起来的部分就是IP地址</p>
+<p>打开阿里云控制台，进入域名列表</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/8.png" class>
+
+<p>点击解析，添加两条记录</p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/9.png" class>
+
+<p>——后续更新：</p>
+<p>GitHub官方建议的方式是使用CNAME将你的域名解析到 yourname.github.io </p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/10.png" class>
+
+<p>所以我把前两个删掉了</p>
+<h3 id="5-开启https"><a href="#5-开启https" class="headerlink" title="5.开启https"></a>5.开启https</h3><p>设置好以后，一般是通过http访问。</p>
+<p>在GitHub项目的setting中，有一个选项Enforce HTTPS </p>
+<img src="/2020/05/26/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/6.png" class>
+
+<p>一开始这个选项是不能勾选的，要等待证书颁发</p>
+<p>证书颁发下来以后，将这个选项勾选上，就可以通过https进行访问了。</p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个完整的HTTP请求过程</title>
+    <url>/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>当在浏览器地址栏输入<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 时，发生了什么</p>
+<h3 id="2-概述"><a href="#2-概述" class="headerlink" title="2.概述"></a>2.概述</h3><p>1.首先对网址进行DNS域名解析，得到对应的IP地址</p>
+<p>2.根据得到的IP地址，找到服务器，发起TCP三次握手</p>
+<p>3.成功建立TCP连接后，发起HTTP请求</p>
+<p>4.服务器相应HTTP请求，返回html代码</p>
+<p>5.浏览器解析html代码，并请求html代码中的资源，例如css，js，图片等。</p>
+<p>6.浏览器对页面进行渲染呈现</p>
+<a id="more"></a>
+
+<h3 id="3-各个步骤的细节"><a href="#3-各个步骤的细节" class="headerlink" title="3.各个步骤的细节"></a>3.各个步骤的细节</h3><h4 id="1-DNS域名解析"><a href="#1-DNS域名解析" class="headerlink" title="1.DNS域名解析"></a>1.DNS域名解析</h4><p>1.浏览器首先会搜索自身的DNS缓存</p>
+<p>2.若自身缓存里没有找到，就会去搜索系统中的DNS缓存</p>
+<p>3.若系统的DNS缓存没有找到，就会尝试在hosts文件中查找</p>
+<p>4.若在hosts文件中还是没有，会先去本地配置的DNS服务器中查找</p>
+<p>5.若本地配置的DNS服务器没有，再来是com的顶级域名服务器</p>
+<p>6.若在com域名服务器中没有，最后就会去baidu.com的域名服务器中查找</p>
+<h4 id="2-TCP三次握手"><a href="#2-TCP三次握手" class="headerlink" title="2.TCP三次握手"></a>2.TCP三次握手</h4><h5 id="为什么要三次握手？"><a href="#为什么要三次握手？" class="headerlink" title="为什么要三次握手？"></a>为什么要三次握手？</h5><p>因为计算机之间通信是通过协议来实现，协议不同是不能进行通信的。三次握手是保证了协议一致（3次是最少的认知次数）。</p>
+<h4 id="3-发起HTTP请求"><a href="#3-发起HTTP请求" class="headerlink" title="3.发起HTTP请求"></a>3.发起HTTP请求</h4><p>HTTP请求分为3个部分，请求行、请求头、请求正文</p>
+<ul>
+<li><p><strong>请求行：</strong>用于描述客户端的请求方式（例如GET、POST等），请求URL以及使用的HTTP协议的版本号。比如GET/index.html HTTP/1.1</p>
+</li>
+<li><p><strong>请求头：</strong>请求头是告知服务器关于客户端（浏览器）的请求信息。</p>
+</li>
+<li><p><strong>请求正文：</strong>请求正文就是客户端（浏览器）向服务器传递的数据。（有一些请求是不需要请求正文的，例如GET请求可以没有请求正文）</p>
+</li>
+</ul>
+<p>一般的请求方式有：</p>
+<ul>
+<li><em>GET：</em>完整请求一个资源</li>
+<li><em>POST：</em>提交表单</li>
+<li><em>HEAD：</em>仅请求响应头部</li>
+<li><em>PUT：</em>上传文件</li>
+<li><em>DELETE：</em>删除</li>
+<li><em>OPTIONS：</em>预请求，即试探性的请求，如果遭到拒绝，则不会发起第二次请求</li>
+</ul>
+<h4 id="4-服务器响应HTTP请求"><a href="#4-服务器响应HTTP请求" class="headerlink" title="4.服务器响应HTTP请求"></a>4.服务器响应HTTP请求</h4><p>HTTP响应同样分为3个部分，响应行、响应头、响应正文</p>
+<ul>
+<li><strong>响应行：</strong>一般有协议版本号、状态码、描述组成。例如HTTP/200 OK</li>
+<li><strong>响应头：</strong>返回服务器的基本信息，以及告知客户端如何处理数据</li>
+<li><strong>响应体：</strong>就是响应的消息体，一般就是数据或者html代码</li>
+</ul>
+<p><strong>状态码：</strong></p>
+<ul>
+<li><em>1xx：</em>提示信息，表示请求已收到，继续处理</li>
+<li><em>2xx：</em>成功，请求被成功接收并完成整个处理过程。一般为200</li>
+<li><em>3xx：</em>重定向，要完成请求必须要进行进一步的操作。一般有302重定向至新的资源地址</li>
+<li><em>4xx：</em>客户端请求错误，404表示请求的资源在服务器中没有，403服务器拒绝访问</li>
+<li><em>5xx：</em>服务端错误，一般用500服务器发生错误，503服务器不能处理这个请求</li>
+</ul>
+<h4 id="5-解析html代码并请求html代码中的资源"><a href="#5-解析html代码并请求html代码中的资源" class="headerlink" title="5.解析html代码并请求html代码中的资源"></a>5.解析html代码并请求html代码中的资源</h4><p>若有css、js、图片等静态资源，就会向服务器下载。</p>
+<h4 id="6-浏览器对页面进行渲染呈现"><a href="#6-浏览器对页面进行渲染呈现" class="headerlink" title="6.浏览器对页面进行渲染呈现"></a>6.浏览器对页面进行渲染呈现</h4><p>这里就是浏览器自己的工作机制了，对已获得的静态资源和html代码进行渲染并呈现给用户。</p>
+]]></content>
+      <tags>
+        <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树的前序遍历、中序遍历、后序遍历</title>
+    <url>/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
+    <content><![CDATA[<h2 id="二叉树的前序遍历、中序遍历、后序遍历"><a href="#二叉树的前序遍历、中序遍历、后序遍历" class="headerlink" title="二叉树的前序遍历、中序遍历、后序遍历"></a>二叉树的前序遍历、中序遍历、后序遍历</h2><p>简单讲一下三种遍历方式</p>
+<ul>
+<li>前序：根 - &gt; 左 - &gt;  右</li>
+<li>中序：左 - &gt; 根 - &gt; 右</li>
+<li>后序：左 - &gt; 右 - &gt; 根</li>
+</ul>
+<p><strong>其实再复杂的二叉树都可以拆分成3个节点的二叉树一步一步遍历</strong></p>
+<a id="more"></a>
+
+<h3 id="简单的二叉树"><a href="#简单的二叉树" class="headerlink" title="简单的二叉树"></a>简单的二叉树</h3><img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/1.png" class>
+
+<ul>
+<li>前序：ABC</li>
+<li>中序：BAC</li>
+<li>后序：BCA</li>
+</ul>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/2.png" class>
+
+<ul>
+<li>前序：ABDECFG</li>
+</ul>
+<p>(可以拆分成多个有3个节点的小二叉树)</p>
+<p>首先A为根节点，有左子树B，右子树C</p>
+<p>B可以作为下一级的根节点，有左子树D，右子树E</p>
+<p>A根节点的右子树C同理</p>
+<p>最后就是ABDECFG</p>
+<ul>
+<li>中序：DBEAFCG</li>
+</ul>
+<p>首先是B A C，</p>
+<p>B下面还有子树，所以是D B E A C，</p>
+<p>C下面还有子树，所以最后是DBEAFCG</p>
+<ul>
+<li>后序：DEBFGCA</li>
+</ul>
+<p>首先是 B C A，</p>
+<p>B下面还有子树，所以是D E B C A，</p>
+<p>C下面还有子树，所以最后是DEBFGCA</p>
+<h3 id="不规则的二叉树"><a href="#不规则的二叉树" class="headerlink" title="不规则的二叉树"></a>不规则的二叉树</h3><p>上面的二叉树是左右对称的二叉树。</p>
+<p>现在画一个不对称的二叉树</p>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/3.png" class>
+
+<ul>
+<li>前序：ABDEGHCF</li>
+</ul>
+<p>首先是A B C，B下面还有子树，所以是A B D E C</p>
+<p>E下面还有子树，所以是A B D E G H C</p>
+<p>C下面还有子树，最后就是ABDEGHCF</p>
+<ul>
+<li>中序：DBGEHACF</li>
+</ul>
+<p>首先是B A C，B下面还有子树，所以是D B E A C</p>
+<p>E下面还有子树，所以是D B G E H A C</p>
+<p>C下面还有子树，最后就是DBGEHACF</p>
+<ul>
+<li>后序：DGHEBFCA</li>
+</ul>
+<p>首先是B C A，B下面还有子树，所以是D E B C A </p>
+<p>E下面还有子树，所以是D G H E B C A </p>
+<p>C下面还有子树，所以是DGHEBFCA</p>
+<h3 id="根据三种排序中的两种排序画出二叉树（中序必须有）"><a href="#根据三种排序中的两种排序画出二叉树（中序必须有）" class="headerlink" title="根据三种排序中的两种排序画出二叉树（中序必须有）"></a>根据三种排序中的两种排序画出二叉树（中序必须有）</h3><p>想要知道二叉树的结构，中序是必不可少的。因为没有中序无法知道左右子树。</p>
+<p><strong>如果已知中序遍历是DBEAFC，前序遍历是ABDECF，求后序遍历</strong></p>
+<ol>
+<li><p>可以确定A是根节点</p>
+</li>
+<li><p>A根节点下面，左子树有DBE，右子树有FC</p>
+</li>
+<li><p>根据前序BDE，中序DBE，得知B是次级根节点，左子树是D，右子树是E</p>
+</li>
+<li><p>F C、C F，根据排序方式可以得出结论，C是次级根节点，左子树是F（中序遍历F出现在C前面所以是左子树，如果F出现的C后面，那F就是C的右子树），无右子树</p>
+<img src="/2020/05/03/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/4.png" class title="二叉树图示">
+</li>
+<li><p>所以后序遍历就是DEBFCA</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>再把所说的排序方式深入总结一下</p>
+<ol>
+<li><strong>前序遍历：首先访问根节点，再遍历左子树，最后遍历右子树。在遍历左、右子树时，也是先访问根节点，再遍历左子树，最后遍历右子树。</strong></li>
+<li><strong>中序遍历：首先遍历左子树，然后访问根节点，最后遍历右子树。在遍历左、右子树时，也是先遍历左子树，然后访问根节点，最后遍历右子树。</strong></li>
+<li><strong>后序遍历：首先遍历左子树，再遍历右子树，最后访问根节点。在遍历左、右子树时，也是先遍历左子树，再遍历右子树，最后访问根节点。</strong></li>
+</ol>
+<p>也就是不断地递归</p>
+]]></content>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用redis监听订单</title>
+    <url>/2020/04/25/%E4%BD%BF%E7%94%A8redis%E7%9B%91%E5%90%AC%E8%AE%A2%E5%8D%95/</url>
+    <content><![CDATA[<h2 id="使用redis监听订单"><a href="#使用redis监听订单" class="headerlink" title="使用redis监听订单"></a>使用redis监听订单</h2><h3 id="1-使用场景"><a href="#1-使用场景" class="headerlink" title="1.使用场景"></a>1.使用场景</h3><p>一般在淘宝之类的购物网站买东西，在下单以后，支付之前会有一个订单有效期。</p>
+<h3 id="2-大概流程"><a href="#2-大概流程" class="headerlink" title="2.大概流程"></a>2.大概流程</h3><ol>
+<li>点击下单，发送请求。生成订单信息，保存到数据库中，初始化支付状态（可以是0）。同时把订单信息存入redis。以订单号orderId作为redis的key（值可以随便设置），并且设置过期时间（也就是订单的有效期）。</li>
+<li>在订单过期之前。如果用户付款成功的话，支付宝或者微信支付之类的回调接口会修改订单的支付状态为成功。</li>
+<li>到了过期时间，redis监听器监听到了过期的key，取出key(也就是orderId)到数据库中查询该订单的支付状态。如果支付状态不是成功，则修改支付状态为失败（成功可以为1，失败则为2）。</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="3-实现代码（简单模拟）"><a href="#3-实现代码（简单模拟）" class="headerlink" title="3.实现代码（简单模拟）"></a>3.实现代码（简单模拟）</h3>]]></content>
+      <tags>
+        <tag>工作有感</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从零开始-用hexo和GitHub搭建个人博客</title>
     <url>/2020/04/04/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B-%E7%94%A8hexo%E5%92%8CGitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="用hexo和GitHub搭建个人博客"><a href="#用hexo和GitHub搭建个人博客" class="headerlink" title="用hexo和GitHub搭建个人博客"></a>用hexo和GitHub搭建个人博客</h2><h4 id="1-首先安装Git-Bash"><a href="#1-首先安装Git-Bash" class="headerlink" title="1.首先安装Git Bash"></a>1.首先安装Git Bash</h4><p>安装很简单，下载好以后一路点next就ok</p>
@@ -853,64 +927,6 @@
 ]]></content>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个完整的HTTP请求过程</title>
-    <url>/2020/05/21/%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84HTTP%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>当在浏览器地址栏输入<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 时，发生了什么</p>
-<h3 id="2-概述"><a href="#2-概述" class="headerlink" title="2.概述"></a>2.概述</h3><p>1.首先对网址进行DNS域名解析，得到对应的IP地址</p>
-<p>2.根据得到的IP地址，找到服务器，发起TCP三次握手</p>
-<p>3.成功建立TCP连接后，发起HTTP请求</p>
-<p>4.服务器相应HTTP请求，返回html代码</p>
-<p>5.浏览器解析html代码，并请求html代码中的资源，例如css，js，图片等。</p>
-<p>6.浏览器对页面进行渲染呈现</p>
-<a id="more"></a>
-
-<h3 id="3-各个步骤的细节"><a href="#3-各个步骤的细节" class="headerlink" title="3.各个步骤的细节"></a>3.各个步骤的细节</h3><h4 id="1-DNS域名解析"><a href="#1-DNS域名解析" class="headerlink" title="1.DNS域名解析"></a>1.DNS域名解析</h4><p>1.浏览器首先会搜索自身的DNS缓存</p>
-<p>2.若自身缓存里没有找到，就会去搜索系统中的DNS缓存</p>
-<p>3.若系统的DNS缓存没有找到，就会尝试在hosts文件中查找</p>
-<p>4.若在hosts文件中还是没有，会先去本地配置的DNS服务器中查找</p>
-<p>5.若本地配置的DNS服务器没有，再来是com的顶级域名服务器</p>
-<p>6.若在com域名服务器中没有，最后就会去baidu.com的域名服务器中查找</p>
-<h4 id="2-TCP三次握手"><a href="#2-TCP三次握手" class="headerlink" title="2.TCP三次握手"></a>2.TCP三次握手</h4><h5 id="为什么要三次握手？"><a href="#为什么要三次握手？" class="headerlink" title="为什么要三次握手？"></a>为什么要三次握手？</h5><p>因为计算机之间通信是通过协议来实现，协议不同是不能进行通信的。三次握手是保证了协议一致（3次是最少的认知次数）。</p>
-<h4 id="3-发起HTTP请求"><a href="#3-发起HTTP请求" class="headerlink" title="3.发起HTTP请求"></a>3.发起HTTP请求</h4><p>HTTP请求分为3个部分，请求行、请求头、请求正文</p>
-<ul>
-<li><p><strong>请求行：</strong>用于描述客户端的请求方式（例如GET、POST等），请求URL以及使用的HTTP协议的版本号。比如GET/index.html HTTP/1.1</p>
-</li>
-<li><p><strong>请求头：</strong>请求头是告知服务器关于客户端（浏览器）的请求信息。</p>
-</li>
-<li><p><strong>请求正文：</strong>请求正文就是客户端（浏览器）向服务器传递的数据。（有一些请求是不需要请求正文的，例如GET请求可以没有请求正文）</p>
-</li>
-</ul>
-<p>一般的请求方式有：</p>
-<ul>
-<li><em>GET：</em>完整请求一个资源</li>
-<li><em>POST：</em>提交表单</li>
-<li><em>HEAD：</em>仅请求响应头部</li>
-<li><em>PUT：</em>上传文件</li>
-<li><em>DELETE：</em>删除</li>
-<li><em>OPTIONS：</em>预请求，即试探性的请求，如果遭到拒绝，则不会发起第二次请求</li>
-</ul>
-<h4 id="4-服务器响应HTTP请求"><a href="#4-服务器响应HTTP请求" class="headerlink" title="4.服务器响应HTTP请求"></a>4.服务器响应HTTP请求</h4><p>HTTP响应同样分为3个部分，响应行、响应头、响应正文</p>
-<ul>
-<li><strong>响应行：</strong>一般有协议版本号、状态码、描述组成。例如HTTP/200 OK</li>
-<li><strong>响应头：</strong>返回服务器的基本信息，以及告知客户端如何处理数据</li>
-<li><strong>响应体：</strong>就是响应的消息体，一般就是数据或者html代码</li>
-</ul>
-<p><strong>状态码：</strong></p>
-<ul>
-<li><em>1xx：</em>提示信息，表示请求已收到，继续处理</li>
-<li><em>2xx：</em>成功，请求被成功接收并完成整个处理过程。一般为200</li>
-<li><em>3xx：</em>重定向，要完成请求必须要进行进一步的操作。一般有302重定向至新的资源地址</li>
-<li><em>4xx：</em>客户端请求错误，404表示请求的资源在服务器中没有，403服务器拒绝访问</li>
-<li><em>5xx：</em>服务端错误，一般用500服务器发生错误，503服务器不能处理这个请求</li>
-</ul>
-<h4 id="5-解析html代码并请求html代码中的资源"><a href="#5-解析html代码并请求html代码中的资源" class="headerlink" title="5.解析html代码并请求html代码中的资源"></a>5.解析html代码并请求html代码中的资源</h4><p>若有css、js、图片等静态资源，就会向服务器下载。</p>
-<h4 id="6-浏览器对页面进行渲染呈现"><a href="#6-浏览器对页面进行渲染呈现" class="headerlink" title="6.浏览器对页面进行渲染呈现"></a>6.浏览器对页面进行渲染呈现</h4><p>这里就是浏览器自己的工作机制了，对已获得的静态资源和html代码进行渲染并呈现给用户。</p>
-]]></content>
-      <tags>
-        <tag>网络</tag>
       </tags>
   </entry>
   <entry>
@@ -1045,20 +1061,9 @@
       </tags>
   </entry>
   <entry>
-    <title>使用redis监听订单</title>
-    <url>/2020/04/25/%E4%BD%BF%E7%94%A8redis%E7%9B%91%E5%90%AC%E8%AE%A2%E5%8D%95/</url>
-    <content><![CDATA[<h2 id="使用redis监听订单"><a href="#使用redis监听订单" class="headerlink" title="使用redis监听订单"></a>使用redis监听订单</h2><h3 id="1-使用场景"><a href="#1-使用场景" class="headerlink" title="1.使用场景"></a>1.使用场景</h3><p>一般在淘宝之类的购物网站买东西，在下单以后，支付之前会有一个订单有效期。</p>
-<h3 id="2-大概流程"><a href="#2-大概流程" class="headerlink" title="2.大概流程"></a>2.大概流程</h3><ol>
-<li>点击下单，发送请求。生成订单信息，保存到数据库中，初始化支付状态（可以是0）。同时把订单信息存入redis。以订单号orderId作为redis的key（值可以随便设置），并且设置过期时间（也就是订单的有效期）。</li>
-<li>在订单过期之前。如果用户付款成功的话，支付宝或者微信支付之类的回调接口会修改订单的支付状态为成功。</li>
-<li>到了过期时间，redis监听器监听到了过期的key，取出key(也就是orderId)到数据库中查询该订单的支付状态。如果支付状态不是成功，则修改支付状态为失败（成功可以为1，失败则为2）。</li>
-</ol>
-<a id="more"></a>
-
-<h3 id="3-实现代码（简单模拟）"><a href="#3-实现代码（简单模拟）" class="headerlink" title="3.实现代码（简单模拟）"></a>3.实现代码（简单模拟）</h3>]]></content>
-      <tags>
-        <tag>工作有感</tag>
-      </tags>
+    <title>关于单点登录的一些总结</title>
+    <url>/2020/06/01/%E5%85%B3%E4%BA%8E%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>关于redis</title>
@@ -1145,9 +1150,52 @@
       </tags>
   </entry>
   <entry>
-    <title>关于单点登录的一些总结</title>
-    <url>/2020/06/01/%E5%85%B3%E4%BA%8E%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[]]></content>
+    <title>关于缓存和布隆过滤器</title>
+    <url>/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</url>
+    <content><![CDATA[<h3 id="1-缓存雪崩"><a href="#1-缓存雪崩" class="headerlink" title="1.缓存雪崩"></a>1.缓存雪崩</h3><p><strong>缓存雪崩是什么？</strong></p>
+<p>缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>搭建redis集群，提升高可用性。</li>
+<li>将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效</li>
+<li>将热点数据的过期时间设为永不过期。</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2.缓存击穿"></a>2.缓存击穿</h3><p><strong>缓存击穿是什么？</strong></p>
+<p>缓存击穿就是，缓存中没有但数据库中有的数据。如果这时候并发请求很多，在缓存中读取不到数据，请求就会落到数据库上，导致数据库所承受的压力瞬间增大。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>设置热点数据永不过期。</li>
+<li>加锁限流（互斥锁）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getCache</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 1.从缓存中获取数据</span></span><br><span class="line">    String result = getDataFromCache();</span><br><span class="line">    <span class="comment">// 2.如果缓存为空</span></span><br><span class="line">    <span class="keyword">if</span> (StringUtils.isEmpty(result)) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 3.尝试获取锁</span></span><br><span class="line">            <span class="keyword">if</span> (lock.tryLock()) &#123;</span><br><span class="line">                <span class="comment">// 4.拿到锁，从数据库获取数据并写入缓存</span></span><br><span class="line">                result = getDataFromDB();</span><br><span class="line">                setDataToCache(result);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 6.如果没有拿到锁，先尝试从缓存获取数据（可能别的线程已经将数据写入缓存）</span></span><br><span class="line">                <span class="comment">// 7.如果缓存为空</span></span><br><span class="line">                <span class="keyword">if</span> (StringUtils.isEmpty(result)) &#123;</span><br><span class="line">                    <span class="comment">// 8.线程sleep一阵</span></span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                    <span class="comment">// 9.重试</span></span><br><span class="line">                    <span class="keyword">return</span> getCache();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//5.释放锁</span></span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-缓存穿透"><a href="#3-缓存穿透" class="headerlink" title="3.缓存穿透"></a>3.缓存穿透</h3><p><strong>缓存穿透是什么？</strong></p>
+<p>缓存穿透就是，一个在缓存中和数据库中都不存在的数据。在请求过来时，会直接落到数据库上。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>在接口层面做数据校验。</li>
+<li>使用布隆过滤器</li>
+<li>在数据库中查询不到也缓存为null值。</li>
+</ul>
+<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><h3 id="1-什么是布隆过滤器"><a href="#1-什么是布隆过滤器" class="headerlink" title="1.什么是布隆过滤器"></a>1.什么是布隆过滤器</h3><p>布隆过滤器（Bloom Filter）是1970年由<a href="https://baike.baidu.com/item/%E5%B8%83%E9%9A%86/14216465" target="_blank" rel="noopener">布隆</a>提出的。它实际上是一个很长的<a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457" target="_blank" rel="noopener">二进制</a>向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都比一般的算法要好的多，缺点是有一定的误识别率和删除困难。    ——百度百科</p>
+<h3 id="2-布隆过滤器的原理"><a href="#2-布隆过滤器的原理" class="headerlink" title="2.布隆过滤器的原理"></a>2.布隆过滤器的原理</h3><p>布隆过滤器有一个<strong>位数组</strong>，位数组的每个元素只占1bit，并且每个元素只能是1或者0</p>
+<p><strong>存入元素：</strong></p>
+<p>1.布隆过滤器会用哈希函数对元素进行计算，得到哈希值。（有几个哈希函数就会有几个哈希值）</p>
+<p>2.根据得到的哈希值，在位数组中把对应的下标设置为1。</p>
+<p><strong>判断元素是否存在：</strong></p>
+<p>1.使用哈希函数对该元素进行计算，得到哈希值。</p>
+<p>2.得到哈希值后，判断位数组中的每个元素对应的下标是否为1。如果都为1则证明该元素在布隆过滤器中，只要有一个不为1，说明该元素不在布隆过滤器中。</p>
+<p><strong>结论：</strong>布隆过滤器说某个元素不在，那必定不在；说某个元素存在，有几率会误判。</p>
+<h3 id="3-应用场景"><a href="#3-应用场景" class="headerlink" title="3.应用场景"></a>3.应用场景</h3><p>1.过滤，例如防止缓存穿透，一些网站的黑名单功能等。</p>
+<p>2.去重</p>
+]]></content>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
   </entry>
   <entry>
     <title>数据库和缓存的双写一致性</title>
@@ -1212,54 +1260,6 @@
 </ul>
 <p>至于延时多久可以根据实际场景判断。</p>
 <h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><p>一般我遇到的都是采用第三种方案（先删除缓存，再更新数据库），并采用延时双删策略。</p>
-]]></content>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于缓存和布隆过滤器</title>
-    <url>/2020/05/20/%E5%85%B3%E4%BA%8E%E7%BC%93%E5%AD%98%E5%92%8C%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="1-缓存雪崩"><a href="#1-缓存雪崩" class="headerlink" title="1.缓存雪崩"></a>1.缓存雪崩</h3><p><strong>缓存雪崩是什么？</strong></p>
-<p>缓存雪崩就是，大量的缓存在同一时间内失效，导致请求落到数据库上，导致数据库在短时间内承受大量的请求而崩溃。</p>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li>搭建redis集群，提升高可用性。</li>
-<li>将缓存的过期时间设为随机，避免在大量数据在同一时间呢失效</li>
-<li>将热点数据的过期时间设为永不过期。</li>
-</ul>
-<a id="more"></a>
-
-<h3 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2.缓存击穿"></a>2.缓存击穿</h3><p><strong>缓存击穿是什么？</strong></p>
-<p>缓存击穿就是，缓存中没有但数据库中有的数据。如果这时候并发请求很多，在缓存中读取不到数据，请求就会落到数据库上，导致数据库所承受的压力瞬间增大。</p>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li>设置热点数据永不过期。</li>
-<li>加锁限流（互斥锁）</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getCache</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 1.从缓存中获取数据</span></span><br><span class="line">    String result = getDataFromCache();</span><br><span class="line">    <span class="comment">// 2.如果缓存为空</span></span><br><span class="line">    <span class="keyword">if</span> (StringUtils.isEmpty(result)) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 3.尝试获取锁</span></span><br><span class="line">            <span class="keyword">if</span> (lock.tryLock()) &#123;</span><br><span class="line">                <span class="comment">// 4.拿到锁，从数据库获取数据并写入缓存</span></span><br><span class="line">                result = getDataFromDB();</span><br><span class="line">                setDataToCache(result);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 6.如果没有拿到锁，先尝试从缓存获取数据（可能别的线程已经将数据写入缓存）</span></span><br><span class="line">                <span class="comment">// 7.如果缓存为空</span></span><br><span class="line">                <span class="keyword">if</span> (StringUtils.isEmpty(result)) &#123;</span><br><span class="line">                    <span class="comment">// 8.线程sleep一阵</span></span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                    <span class="comment">// 9.重试</span></span><br><span class="line">                    <span class="keyword">return</span> getCache();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//5.释放锁</span></span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-缓存穿透"><a href="#3-缓存穿透" class="headerlink" title="3.缓存穿透"></a>3.缓存穿透</h3><p><strong>缓存穿透是什么？</strong></p>
-<p>缓存穿透就是，一个在缓存中和数据库中都不存在的数据。在请求过来时，会直接落到数据库上。</p>
-<p><strong>解决方案：</strong></p>
-<ul>
-<li>在接口层面做数据校验。</li>
-<li>使用布隆过滤器</li>
-<li>在数据库中查询不到也缓存为null值。</li>
-</ul>
-<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><h3 id="1-什么是布隆过滤器"><a href="#1-什么是布隆过滤器" class="headerlink" title="1.什么是布隆过滤器"></a>1.什么是布隆过滤器</h3><p>布隆过滤器（Bloom Filter）是1970年由<a href="https://baike.baidu.com/item/%E5%B8%83%E9%9A%86/14216465" target="_blank" rel="noopener">布隆</a>提出的。它实际上是一个很长的<a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457" target="_blank" rel="noopener">二进制</a>向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都比一般的算法要好的多，缺点是有一定的误识别率和删除困难。    ——百度百科</p>
-<h3 id="2-布隆过滤器的原理"><a href="#2-布隆过滤器的原理" class="headerlink" title="2.布隆过滤器的原理"></a>2.布隆过滤器的原理</h3><p>布隆过滤器有一个<strong>位数组</strong>，位数组的每个元素只占1bit，并且每个元素只能是1或者0</p>
-<p><strong>存入元素：</strong></p>
-<p>1.布隆过滤器会用哈希函数对元素进行计算，得到哈希值。（有几个哈希函数就会有几个哈希值）</p>
-<p>2.根据得到的哈希值，在位数组中把对应的下标设置为1。</p>
-<p><strong>判断元素是否存在：</strong></p>
-<p>1.使用哈希函数对该元素进行计算，得到哈希值。</p>
-<p>2.得到哈希值后，判断位数组中的每个元素对应的下标是否为1。如果都为1则证明该元素在布隆过滤器中，只要有一个不为1，说明该元素不在布隆过滤器中。</p>
-<p><strong>结论：</strong>布隆过滤器说某个元素不在，那必定不在；说某个元素存在，有几率会误判。</p>
-<h3 id="3-应用场景"><a href="#3-应用场景" class="headerlink" title="3.应用场景"></a>3.应用场景</h3><p>1.过滤，例如防止缓存穿透，一些网站的黑名单功能等。</p>
-<p>2.去重</p>
 ]]></content>
       <tags>
         <tag>Redis</tag>
@@ -1417,6 +1417,67 @@
 ]]></content>
       <tags>
         <tag>Java设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Zookeeper的一些总结</title>
+    <url>/2020/06/04/Zookeeper%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h3 id="1-Zookeeper是什么"><a href="#1-Zookeeper是什么" class="headerlink" title="1.Zookeeper是什么"></a>1.Zookeeper是什么</h3><p>ZooKeeper是一个<a href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F/19276232" target="_blank" rel="noopener">分布式</a>的，开放源码的<a href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/9854429" target="_blank" rel="noopener">分布式应用程序</a>协调服务，是<a href="https://baike.baidu.com/item/Google" target="_blank" rel="noopener">Google</a>的Chubby一个<a href="https://baike.baidu.com/item/%E5%BC%80%E6%BA%90/246339" target="_blank" rel="noopener">开源</a>的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。——百度百科</p>
+<p>Zookeeper=文件系统+监听通知机制</p>
+<a id="more"></a>
+
+<p><strong>Zookeeper的znode</strong></p>
+<p>能够自由增加和删除。</p>
+<ul>
+<li><strong>PERSISTENT-持久化目录节点：</strong>客户端与Zookeeper断开连接后，该节点依然存在。</li>
+<li><strong>PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点：</strong>同上，只是多了顺序编号</li>
+<li><strong>EPHEMERAL-临时目录节点：</strong>客户端与Zookeeper断开连接后，删除该节点。</li>
+<li><strong>EPHEMERAL_SEQUENTIAL-临时顺序编号目录节点：</strong>同上，只是多了顺序编号。</li>
+</ul>
+<p>临时节点不允许有子节点。</p>
+<p><strong>监听通知机制</strong></p>
+<p>客户端注册监听它关心的节点，当节点发生变化时（例如数据改变、被删除、增加等）Zookeeper会通知客户端。</p>
+<p><strong>Zookeeper的5大特性</strong></p>
+<ul>
+<li>顺序一致性：同一个客户端发出的请求，会严格按照顺序进入Zookeeper。</li>
+<li>原子性：集群中的机器都成功处理某个请求，不会出现机器A处理成功，机器B处理失败。</li>
+<li>单一性：集群中的所有机器数据一样。</li>
+<li>可靠性：服务端数据发生变化会立即存储。</li>
+<li>实时性：保证客户端获取到的数据是最新的。</li>
+</ul>
+<h3 id="2-Zookeeper的集群结构"><a href="#2-Zookeeper的集群结构" class="headerlink" title="2.Zookeeper的集群结构"></a>2.Zookeeper的集群结构</h3><ol>
+<li><strong>Leader：</strong>连接任意节点，如果节点出现故障，Leader自动修复，在Service启动时完成Leader的选举。</li>
+<li><strong>Follower：</strong>听从Leader的指令，完成选举工作。</li>
+<li><strong>Client：</strong>分布式中的一个节点，访问服务器的配置信息，周期性向Server发送心跳包，Server向Client回应确认，如果Client没有收到回应，则重定向至另一个Server。</li>
+<li><strong>Server：</strong>Zookeeper的一个节点，为Client提供所需的服务，给Client回应信息表明自己是存活的。</li>
+</ol>
+<p><strong>Leader的作用：</strong></p>
+<ul>
+<li>恢复数据</li>
+<li>维持与Follower的心跳，接收Follower的请求并判断Follower的请求消息类型。</li>
+<li>对不同的Follower消息类型进行不同的处理。</li>
+</ul>
+<h3 id="3-Zookeeper的基本运转流程"><a href="#3-Zookeeper的基本运转流程" class="headerlink" title="3.Zookeeper的基本运转流程"></a>3.Zookeeper的基本运转流程</h3><ol>
+<li>选举Leader</li>
+<li>同步数据</li>
+<li>选举Leader的算法要保持一致</li>
+<li>Leader具有最高的执行ID</li>
+<li>集群中的大多数机器得到响应并follow选举出来的Leader</li>
+</ol>
+<h3 id="4-Zookeeper的一些问题"><a href="#4-Zookeeper的一些问题" class="headerlink" title="4.Zookeeper的一些问题"></a>4.Zookeeper的一些问题</h3><p><strong>Zookeeper服务器挂了，服务调用还可以进行吗？</strong></p>
+<p>可以，消费者在启动时会从Zookeeper拉取服务提供者的地址接口等数据，缓存到本地。每次调用时，可以根据本地缓存进行调用。</p>
+<p><strong>Zookeeper如何进行服务治理？</strong></p>
+<p>接收服务提供者的接口信息和IP地址进行存储，然后管理消费者和服务提供者之间的调用关系。</p>
+<p><strong>如果Zookeeper服务挂了怎么办？</strong></p>
+<ol>
+<li>任意一台挂了，切换到另一台。</li>
+<li>全部挂了，消费者和服务提供者可以通过本地缓存进行通讯。</li>
+<li>任意一台服务提供者无状态挂了不影响使用。</li>
+<li>服务提供者全挂了，消费者无法将无法使用，会无限重连直至服务提供者恢复。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Zookeeper</tag>
       </tags>
   </entry>
 </search>
