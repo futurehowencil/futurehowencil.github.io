@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="一般的数据库和缓存的更新策略有3种。  先更新数据库，再更新缓存。 先更新数据库，再删除缓存。 先删除缓存，再更新数据库。  1.先更新数据库，再更新缓存这个应该没什么人用吧。。 原因：  线程安全问题：  如果短时间内2个请求AB（有先后顺序）进行更新操作。  A更新了数据库 B更新了数据库 B更新了缓存 A更新了缓存  这里的缓存应该是已B的请求为最新数据，这就导致了脏数据。  业务方面  如">
+<meta name="description" content="一般的数据库和缓存的更新策略有3种。  先更新数据库，再更新缓存。 先更新数据库，再删除缓存。 先删除缓存，再更新数据库。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库和缓存的双写一致性">
 <meta property="og:url" content="http://yoursite.com/2020/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/index.html">
 <meta property="og:site_name" content="76的个人博客">
-<meta property="og:description" content="一般的数据库和缓存的更新策略有3种。  先更新数据库，再更新缓存。 先更新数据库，再删除缓存。 先删除缓存，再更新数据库。  1.先更新数据库，再更新缓存这个应该没什么人用吧。。 原因：  线程安全问题：  如果短时间内2个请求AB（有先后顺序）进行更新操作。  A更新了数据库 B更新了数据库 B更新了缓存 A更新了缓存  这里的缓存应该是已B的请求为最新数据，这就导致了脏数据。  业务方面  如">
+<meta property="og:description" content="一般的数据库和缓存的更新策略有3种。  先更新数据库，再更新缓存。 先更新数据库，再删除缓存。 先删除缓存，再更新数据库。">
 <meta property="article:published_time" content="2020-06-03T13:12:24.000Z">
-<meta property="article:modified_time" content="2020-06-04T09:41:45.015Z">
+<meta property="article:modified_time" content="2020-06-04T09:47:47.795Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -369,6 +369,8 @@
 <li>先更新数据库，再删除缓存。</li>
 <li>先删除缓存，再更新数据库。</li>
 </ol>
+<a id="more"></a>
+
 <h3 id="1-先更新数据库，再更新缓存"><a href="#1-先更新数据库，再更新缓存" class="headerlink" title="1.先更新数据库，再更新缓存"></a>1.先更新数据库，再更新缓存</h3><p>这个应该没什么人用吧。。</p>
 <p>原因：</p>
 <ol>
