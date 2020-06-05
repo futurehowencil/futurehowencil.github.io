@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="76的个人博客">
 <meta property="og:description" content="1.什么是SpringCloudSpringCloud 是一系列框架的有序集合。它利用 SpringBoot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 SpringBoot 的开发风格做到一键启动和部署。">
 <meta property="article:published_time" content="2020-06-02T00:42:11.000Z">
-<meta property="article:modified_time" content="2020-06-05T16:40:28.981Z">
+<meta property="article:modified_time" content="2020-06-05T16:43:31.683Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="常用框架">
 <meta name="twitter:card" content="summary">
@@ -383,7 +383,7 @@
 </li>
 <li><strong>服务消费者：</strong><ul>
 <li><strong>获取服务：</strong>服务消费者进行消费时会发送一个REST请求到注册中心获取服务列表，服务列表30s更新一次。</li>
-<li><strong>服务调用：</strong>消费者在获取服务清单后，通过服务名获取服务的实例名，和该实例名的元数据（IP+端等），Eureka底层会通过Ribbon默认采用讯轮的方式进行调用从而实现客户端的负载均衡。</li>
+<li><strong>服务调用：</strong>消费者在获取服务清单后，通过服务名获取服务的实例名，和该实例名的元数据（IP+端口等），Eureka底层会通过Ribbon默认采用讯轮的方式进行调用从而实现客户端的负载均衡。</li>
 <li><strong>服务下线：</strong>当服务重启或者关闭时，要主动通知注册中心。会发送一个REST请求到注册中心，注册中心收到请求之后就会把服务从注册列表中剔除。</li>
 </ul>
 </li>
