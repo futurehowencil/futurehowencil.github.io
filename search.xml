@@ -332,7 +332,7 @@
 <h3 id="3-SpringCloud组件详解"><a href="#3-SpringCloud组件详解" class="headerlink" title="3.SpringCloud组件详解"></a>3.SpringCloud组件详解</h3><ol>
 <li><strong>Eureka的治理机制：</strong><ol>
 <li><strong>服务提供者：</strong><ul>
-<li><strong>服务注册与同步：</strong>启动时会通过REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息（IP+端等）。并且该注册请求会转发到集群中相连的其他注册中心，实现注册中心之间的服务同步。</li>
+<li><strong>服务注册与同步：</strong>启动时会通过REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息（IP+端口等）。并且该注册请求会转发到集群中相连的其他注册中心，实现注册中心之间的服务同步。</li>
 <li><strong>服务续约：</strong>注册完成后，服务提供者会维护一个心跳通知Eureka Server自身还在运行，防止被注册中心剔除。</li>
 </ul>
 </li>
