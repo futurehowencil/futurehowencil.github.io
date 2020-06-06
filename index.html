@@ -364,40 +364,19 @@
 
       
         
-          
-            <h3 id="1-什么是Dubbo"><a href="#1-什么是Dubbo" class="headerlink" title="1.什么是Dubbo"></a>1.什么是Dubbo</h3><p>Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：</p>
+          <h3 id="1-什么是Dubbo"><a href="#1-什么是Dubbo" class="headerlink" title="1.什么是Dubbo"></a>1.什么是Dubbo</h3><p>Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：</p>
 <ul>
 <li>面向接口的远程方法调用</li>
 <li>智能容错和负载均衡</li>
 <li>服务自动注册和发现。</li>
 </ul>
-<h3 id="2-为什么要用Dubbo"><a href="#2-为什么要用Dubbo" class="headerlink" title="2.为什么要用Dubbo"></a>2.为什么要用Dubbo</h3><ul>
-<li>公共的逻辑业务提取出来形成服务，对外提供。</li>
-<li>方便维护</li>
-</ul>
-<h3 id="3-Dubbo的节点角色"><a href="#3-Dubbo的节点角色" class="headerlink" title="3.Dubbo的节点角色"></a>3.Dubbo的节点角色</h3><ul>
-<li><strong>Provider：</strong>暴露服务的服务提供方</li>
-<li><strong>Consumer：</strong>调用远程服务的服务消费方</li>
-<li><strong>Registry：</strong>服务注册与发现的注册中心</li>
-<li><strong>Monitor：</strong>统计服务的调用次数和调用时间的监控中心</li>
-<li><strong>Container：</strong>服务运行的容器</li>
-</ul>
-<p>整个就是<strong>生产-消费者</strong>模型，并在这种基础上多了<strong>注册中心</strong>和<strong>监控中心</strong>，用于管理服务提供方提供的URL。</p>
-<p><strong>运行过程：</strong></p>
-<ol>
-<li>启动容器，加载并运行服务提供者。</li>
-<li>服务提供者在启动时，向注册中心发布注册自己所提供的服务。</li>
-<li>服务消费者在启动时，在注册中心订阅自己所需的服务。</li>
-</ol>
-<p>考虑失败和变更的情况：</p>
-<ul>
-<li>注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。</li>
-<li>服务消费者从提供者的列表中，基于软负载均衡算法，选择一台提供者调用，如果失败，则另选一台。</li>
-<li>消费者和提供者，在内存中累计的调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。</li>
-</ul>
-<p>Dubbo服务之间的调用默认同步阻塞，支持异步调用。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/06/06/%E5%85%B3%E4%BA%8EDubbo/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

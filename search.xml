@@ -1489,6 +1489,8 @@
 <li>智能容错和负载均衡</li>
 <li>服务自动注册和发现。</li>
 </ul>
+<a id="more"></a>
+
 <h3 id="2-为什么要用Dubbo"><a href="#2-为什么要用Dubbo" class="headerlink" title="2.为什么要用Dubbo"></a>2.为什么要用Dubbo</h3><ul>
 <li>公共的逻辑业务提取出来形成服务，对外提供。</li>
 <li>方便维护</li>
