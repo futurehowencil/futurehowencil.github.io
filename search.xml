@@ -1521,4 +1521,17 @@
         <tag>Dubbo</tag>
       </tags>
   </entry>
+  <entry>
+    <title>win10自带输入法添加小鹤双拼</title>
+    <url>/2020/06/07/win10%E8%87%AA%E5%B8%A6%E8%BE%93%E5%85%A5%E6%B3%95%E6%B7%BB%E5%8A%A0%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/</url>
+    <content><![CDATA[<p>1.复制文本</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line">[HKEY<span class="emphasis">_CURRENT_</span>USER\Software\Microsoft\InputMethod\Settings\CHS]</span><br><span class="line">"LangBar Force On"=dword:00000000</span><br><span class="line">"Enable Double Pinyin"=dword:00000001</span><br><span class="line">"EmoticonTipTriggerCount"=dword:00000001</span><br><span class="line">"HapLastDownloadTime"=hex(b):eb,69,29,59,00,00,00,00</span><br><span class="line">"UserDefinedDoublePinyinScheme0"="FlyPY<span class="emphasis">*2*</span>^*iuvdjhcwfg xmlnpbksqszxkrltvyovt"</span><br><span class="line">"DoublePinyinScheme"=dword:0000000a</span><br><span class="line">"UDLLastUpdatedTime"="2017-05-27 22:01:40"</span><br><span class="line">"UDLCount"=dword:0000018b</span><br><span class="line">"UDLVisibleCount"=dword:0000018b</span><br></pre></td></tr></table></figure>
+
+<p>2.修改文件后缀为reg</p>
+<p>3.双击运行即可</p>
+]]></content>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
 </search>
