@@ -1551,4 +1551,35 @@
         <tag>Windows</tag>
       </tags>
   </entry>
+  <entry>
+    <title>基于docker安装RabbitMQ</title>
+    <url>/2020/06/20/%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85RabbitMQ/</url>
+    <content><![CDATA[<h3 id="1-拉取镜像"><a href="#1-拉取镜像" class="headerlink" title="1.拉取镜像"></a>1.拉取镜像</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull rabbitmq:3.7.7-management</span><br></pre></td></tr></table></figure>
+
+<p>之后可以输入<code>docker images</code>命令查看镜像</p>
+<img src="/2020/06/20/%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85RabbitMQ/1.png" class>
+
+<h3 id="2-创建并启动容器"><a href="#2-创建并启动容器" class="headerlink" title="2.创建并启动容器"></a>2.创建并启动容器</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d --name rabbitmq3.7.7 -p 5672:5672 -p 15672:15672 -v `pwd`/data:/var/lib/rabbitmq --hostname myRabbit -e RABBITMQ_DEFAULT_VHOST=my_vhost  -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin 2888deb59dfc</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>参数说明：</strong><ul>
+<li>-d 后台运行</li>
+<li>–name  指定容器名字</li>
+<li>-p 服务运行端口 5672为应用访问端口 15672为控制台Web端口</li>
+<li>-v 映射目录或文件</li>
+<li>– hostname 主机名（RabbitMQ的一个重要注意事项是它根据所谓的 “节点名称” 存储数据，默认为主机名）</li>
+<li>-e 指定环境变量（ABBITMQ_DEFAULT_VHOST：默认虚拟机名；RABBITMQ_DEFAULT_USER：默认的用户名；RABBITMQ_DEFAULT_PASS：默认用户名的密码）</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-启动之后查看"><a href="#3-启动之后查看" class="headerlink" title="3.启动之后查看"></a>3.启动之后查看</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/06/20/%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85RabbitMQ/2.png" class>
+
+<p>输入RabbitMQ控制台地址<code>http://Server-IP:15672</code></p>
+]]></content>
+      <tags>
+        <tag>RabbitMQ</tag>
+      </tags>
+  </entry>
 </search>
