@@ -1538,20 +1538,6 @@
       </tags>
   </entry>
   <entry>
-    <title>windows下win键+*失效</title>
-    <url>/2020/06/20/windows%E4%B8%8Bwin%E9%94%AE-%E5%A4%B1%E6%95%88/</url>
-    <content><![CDATA[<h3 id="1-可能是win键被锁"><a href="#1-可能是win键被锁" class="headerlink" title="1.可能是win键被锁"></a>1.可能是win键被锁</h3><p>按Fn+win解锁</p>
-<h3 id="2-win-组合键失效"><a href="#2-win-组合键失效" class="headerlink" title="2.win+*组合键失效"></a>2.win+*组合键失效</h3><ol>
-<li>在运行里打开<code>regedit</code>注册表</li>
-<li>定位到<code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer</code>，找到<code>NoWinKeys</code>设置为0</li>
-<li>重新启动<code>explorer.exe</code></li>
-</ol>
-]]></content>
-      <tags>
-        <tag>Windows</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基于docker安装RabbitMQ</title>
     <url>/2020/06/20/%E5%9F%BA%E4%BA%8Edocker%E5%AE%89%E8%A3%85RabbitMQ/</url>
     <content><![CDATA[<h3 id="1-拉取镜像"><a href="#1-拉取镜像" class="headerlink" title="1.拉取镜像"></a>1.拉取镜像</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull rabbitmq:3.7.7-management</span><br></pre></td></tr></table></figure>
