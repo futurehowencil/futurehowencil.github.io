@@ -1568,4 +1568,21 @@
         <tag>RabbitMQ</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySql索引设计原则</title>
+    <url>/2020/06/23/MySql%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/</url>
+    <content><![CDATA[<h3 id="MySQL索引设计原则"><a href="#MySQL索引设计原则" class="headerlink" title="MySQL索引设计原则"></a>MySQL索引设计原则</h3><ol>
+<li>对于经常查询的字段，建立索隐</li>
+<li>选择唯一性索引</li>
+<li>选择区别度高的字段，例如性别就不适合做索引</li>
+<li>避免对经常更新的表做过多的索引</li>
+<li>数据量小的表不建议建立索引，全文检索会比较快</li>
+<li>尽量选择数据量少的字段做索引，索引的值不应该太长</li>
+<li>为经常需要排序、分组和联合操作的字段建立索引</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
 </search>
