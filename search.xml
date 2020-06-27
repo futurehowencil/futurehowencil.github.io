@@ -1585,4 +1585,20 @@
         <tag>MySQL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>win组合键失效</title>
+    <url>/2020/06/27/win%E7%BB%84%E5%90%88%E9%94%AE%E5%A4%B1%E6%95%88/</url>
+    <content><![CDATA[<p><strong>问题：</strong>win+E, win+D等组合键失效</p>
+<p><strong>解决方法：</strong></p>
+<ol>
+<li>在运行里打开<code>regedit.exe</code></li>
+<li>定位到<code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer</code></li>
+<li>修改<code>NoWinKeys</code>，设置为0</li>
+<li>重启<code>explorer.exe</code></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
 </search>
