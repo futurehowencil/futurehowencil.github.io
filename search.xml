@@ -1628,6 +1628,8 @@
 <h3 id="3-初始化vue项目"><a href="#3-初始化vue项目" class="headerlink" title="3.初始化vue项目"></a>3.初始化vue项目</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue init webpack demo</span><br></pre></td></tr></table></figure>
 
 <p>命令含义: vue脚手架使用webpack模板初始化一个名为demo的项目</p>
+<a id="more"></a>
+
 <ul>
 <li>如果初始化太慢可以修改镜像地址</li>
 </ul>
