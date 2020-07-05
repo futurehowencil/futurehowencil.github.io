@@ -1666,4 +1666,15 @@
         <tag>vue</tag>
       </tags>
   </entry>
+  <entry>
+    <title>vue使用ElementUI</title>
+    <url>/2020/07/05/vue%E4%BD%BF%E7%94%A8ElementUI/</url>
+    <content><![CDATA[<h3 id="1-在项目内安装ElementUI"><a href="#1-在项目内安装ElementUI" class="headerlink" title="1.在项目内安装ElementUI"></a>1.在项目内安装ElementUI</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i element-ui</span><br></pre></td></tr></table></figure>
+
+<p>接下来的部分可参考ElementUI的官网</p>
+<h3 id="2-导入相关依赖"><a href="#2-导入相关依赖" class="headerlink" title="2.导入相关依赖"></a>2.导入相关依赖</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line">import ElementUI from 'element-ui'</span><br><span class="line">import 'element-ui/lib/theme-chalk/index.css'</span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
 </search>
