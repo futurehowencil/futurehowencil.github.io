@@ -284,6 +284,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fzq">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/my_avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="76的个人笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/" itemprop="url">使用alibaba-nacos踩的坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-13T21:53:53+08:00">
+                2020-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/07/13/使用alibaba-nacos踩的坑/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-默认的配置为-properties"><a href="#1-默认的配置为-properties" class="headerlink" title="1.默认的配置为.properties"></a>1.默认的配置为.properties</h3><p>在<font color="red">项目中</font>读取配置中心的配置的文件为bootstrap.properties</p>
+<p>在<font color="red">配置中心</font>配置了默认的配置文件后缀为.yml结果不生效</p>
+<p>举例</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 应用名称</span></span><br><span class="line"><span class="meta">spring.application.name</span>= <span class="string">xxx</span></span><br><span class="line"><span class="comment"># 配置中心地址</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.server-addr</span>= <span class="string">xx.xx.xx.xx</span></span><br><span class="line"><span class="comment">#命名空间的id</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.namespace</span>=<span class="string">1759b5b8-f6c5-4aea-8841-f13097e80d7b</span></span><br><span class="line"><span class="comment"># 配置分组</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.group</span>=<span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-使用扩展的配置"><a href="#2-使用扩展的配置" class="headerlink" title="2.使用扩展的配置"></a>2.使用扩展的配置</h3><p>举例</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用ext扩展配置集</span></span><br><span class="line"><span class="comment"># 配置文件名称</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].data-id</span>=<span class="string">datasource.yml</span></span><br><span class="line"><span class="comment"># 分组名称</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].group</span>=<span class="string">dev</span></span><br><span class="line"><span class="comment"># 是否自动刷新配置 默认false</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].refresh</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/11/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1-%E5%9F%BA%E4%BA%8E%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF-%E8%BD%AC%E8%BD%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1524,142 +1659,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/06/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fzq">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/my_avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="76的个人笔记">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/06/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/" itemprop="url">hexo博客如何自定义域名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-06T12:17:22+08:00">
-                2020-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/06/06/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/06/hexo博客如何自定义域名/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="hexo博客自定义域名"><a href="#hexo博客自定义域名" class="headerlink" title="hexo博客自定义域名"></a>hexo博客自定义域名</h2><h3 id="1-购买域名"><a href="#1-购买域名" class="headerlink" title="1.购买域名"></a>1.购买域名</h3><p>这里以阿里云为例。</p>
-<p>在搜索框输入自己想要的域名，之后点击查询，在下放选择自己想要的域名购买就好了</p>
-<img src="/2020/06/06/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/1.png" class>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/06/06/hexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1714,7 +1713,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

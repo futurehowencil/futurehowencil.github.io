@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="1.什么是SpringCloudSpringCloud 是一系列框架的有序集合。它利用 SpringBoot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 SpringBoot 的开发风格做到一键启动和部署。">
+<meta name="description" content="1.默认的配置为.properties在项目中读取配置中心的配置的文件为bootstrap.properties 在配置中心配置了默认的配置文件后缀为.yml结果不生效 举例 12345678# 应用名称spring.application.name&#x3D; xxx# 配置中心地址spring.cloud.nacos.config.server-addr&#x3D; xx.xx.xx.xx#命名空间的idspri">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringCloud">
-<meta property="og:url" content="http://yoursite.com/2020/06/02/SpringCloud/index.html">
+<meta property="og:title" content="使用alibaba-nacos踩的坑">
+<meta property="og:url" content="http://yoursite.com/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/index.html">
 <meta property="og:site_name" content="76的个人笔记">
-<meta property="og:description" content="1.什么是SpringCloudSpringCloud 是一系列框架的有序集合。它利用 SpringBoot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 SpringBoot 的开发风格做到一键启动和部署。">
-<meta property="article:published_time" content="2020-06-02T00:42:11.000Z">
-<meta property="article:modified_time" content="2020-06-05T16:43:31.683Z">
+<meta property="og:description" content="1.默认的配置为.properties在项目中读取配置中心的配置的文件为bootstrap.properties 在配置中心配置了默认的配置文件后缀为.yml结果不生效 举例 12345678# 应用名称spring.application.name&#x3D; xxx# 配置中心地址spring.cloud.nacos.config.server-addr&#x3D; xx.xx.xx.xx#命名空间的idspri">
+<meta property="article:published_time" content="2020-07-13T13:53:53.000Z">
+<meta property="article:modified_time" content="2020-07-13T14:00:17.603Z">
 <meta property="article:author" content="fzq">
 <meta property="article:tag" content="常用框架">
 <meta name="twitter:card" content="summary">
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/06/02/SpringCloud/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/07/13/使用alibaba-nacos踩的坑/"/>
 
 
 
 
 
-  <title>SpringCloud | 76的个人笔记</title>
+  <title>使用alibaba-nacos踩的坑 | 76的个人笔记</title>
   
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/SpringCloud/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="fzq">
@@ -303,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SpringCloud</h1>
+          <h1 class="post-title" itemprop="name headline">使用alibaba-nacos踩的坑</h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-02T08:42:11+08:00">
-                2020-06-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-13T21:53:53+08:00">
+                2020-07-13
               </time>
             
 
@@ -334,8 +334,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/06/02/SpringCloud/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/02/SpringCloud/" itemprop="commentCount"></span>
+                <a href="/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/07/13/使用alibaba-nacos踩的坑/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,78 +363,13 @@
       
 
       
-        <h3 id="1-什么是SpringCloud"><a href="#1-什么是SpringCloud" class="headerlink" title="1.什么是SpringCloud"></a>1.什么是SpringCloud</h3><p>SpringCloud 是一系列框架的有序集合。它利用 SpringBoot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 SpringBoot 的开发风格做到一键启动和部署。</p>
-<a id="more"></a>
+        <h3 id="1-默认的配置为-properties"><a href="#1-默认的配置为-properties" class="headerlink" title="1.默认的配置为.properties"></a>1.默认的配置为.properties</h3><p>在<font color="red">项目中</font>读取配置中心的配置的文件为bootstrap.properties</p>
+<p>在<font color="red">配置中心</font>配置了默认的配置文件后缀为.yml结果不生效</p>
+<p>举例</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 应用名称</span></span><br><span class="line"><span class="meta">spring.application.name</span>= <span class="string">xxx</span></span><br><span class="line"><span class="comment"># 配置中心地址</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.server-addr</span>= <span class="string">xx.xx.xx.xx</span></span><br><span class="line"><span class="comment">#命名空间的id</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.namespace</span>=<span class="string">1759b5b8-f6c5-4aea-8841-f13097e80d7b</span></span><br><span class="line"><span class="comment"># 配置分组</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.group</span>=<span class="string">dev</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="2-SpringCloud的核心组件"><a href="#2-SpringCloud的核心组件" class="headerlink" title="2.SpringCloud的核心组件"></a>2.SpringCloud的核心组件</h3><ul>
-<li><strong>Eureka：</strong>服务注册与发现（注册中心）。</li>
-<li><strong>Feign：</strong>声明式服务调用，基于动态代理机制，根据注解和选择的机器，拼接请求URL地址，发起请求。</li>
-<li><strong>Ribbon：</strong>客户端负载均衡，从一个服务的多台机器中选择一台。</li>
-<li><strong>Hystrix：</strong>断路器，服务容错保护。提供线程池，不同的服务走不同的线程池，实现了不同服务的调用的隔离，避免了服务雪崩的问题。</li>
-<li><strong>Zuul：</strong>API网关服务，由Zuul网关转发请求给对应的服务。</li>
-<li><strong>Config：</strong>分布式配置中心。</li>
-</ul>
-<h3 id="3-SpringCloud组件详解"><a href="#3-SpringCloud组件详解" class="headerlink" title="3.SpringCloud组件详解"></a>3.SpringCloud组件详解</h3><ol>
-<li><strong>Eureka的治理机制：</strong><ol>
-<li><strong>服务提供者：</strong><ul>
-<li><strong>服务注册与同步：</strong>启动时会通过REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息（IP+端口等）。并且该注册请求会转发到集群中相连的其他注册中心，实现注册中心之间的服务同步。</li>
-<li><strong>服务续约：</strong>注册完成后，服务提供者会维护一个心跳通知Eureka Server自身还在运行，防止被注册中心剔除。</li>
-</ul>
-</li>
-<li><strong>服务消费者：</strong><ul>
-<li><strong>获取服务：</strong>服务消费者进行消费时会发送一个REST请求到注册中心获取服务列表，服务列表30s更新一次。</li>
-<li><strong>服务调用：</strong>消费者在获取服务清单后，通过服务名获取服务的实例名，和该实例名的元数据（IP+端口等），Eureka底层会通过Ribbon默认采用讯轮的方式进行调用从而实现客户端的负载均衡。</li>
-<li><strong>服务下线：</strong>当服务重启或者关闭时，要主动通知注册中心。会发送一个REST请求到注册中心，注册中心收到请求之后就会把服务从注册列表中剔除。</li>
-</ul>
-</li>
-<li><strong>注册中心：</strong><ul>
-<li><strong>失效剔除：</strong>默认每隔一段时间（60s）将当前清单中超时（默认90s）没有续约的服务剔除出去。</li>
-<li><strong>自我保护：</strong>注册中心在运行期间会统计服务提供者心跳失败的比例，如果这个比例在15分钟之内小于85%。注册中心会将当前服务保护起来，使其不会过期。</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><strong>Ribbon和Nginx的区别</strong></li>
-</ol>
-<p>Ribbon服务清单在客户端，Nginx服务清单在服务端。</p>
-<ol start="3">
-<li><p><strong>Hystrix断路器：</strong></p>
-<ol>
-<li>对通过第三方客户端的访问的依赖项的延迟和故障进行保护和控制。</li>
-<li>在复杂的分布式系统中阻止级联故障。</li>
-<li>快速失败，快速恢复。</li>
-<li>回退，降级</li>
-<li>启用近实时监控、警报和操作控制。</li>
-</ol>
-<p>有几个重要的参数：<strong>滑动窗口大小（20）、 熔断器开关间隔（5s）、错误率（50%）</strong></p>
-<ul>
-<li>每当20个请求中，有50%失败时，断路器就会打开，此时再调用此服务，将会直接返回失败，不再调用远程服务。</li>
-<li>直到5秒钟之后，重新检测该触发条件，判断是否把断路器关闭 ，或者继续打开。</li>
-</ul>
-<p>服务熔断就是相当于我们电闸的保险丝,一旦发生服务雪崩的,就会熔断整个服务,通过维护一个自己的线程池,当线程达到阈值的时候就启动服务降级,如果其他请求继续访问就直接返回fallback的默认值。</p>
-</li>
-<li><p><strong>关于Zuul</strong></p>
-<ol>
-<li>网关一般是应用的入口，做一些公共的与业务无关的校验工作，所以使用Zuul的原因如下：<ol>
-<li>作为系统的统一入口。</li>
-<li>与服务治理框架相结合，实现自动化的实力维护、以及负载均衡的路由转发。</li>
-<li>实现接口的校验和微服务业务逻辑的解耦。</li>
-</ol>
-</li>
-<li>Zuul和Feign有何不同？<ol>
-<li>Zuul是路由的是Controller的请求，Feign路由的是Service的请求。</li>
-<li>Zuul做最外层请求的负载均衡，Feign做的是Service调用的负载均衡。</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="4-SpringCloud和Dubbo有何不同？"><a href="#4-SpringCloud和Dubbo有何不同？" class="headerlink" title="4.SpringCloud和Dubbo有何不同？"></a>4.SpringCloud和Dubbo有何不同？</h3><ul>
-<li>Dubbo的通信机制是RPC，SpringCloud是REST请求。</li>
-<li>Dubbo是SOA面向服务的架构，SpringCloud则是把业务系统组件化。</li>
-<li>Zookeeper在选举期间注册服务不可用，各个节点之间是主从关系。Eureka各个节点之间是平等的。</li>
-</ul>
-
+<h3 id="2-使用扩展的配置"><a href="#2-使用扩展的配置" class="headerlink" title="2.使用扩展的配置"></a>2.使用扩展的配置</h3><p>举例</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用ext扩展配置集</span></span><br><span class="line"><span class="comment"># 配置文件名称</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].data-id</span>=<span class="string">datasource.yml</span></span><br><span class="line"><span class="comment"># 分组名称</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].group</span>=<span class="string">dev</span></span><br><span class="line"><span class="comment"># 是否自动刷新配置 默认false</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].refresh</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -464,8 +399,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/01/SpringBoot/" rel="next" title="SpringBoot">
-                <i class="fa fa-chevron-left"></i> SpringBoot
+              <a href="/2020/07/11/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1-%E5%9F%BA%E4%BA%8E%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF-%E8%BD%AC%E8%BD%BD/" rel="next" title="分布式事务_基于可靠消息(转载)">
+                <i class="fa fa-chevron-left"></i> 分布式事务_基于可靠消息(转载)
               </a>
             
           </div>
@@ -473,10 +408,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/06/02/MySql%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E5%9C%BA%E6%99%AF/" rel="prev" title="MySQL索引失效的几种场景">
-                MySQL索引失效的几种场景 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -507,8 +438,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2020/06/02/SpringCloud/"
-           data-title="SpringCloud" data-url="http://yoursite.com/2020/06/02/SpringCloud/">
+      <div class="ds-thread" data-thread-key="2020/07/13/使用alibaba-nacos踩的坑/"
+           data-title="使用alibaba-nacos踩的坑" data-url="http://yoursite.com/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/">
       </div>
     </div>
 
@@ -610,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是SpringCloud"><span class="nav-number">1.</span> <span class="nav-text">1.什么是SpringCloud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SpringCloud的核心组件"><span class="nav-number">2.</span> <span class="nav-text">2.SpringCloud的核心组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SpringCloud组件详解"><span class="nav-number">3.</span> <span class="nav-text">3.SpringCloud组件详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SpringCloud和Dubbo有何不同？"><span class="nav-number">4.</span> <span class="nav-text">4.SpringCloud和Dubbo有何不同？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-默认的配置为-properties"><span class="nav-number">1.</span> <span class="nav-text">1.默认的配置为.properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用扩展的配置"><span class="nav-number">2.</span> <span class="nav-text">2.使用扩展的配置</span></a></li></ol></div>
             
 
           </div>

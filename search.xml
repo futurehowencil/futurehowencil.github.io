@@ -1703,4 +1703,18 @@
         <tag>分布式事务</tag>
       </tags>
   </entry>
+  <entry>
+    <title>使用alibaba-nacos踩的坑</title>
+    <url>/2020/07/13/%E4%BD%BF%E7%94%A8alibaba-nacos%E8%B8%A9%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<h3 id="1-默认的配置为-properties"><a href="#1-默认的配置为-properties" class="headerlink" title="1.默认的配置为.properties"></a>1.默认的配置为.properties</h3><p>在<font color="red">项目中</font>读取配置中心的配置的文件为bootstrap.properties</p>
+<p>在<font color="red">配置中心</font>配置了默认的配置文件后缀为.yml结果不生效</p>
+<p>举例</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 应用名称</span></span><br><span class="line"><span class="meta">spring.application.name</span>= <span class="string">xxx</span></span><br><span class="line"><span class="comment"># 配置中心地址</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.server-addr</span>= <span class="string">xx.xx.xx.xx</span></span><br><span class="line"><span class="comment">#命名空间的id</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.namespace</span>=<span class="string">1759b5b8-f6c5-4aea-8841-f13097e80d7b</span></span><br><span class="line"><span class="comment"># 配置分组</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.group</span>=<span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-使用扩展的配置"><a href="#2-使用扩展的配置" class="headerlink" title="2.使用扩展的配置"></a>2.使用扩展的配置</h3><p>举例</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用ext扩展配置集</span></span><br><span class="line"><span class="comment"># 配置文件名称</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].data-id</span>=<span class="string">datasource.yml</span></span><br><span class="line"><span class="comment"># 分组名称</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].group</span>=<span class="string">dev</span></span><br><span class="line"><span class="comment"># 是否自动刷新配置 默认false</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.ext-config[0].refresh</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>常用框架</tag>
+      </tags>
+  </entry>
 </search>
